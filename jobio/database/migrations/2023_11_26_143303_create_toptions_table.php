@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('toptions', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->nullable(false);
             $table->text('option_type')->nullable(false);
-            $table->text('option_value')->nullable(false)->unique();
+            $table->string('option_value',255)->nullable(false)->unique('toptions_option-value_unique');
             $table->timestamps();
         });
     }
