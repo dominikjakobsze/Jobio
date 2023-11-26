@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tpeople', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->text('email')->nullable(false)->unique();
+            $table->text('otp')->nullable(false)->unique();
+            $table->text('folder')->nullable(false)->unique();
+            $table->text('role')->nullable(false);
             $table->timestamps();
         });
     }
