@@ -12,7 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('toffers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->integer('min_salary')->nullable(false);
+            $table->integer('max_salary')->nullable(false);
+            $table->text('title')->nullable(false);
+            $table->text('page_offer')->nullable(false);
+            $table->double('longitude')->nullable(false);
+            $table->double('latitude')->nullable(false);
+            $table->text('city')->nullable(false);
+            $table->text('street')->nullable(false);
+            $table->text('zip_code')->nullable(false);
+            $table->text('voivodeship')->nullable(false);
+            $table->uuid('temployer_id')->nullable(false);
+            $table->text('company_icon')->nullable(false);
             $table->timestamps();
         });
     }
