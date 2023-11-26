@@ -19,4 +19,17 @@ class Toffer extends Model
     protected $keyType = 'string';
     public $timestamps = true;
     protected $dateFormat = 'Y-m-d H:i:s';
+
+    public function tperson()
+    {
+        return $this->belongsTo(Tperson::class, 'temployer_id', 'id');
+    }
+    public function treports()
+    {
+        return $this->hasMany(Treport::class, 'resource_id', 'id');
+    }
+    public function toftops()
+    {
+        return $this->hasMany(Toftop::class, 'toffer_id', 'id');
+    }
 }
