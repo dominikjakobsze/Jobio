@@ -1,0 +1,1 @@
+<div class="w-full max-w-[100%] h-[40px] bg-sky-300 sticky top-0 left-0"></div>

@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    min-width: 0; /* min-width dla grid i flexbox jest ustawiony na auto! */
+    min-height: 0; /* min-heigth dla grid i flexbox jest ustawiony na auto! */
+    /* zmiana min-width i min-height dla flexbox i grid jest konieczne, zeby layout pozostal spojny! */
+}
+/*TO MUSI ZOSTAC W TAKIEJ KOLEJNOSCI!*/
+/* https://github.com/SortableJS/Sortable/issues/1795 */
+.chosen-builder {
+    /* background-color: blue; */
+    opacity: 1;
+}
+.ghost-builder {
+    /* background-color: red; */
+    opacity: 1;
+}
+.drag-builder {
+    /* background-color: yellow; */
+    opacity: 1;
+}
+/*DOTAD*/
+
+/* flex shortcuts */
+.f {
+    display: flex;
+}
+.b {
+    display: block;
+}
+
+.fw {
+    flex-wrap: wrap;
+}
+
+.fnw {
+    flex-wrap: nowrap;
+}
+
+.fr {
+    flex-direction: row;
+}
+
+.cc {
+    align-content: center;
+}
+
+.cs {
+    align-content: flex-start; /* Corrected value */
+}
+
+.cst {
+    align-content: stretch;
+}
+
+.ist {
+    align-items: stretch;
+}
+
+.is {
+    align-items: flex-start; /* Corrected value */
+}
+
+.ic {
+    align-items: center;
+}
+
+.ss {
+    align-self: flex-start;
+}
+
+.sc {
+    align-self: center;
+}
+
+.sst {
+    align-self: stretch;
+}
+
+.js {
+    justify-content: flex-start; /* Corrected value */
+}
+
+.jb {
+    justify-content: space-between;
+}
+
+.jc {
+    justify-content: center;
+}
+
+.jst {
+    justify-content: stretch;
+}
+
+.cup {
+    cursor: pointer;
+}
+.oxh {
+    overflow-x: hidden;
+}
+.oxa {
+    overflow-x: auto;
+}
+.oxs {
+    overflow-x: scroll;
+}

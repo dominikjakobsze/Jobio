@@ -1,0 +1,76 @@
+# jobio
+
+services:
+  # jobio_app
+  app:
+    container_name: app
+    hostname: app
+    networks:
+      app_network:
+        aliases:
+          - app
+    build:
+      context: .
+      dockerfile: ./dockerfiles/app/dockerfile_file/Dockerfile
+    command: bash -c "cd / && supervisord -n -c /svcnf/supervisord.conf"
+    ports:
+      - 7150:7150
+    volumes:
+      - ./:/app
+      - ./dockerfiles/app/supervisord.conf:/svcnf/supervisord.conf
+      - ./dockerfiles/app/logs:/app_logs
+    deploy:
+      resources:
+        limits:
+          memory: "600M"
+
+  # jobio_db_dev
+  db_dev:
+    container_name: db_dev
+    hostname: db_dev
+    environment:
+      MYSQL_ROOT_PASSWORD: laravel_dev
+      MYSQL_DATABASE: laravel_dev
+      MYSQL_USER: laravel_dev
+      MYSQL_PASSWORD: laravel_dev
+    networks:
+      app_network:
+        aliases:
+          - db_dev
+    image: mysql:8.1.0-oracle
+    ports:
+      - 3100:3306
+    volumes:
+      - ./db_mysql_volumes/db_dev:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          memory: "700M"
+
+  # jobio_front_compiler
+  front_compiler:
+    container_name: front_compiler
+    hostname: front_compiler
+    networks:
+      app_network:
+        aliases:
+          - front_compiler
+    build:
+      context: .
+      dockerfile: ./dockerfiles/front_compiler/dockerfile_file/Dockerfile
+    command: bash -c "cd / && supervisord -n -c /svcnf/supervisord.conf"
+    ports:
+      - 5100:5100
+    volumes:
+      - ./:/app
+      - ./dockerfiles/front_compiler/supervisord.conf:/svcnf/supervisord.conf
+      - ./dockerfiles/front_compiler/logs:/front_compiler_logs
+    deploy:
+      resources:
+        limits:
+          memory: "600M"
+
+# jobio_app_network
+networks:
+  app_network:
+    driver: bridge
