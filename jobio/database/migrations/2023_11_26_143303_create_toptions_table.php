@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('toptions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->text('option_type')->nullable(false);
+            $table->text('option_value')->nullable(false)->unique();
             $table->timestamps();
         });
     }
