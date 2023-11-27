@@ -18,4 +18,8 @@ class Tperson extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+
+    public function toffers(){
+        return $this->hasMany(Toffer::class,'temployer_id','id');
+    }
 }
