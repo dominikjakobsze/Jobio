@@ -18,4 +18,8 @@ class Treport extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+
+    public function toffer(){
+        return $this->belongsTo(Toffer::class,'resource_id','id');
+    }
 }
