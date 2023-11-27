@@ -20,4 +20,12 @@ class Toftop extends Model
     public $timestamps = true;
     protected $dateFormat = 'Y-m-d H:i:s';
 
+    public function toption()
+    {
+        return $this->belongsTo(Toption::class, 'toption_id', 'id');
+    }
+    public function toffer()
+    {
+        return $this->belongsTo(Toffer::class, 'toffer_id', 'id');
+    }
 }
