@@ -19,4 +19,7 @@ class Toption extends Model
     protected $keyType = 'string';
     public $timestamps = true;
 
+    public function toftops(){
+        return $this->hasMany(Toftop::class,'toption_id','id');
+    }
 }
