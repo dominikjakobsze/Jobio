@@ -3,7 +3,6 @@
 use App\Models\Tperson;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -15,10 +14,9 @@ return [
     |
     */
 
-    // 'defaults' => [
-    //     'guard' => 'web',
-    //     'passwords' => 'users',
-    // ],
+    'defaults' => [
+        'guard' => 'person',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -66,11 +64,6 @@ return [
             'driver' => 'eloquent',
             'model' => Tperson::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -92,14 +85,11 @@ return [
     |
     */
 
-    // 'passwords' => [
-    //     'users' => [
-    //         'provider' => 'users',
-    //         'table' => 'password_reset_tokens',
-    //         'expire' => 60,
-    //         'throttle' => 60,
-    //     ],
-    // ],
+    'passwords' => [
+        'users' => [
+            'provider' => 'person',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -112,6 +102,5 @@ return [
     |
     */
 
-    // 'password_timeout' => 10800,
-
+    'password_timeout' => 10800,
 ];

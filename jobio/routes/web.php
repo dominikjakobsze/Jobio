@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [TpersonController::class,'index']);
 Route::get('/login', function () {
+    //dd(Hash::make('12345678'));
     Auth::guard('person')->attempt([
         'email' => 'dominikjakobsze00@gmail.com',
         'password' => '12345678',
