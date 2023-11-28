@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TpersonController;
+use App\Models\Tlog;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -31,4 +32,7 @@ Route::get('/login', function () {
 Route::get('/logout',function(){
     Session::invalidate();
     Session::regenerateToken();
+});
+Route::get('/factory', function(){
+    dd(Tlog::factory(1)->make());
 });

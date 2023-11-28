@@ -15,10 +15,10 @@ class TpersonController extends Controller
         dd(
             Auth::guard('person')
                 ->user()
-                ->can('viewAny', Toffer::class),
-        ); //returns false (if user not authenticated, then also null)
-        dd($this->authorize('viewAny', Toffer::class)); //throws error 403 page when false
-        
+                ?->can('viewAny', Toffer::class),
+        ); //returns false if user doesn't have permissions but also null if user is just not authenticated
+        dd($this->authorize('viewAny', Toffer::class)); //throws 403 page when false if user doesn't have permissions or if user is just not authenticated
+
         //https://laravel.com/docs/10.x/authentication#authenticating-users
         //https://laravel.com/docs/10.x/eloquent#observers
         //https://laravel.com/docs/10.x/authorization#authorizing-actions-using-policies
