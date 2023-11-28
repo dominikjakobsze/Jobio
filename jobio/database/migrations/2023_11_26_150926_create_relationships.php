@@ -21,6 +21,9 @@ return new class extends Migration
             $table->foreign('toption_id','toftops_FK_toption-id_-REF-_toptions_PK_id')->references('id')->on('toptions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('toffer_id','toftops_FK_toffer-id_-REF-_toffers_PK_id')->references('id')->on('toffers')->cascadeOnDelete()->cascadeOnUpdate();
         });
+        Schema::table('tlogs', function (Blueprint $table){
+            $table->foreign('tperson_id','tlogs_FK_tperson-id_-REF-_tpeople_PK_id')->references('id')->on('tpeople')->cascadeOnDelete()->cascadeOnUpdate();
+        });
     }
 
     /**
