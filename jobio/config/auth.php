@@ -38,7 +38,7 @@ return [
     'guards' => [
         'person' => [
             'driver' => 'session',
-            'provider' => 'person',
+            'provider' => 'persons',
         ],
     ],
 
@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'person' => [
+        'persons' => [
             'driver' => 'eloquent',
             'model' => Tperson::class,
         ],
@@ -87,7 +87,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'person',
+            'provider' => 'persons',
         ],
     ],
 
