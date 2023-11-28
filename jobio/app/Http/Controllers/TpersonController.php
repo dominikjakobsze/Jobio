@@ -11,12 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class TpersonController extends Controller
 {
-    use CustomAuthorizeTrait;
-
     public function index()
     {
-        dd($this->permit('viewAny',Toffer::class));
-        
+        dd($this->authorize('viewAny',Toffer::class));
+    
         //https://laravel.com/docs/10.x/authentication#authenticating-users
         //https://laravel.com/docs/10.x/eloquent#observers
         //https://laravel.com/docs/10.x/authorization#authorizing-actions-using-policies
