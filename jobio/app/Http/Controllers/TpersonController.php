@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTpersonRequest;
 use App\Http\Requests\UpdateTpersonRequest;
 use App\Models\Toffer;
-use App\Traits\CustomAuthorizeTrait;
 use App\Models\Tperson;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +12,13 @@ class TpersonController extends Controller
 {
     public function index()
     {
-        dd($this->authorize('viewAny',Toffer::class));
+        dd(
+            Auth::guard('person')
+                ->user()
+                ->can('viewAny', Toffer::class),
+        ); //returns false (if user not authenticated, then also null)
+        dd($this->authorize('viewAny', Toffer::class)); //throws error 403 page when false
+        
         //https://laravel.com/docs/10.x/authentication#authenticating-users
         //https://laravel.com/docs/10.x/eloquent#observers
         //https://laravel.com/docs/10.x/authorization#authorizing-actions-using-policies
