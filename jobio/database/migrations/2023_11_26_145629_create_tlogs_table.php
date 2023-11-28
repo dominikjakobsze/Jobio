@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tlogs', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->uuid('tperson_id')->nullable(true);
+            $table->text('action_message')->nullable(false);
+            $table->text('action_model')->nullable(false);
             $table->timestamps();
         });
     }
