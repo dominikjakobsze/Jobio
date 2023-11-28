@@ -55,6 +55,10 @@ class Tperson extends Model implements Authenticatable, Authorizable
     {
         return $this->hasMany(Toffer::class, 'temployer_id', 'id');
     }
+    public function tlogs()
+    {
+        return $this->hasMany(Tlog::class, 'tperson_id', 'id');
+    }
     public function getAuthPassword()
     {
         return $this->otp;
