@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTpersonRequest;
 use App\Http\Requests\UpdateTpersonRequest;
+use App\Models\Toffer;
+use App\Traits\CustomAuthorizeTrait;
 use App\Models\Tperson;
+use Illuminate\Support\Facades\Auth;
 
 class TpersonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use CustomAuthorizeTrait;
+
     public function index()
     {
-        //
+        dd($this->permit('viewAny',Toffer::class));
+        
+        //https://laravel.com/docs/10.x/authentication#authenticating-users
+        //https://laravel.com/docs/10.x/eloquent#observers
+        //https://laravel.com/docs/10.x/authorization#authorizing-actions-using-policies
     }
 
     /**
