@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('toftops', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->uuid('toption_id')->nullable(false);
+            $table->uuid('toffer_id')->nullable(false);
             $table->timestamps();
         });
     }

@@ -1,7 +1,8 @@
 <?php
 
-return [
+use App\Models\Tperson;
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -14,8 +15,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'person',
     ],
 
     /*
@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'person' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'persons',
         ],
     ],
 
@@ -60,15 +60,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'persons' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => Tperson::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -92,10 +87,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
+            'provider' => 'persons',
         ],
     ],
 
@@ -110,6 +102,5 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
-
+    // 'password_timeout' => 10800,
 ];

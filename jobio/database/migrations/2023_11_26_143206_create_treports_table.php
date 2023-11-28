@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('treports', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->text('message')->nullable(false);
+            $table->uuid('resource_id')->nullable(false);
+            $table->text('resource_model')->nullable(false);
+            $table->text('link_source')->nullable(false);
             $table->timestamps();
         });
     }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TpersonController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 // https://github.com/barryvdh/laravel-ide-helper#usage
 
-Route::get('/', function () {
-    return view('job-offer-form.welcome');
+Route::get('/', [TpersonController::class,'index']);
+Route::get('/login', function () {
+    //dd(Hash::make('12345678'));
+    Auth::guard('person')->attempt([
+        'email' => 'dominikjakobsze00@gmail.com',
+        'password' => '12345678',
+    ]);
+    /** @var App\Models\Tperson $user **/
+    $user = Auth::guard('person')->user();
+    Session::regenerateToken();
+    Session::regenerate();
+});
+Route::get('/logout',function(){
+    Session::invalidate();
+    Session::regenerateToken();
 });

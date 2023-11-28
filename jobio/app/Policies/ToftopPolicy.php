@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Toftop;
+use App\Models\Tperson;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -11,7 +12,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(Tperson $tperson): bool
     {
         //
     }
@@ -19,7 +20,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Toftop $toftop): bool
+    public function view(Tperson $tperson, Toftop $toftop): bool
     {
         //
     }
@@ -27,7 +28,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(Tperson $tperson): bool
     {
         //
     }
@@ -35,7 +36,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Toftop $toftop): bool
+    public function update(Tperson $tperson, Toftop $toftop): bool
     {
         //
     }
@@ -43,7 +44,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Toftop $toftop): bool
+    public function delete(Tperson $tperson, Toftop $toftop): bool
     {
         //
     }
@@ -51,7 +52,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Toftop $toftop): bool
+    public function restore(Tperson $tperson, Toftop $toftop): bool
     {
         //
     }
@@ -59,7 +60,7 @@ class ToftopPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Toftop $toftop): bool
+    public function forceDelete(Tperson $tperson, Toftop $toftop): bool
     {
         //
     }

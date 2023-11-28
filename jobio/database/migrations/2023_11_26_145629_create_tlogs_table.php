@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('toptions', function (Blueprint $table) {
+        Schema::create('tlogs', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->nullable(false);
-            $table->text('option_type')->nullable(false);
-            $table->string('option_value',255)->nullable(false)->unique('toptions_option-value_unique');
+            $table->uuid('tperson_id')->nullable(true);
+            $table->text('action_message')->nullable(false);
+            $table->text('action_model')->nullable(false);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('toptions');
+        Schema::dropIfExists('tlogs');
     }
 };
