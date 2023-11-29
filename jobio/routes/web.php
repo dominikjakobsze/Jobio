@@ -34,5 +34,10 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/factory', function(){
-    dd(Tlog::factory(1)->make());
+    dd('t');
+});
+Route::get('/factory/example', function(){
+    /** @var App\Models\Tlog $tlog */
+    $tlog = Tlog::factory(1)->make()->first();
+    dd($tlog->tpeople()->associate('llllereiiwe92394j2dkf239f23o')->save());
 });

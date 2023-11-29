@@ -2,6 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Toffer;
+use App\Models\Toftop;
+use App\Models\Toption;
+use App\Models\Tperson;
+use App\Models\Treport;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +22,8 @@ class TlogFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'action_message' => fake()->text(400),
+            'action_model' => fake()->randomElement([Tperson::class, Toffer::class, Toption::class, Toftop::class, Treport::class]),
         ];
     }
 }

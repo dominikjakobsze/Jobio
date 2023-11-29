@@ -10,29 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable as AuthorizableTrait;
 /**
- * App\Models\Tperson
- *
- * @property string $id
- * @property string $email
- * @property string $otp
- * @property string $folder
- * @property string $role
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Toffer> $toffers
- * @property-read int|null $toffers_count
- * @method static \Database\Factories\TpersonFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson query()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereFolder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereOtp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property string id uuid PK AutoSet
+ * @property string email Unique
+ * @property string otp Unique Nullable [made with Hash::make()]
+ * @property string folder Unique
+ * @property string role [support,employer,employee]
  */
 class Tperson extends Model implements Authenticatable, Authorizable
 {
