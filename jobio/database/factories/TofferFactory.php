@@ -19,7 +19,15 @@ class TofferFactory extends Factory
      */
     public function definition(): array
     {
-        dd(Tperson::all());
+        sleep(2);
+        $employers = Tperson::where("role","=","employer")->get();
+        if(count($employers) == 0){
+            abort(500,'there is no user with role "employer"');
+        }
+        $arrayOfIds = [];
+        foreach($employers as $employer){
+            $arrayOfIds[] = $employer->getAttribute('id');
+        }
         $minSalary = fake()->numberBetween(3600, 17000);
         $maxSalary = fake()->numberBetween($minSalary, 17000);
         $lat_min = 50.550035;
@@ -38,6 +46,7 @@ class TofferFactory extends Factory
         $voivodeship = $request_data['region'] ?? null;
         $city = $request_data['localadmin'] ?? null;
         if($street === null || $zip_code === null || $voivodeship === null || $city === null){
+            sleep(2);
             $lat_min = 52.277665;
             $lat_max = 52.279766;
             $long_min = 21.018917;
@@ -65,7 +74,7 @@ class TofferFactory extends Factory
             'street' => $street,
             'zip_code' => $zip_code,
             'voivodeship' => $voivodeship,
-            'temployer_id' => 'Change ' . Str::uuid() . ' Change',
+            'temployer_id' => fake()->randomElement($arrayOfIds),
             'company_icon' => implode('', fake()->unique()->words(4)),
         ];
     }
