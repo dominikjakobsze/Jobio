@@ -16,8 +16,10 @@ class ToptionFactory extends Factory
      */
     public function definition(): array
     {
+        /** @var \App\Models\Toption */
         return [
-            //
+            "option_type" => fake()->randomElement(['T','T','T','D','D','D','D','D','D','D','D','S']),
+            "option_value" => fake()->unique()->word(),
         ];
     }
 }

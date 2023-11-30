@@ -3,6 +3,7 @@
 use App\Http\Controllers\TpersonController;
 use App\Models\Tlog;
 use App\Models\Toffer;
+use App\Models\Toption;
 use App\Models\Tperson;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -38,6 +39,7 @@ Route::get('/logout',function(){
 Route::get('/test', function(){
     //Tperson::factory(73)->create();
     //Toffer::factory(23)->create();
+    //Toption::factory(85)->create();
 });
 Route::get('/factory/example', function(){
     /** @var App\Models\Tlog $tlog */
