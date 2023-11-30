@@ -24,6 +24,7 @@ class TlogFactory extends Factory
         return [
             'action_message' => fake()->text(400),
             'action_model' => fake()->randomElement([Tperson::class, Toffer::class, Toption::class, Toftop::class, Treport::class]),
+            'tperson_id' => "",
         ];
     }
 }
