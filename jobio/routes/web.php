@@ -39,14 +39,29 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/test', function(){
-    //Tperson::factory(73)->create();
-    //Toffer::factory(23)->create();
-    //Toption::factory(85)->create();
-    Toftop::factory()->count(1300)->create();
+    // Tlog::factory(50)->create();
+    // Tperson::factory(73)->create();
+    // Toffer::factory(23)->create();
+    // Toption::factory(85)->create();
+    // Toftop::factory(1300)->create();
 
-    //przerobic factory tak ze nie korzystamy z create tylko make a potem save, i callback po make zanim zapiszemy =>
-    //afterMaking ma byc - tam dopasowac logike do potrzeb bazy danych!
+
+
+
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //
+    //przerobic factory tak ze korzystamy z create, i callback po create jak zapiszemy =>
+    //afterCreating ma byc - tam dopasowac logike do potrzeb bazy danych!
     //przejrzec wiec wszystkie factory i je przerobic!
+    //
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
 });
 Route::get('/factory/example', function(){
     /** @var App\Models\Tlog $tlog */

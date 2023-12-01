@@ -21,10 +21,14 @@ class TlogFactory extends Factory
      */
     public function definition(): array
     {
+        $tpersons = Tperson::get();
+        if(count($tpersons) == 0){
+            abort(500,'there is no person that can be assigned');
+        }
         return [
             'action_message' => fake()->text(400),
             'action_model' => fake()->randomElement([Tperson::class, Toffer::class, Toption::class, Toftop::class, Treport::class]),
-            'tperson_id' => "",
+            'tperson_id' => fake()->randomElement($tpersons)['id'],
         ];
     }
 }
