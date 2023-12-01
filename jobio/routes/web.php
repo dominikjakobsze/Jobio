@@ -40,9 +40,7 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/test', function(){
-    Tperson::factory(15)->create();
-    Toffer::factory(1)->create();
-    Treport::factory(1)->create();
+    
     dd('test');
 });
 Route::get('/factory/example', function(){
