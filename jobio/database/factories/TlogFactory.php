@@ -28,7 +28,7 @@ class TlogFactory extends Factory
         return [
             'action_message' => fake()->text(400),
             'action_model' => fake()->randomElement([Tperson::class, Toffer::class, Toption::class, Toftop::class, Treport::class]),
-            'tperson_id' => fake()->randomElement($tpersons)['id'],
+            'tperson_id' => fake()->numberBetween(0,10) > 7 ? fake()->randomElement($tpersons)['id'] : null,
         ];
     }
 }

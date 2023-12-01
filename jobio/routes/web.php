@@ -40,12 +40,12 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/test', function(){
-    Tperson::factory(100)->create();
-    Toffer::factory(20)->create();
-    Toption::factory(180)->create();
-    Toftop::factory(800)->create();
-    Treport::factory(27)->create();
-    Tlog::factory(1700)->create();
+    Tperson::factory(10)->create();
+    Toffer::factory(2)->create();
+    Toption::factory(18)->create();
+    Toftop::factory(80)->create();
+    Treport::factory(3)->create();
+    Tlog::factory(170)->create();
     dd('done');
 });
 Route::get('/factory/example', function(){
