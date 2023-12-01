@@ -75,7 +75,7 @@ class TofferFactory extends Factory
             'zip_code' => $zip_code,
             'voivodeship' => $voivodeship,
             'temployer_id' => fake()->randomElement($arrayOfIds),
-            'company_icon' => implode('', fake()->unique()->words(4)),
+            'company_icon' => implode('', fake()->words(4)),
         ];
     }
 }

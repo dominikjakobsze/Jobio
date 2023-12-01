@@ -39,11 +39,11 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/test', function(){
-    Tperson::factory(20)->create();
+    // Tperson::factory(20)->create();
     // Tlog::factory(50)->create();
     // Tperson::factory(73)->create();
     // Toffer::factory(23)->create();
-    // Toption::factory(85)->create();
+    Toption::factory(85)->create();
     // Toftop::factory(1300)->create();
 
 

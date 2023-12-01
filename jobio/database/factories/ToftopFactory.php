@@ -23,7 +23,6 @@ class ToftopFactory extends Factory
                 ->flatten()
                 ->toArray();
             Toftop::whereNotIn('id',$arrayOfUniqueIds)->delete();
-            //dd(Toftop::whereNotIn('id',$arrayOfUniqueIds)->delete(),count($arrayOfUniqueIds),count(Toftop::get()));
         });
     }
     /**
