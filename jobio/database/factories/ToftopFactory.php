@@ -44,6 +44,7 @@ class ToftopFactory extends Factory
         }
         $toffer = fake()->randomElement($toffers);
         $toption = fake()->randomElement($toptions);
+        Toftop::where('toffer_id', $toffer['id'])->where('toption_id',$toption['id'])->delete();
         return [
             'toption_id' => $toption['id'],
             'toffer_id' => $toffer['id'],

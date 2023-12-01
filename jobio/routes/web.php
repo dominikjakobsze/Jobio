@@ -41,7 +41,7 @@ Route::get('/logout',function(){
 });
 Route::get('/test', function(){
     Tperson::factory(10)->create();
-    Toffer::factory(2)->create();
+    Toffer::factory(1)->create();
     Toption::factory(18)->create();
     Toftop::factory(80)->create();
     Treport::factory(3)->create();
