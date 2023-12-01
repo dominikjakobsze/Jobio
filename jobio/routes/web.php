@@ -40,8 +40,13 @@ Route::get('/logout',function(){
     Session::regenerateToken();
 });
 Route::get('/test', function(){
-    
-    dd('test');
+    Tperson::factory(100)->create();
+    Toffer::factory(20)->create();
+    Toption::factory(180)->create();
+    Toftop::factory(800)->create();
+    Treport::factory(27)->create();
+    Tlog::factory(1700)->create();
+    dd('done');
 });
 Route::get('/factory/example', function(){
     /** @var App\Models\Tlog $tlog */
