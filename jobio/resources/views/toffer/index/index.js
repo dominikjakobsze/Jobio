@@ -18,5 +18,5 @@ L.tileLayer(
 
 map.on('click', function(e) {
     console.log(e,URL);
-    var marker = L.marker(e.latlng).addTo(map);
+    const marker = L.marker(e.latlng).addTo(map);
 });
