@@ -1,0 +1,1 @@
+<div class="bg-red-200 absolute top-0 left-0 w-[50%] h-[100%]"></div>    

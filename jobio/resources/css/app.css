@@ -8,7 +8,7 @@
     margin: 0;
     min-width: 0; /* min-width dla grid i flexbox jest ustawiony na auto! */
     min-height: 0; /* min-heigth dla grid i flexbox jest ustawiony na auto! */
-    /* zmiana min-width i min-height dla flexbox i grid jest konieczne, zeby layout pozostal spojny! */
+    /* zmiana min-width i min-height => na 0 dla flexbox i grid jest konieczne, zeby layout pozostal spojny! */
 }
 /*TO MUSI ZOSTAC W TAKIEJ KOLEJNOSCI!*/
 /* https://github.com/SortableJS/Sortable/issues/1795 */
