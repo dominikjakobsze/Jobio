@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Tlog;
+use App\Models\Toffer;
+use App\Models\Toftop;
+use App\Models\Toption;
+use App\Models\Treport;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +18,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Tperson::factory(10)->create();
+        // Toffer::factory(1)->create();
+        // Toption::factory(18)->create();
+        // Toftop::factory(80)->create();
+        // Treport::factory(3)->create();
+        // Tlog::factory(170)->create();
+        $this->call([
+            TpersonSeeder::class,
+            TofferSeeder::class,
+            ToptionSeeder::class,
+            ToftopSeeder::class,
+            TreportSeeder::class,
+            TlogSeeder::class
+        ]);
     }
 }
