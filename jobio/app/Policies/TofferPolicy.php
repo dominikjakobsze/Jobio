@@ -13,7 +13,7 @@ class TofferPolicy
      */
     public function viewAny(?Tperson $tperson): Response
     {
-        return $tperson?->role === 'support' || $tperson?->role === 'employer' ? Response::allow() : Response::deny('nah');
+        return Response::allow();
     }
 
     /**

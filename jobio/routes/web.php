@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
 use App\Models\Tlog;
 use App\Models\Toffer;
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Session;
 */
 // https://github.com/barryvdh/laravel-ide-helper#usage
 
-Route::get('/', [TpersonController::class,'index']);
+Route::get('/', [TofferController::class,'index']);
 Route::get('/login', function () {
     //dd(Hash::make('12345678'));
     Auth::guard('person')->attempt([
