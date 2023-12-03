@@ -16,5 +16,5 @@
 @endpush
 
 @push('js')
-    @vite('resources/views/toffer/index/index.js');
+    @vite('resources/views/toffer/index/index.js')
 @endpush

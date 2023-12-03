@@ -6,8 +6,8 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    min-width: 0; /* min-width dla grid i flexbox jest ustawiony na auto! */
-    min-height: 0; /* min-heigth dla grid i flexbox jest ustawiony na auto! */
+    min-width: 0; /* min-width domyslnie dla grid i flexbox jest ustawiony na auto! */
+    min-height: 0; /* min-heigth domyslnie dla grid i flexbox jest ustawiony na auto! */
     /* zmiana min-width i min-height => na 0 dla flexbox i grid jest konieczne, zeby layout pozostal spojny! */
 }
 /*TO MUSI ZOSTAC W TAKIEJ KOLEJNOSCI!*/

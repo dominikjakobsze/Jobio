@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
 use App\Models\Tlog;
@@ -23,12 +24,13 @@ use Illuminate\Support\Facades\Session;
 |
 */
 // https://github.com/barryvdh/laravel-ide-helper#usage
-
-Route::get('/', [TofferController::class,'index']);
+//image/files-dominik.txt
+Route::get('/', [TofferController::class, 'index']);
+Route::get('/image/{path}', [ResourceController::class, 'display']);
 Route::get('/login', function () {
     //dd(Hash::make('12345678'));
     Auth::guard('person')->attempt([
-        'email' => 'dominikjakobsze00@gmail.com',
+        'email' => 'lesly.muller@hotmail.com',
         'password' => '12345678',
     ]);
     /** @var App\Models\Tperson $user **/
@@ -36,14 +38,14 @@ Route::get('/login', function () {
     Session::regenerateToken();
     Session::regenerate();
 });
-Route::get('/logout',function(){
+Route::get('/logout', function () {
     Session::invalidate();
     Session::regenerateToken();
 });
-Route::get('/test', function(){
+Route::get('/test', function () {
     dd('test');
 });
-Route::get('/factory/example', function(){
+Route::get('/factory/example', function () {
     /** @var App\Models\Tlog $tlog */
     $tlog = Tlog::factory(1)->make()->first();
     dd($tlog->tpeople()->associate('llllereiiwe92394j2dkf239f23o')->save());
