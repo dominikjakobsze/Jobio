@@ -26,7 +26,9 @@ use Illuminate\Support\Facades\Session;
 // https://github.com/barryvdh/laravel-ide-helper#usage
 //image/files-dominik.txt
 Route::get('/', [TofferController::class, 'index']);
-Route::get('/image/{path}', [ResourceController::class, 'display']);
+Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
+Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
+
 Route::get('/login', function () {
     //dd(Hash::make('12345678'));
     Auth::guard('person')->attempt([

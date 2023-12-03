@@ -5,10 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="w-full h-[100dvh] bg-red-300/50 fixed top-0 left-0 flex js cs ss is fr fw overflow-hidden">
-        <div data-map class="w-full bg-blue-50/50 h-[100%] relative flex js cs ss is fr fw">
-            {{-- @include('toffer.index.shared.options') --}}
+    <div class="w-full h-[100dvh] fixed top-0 left-0 flex js cs ss is fr fw overflow-hidden z-[100]">
+        <div data-map class="w-full h-[100%] relative flex js cs ss is fr fw z-[101]">
         </div>
+        @include('toffer.index.shared.options')
+        @include('toffer.index.shared.menu')
     </div>
 @endsection
 
