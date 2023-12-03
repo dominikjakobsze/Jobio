@@ -35,11 +35,16 @@ export const renderMarkers = async (url) => {
         const data = await response.data;
         [...data["offers"]].map((offer) => {
             L.marker([offer["longitude"], offer["latitude"]], {
-                icon: L.icon({
-                    iconUrl: `${URL}/endpoint/image/icons-job.png`,
-                    iconSize: [50, 50],
+                icon: L.divIcon({
+                    // iconUrl: `${URL}/endpoint/image/icons-job.png`,
+                    // iconUrl: `${offer["company_icon"]}`,
+                    html: `<img class="border-solid border-2 border-gray-700 w-[50px] h-[50px] object-contain rounded-full overflow-hidden" src="${offer["company_icon"]}"/>`,
+                    iconSize: [0, 0],
+                    iconAnchor: [0, 0]
                 }),
-                offerId: offer["id"],
+                options: {
+                    offerId: offer["id"],
+                }
             })
                 .addEventListener("click", (e) => {
                     console.log(e);

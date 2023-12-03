@@ -110,3 +110,7 @@
 .oxs {
     overflow-x: scroll;
 }
+.leaflet-div-icon{
+    border: 0px solid rgba(202, 17, 162, 0.80) !important;
+    border-radius: 100%;
+}

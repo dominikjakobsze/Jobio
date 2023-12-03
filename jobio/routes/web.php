@@ -45,10 +45,28 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
-    dd('test');
+    dd(
+        Toffer::with(['toftops.toption'])
+            ->whereRelation('toftops.toption', 'option_value', '=', 'possimusut')
+            ->get()
+            ->toArray(),
+        //Toffer::with(['toftops.toption'])->whereRelation('toftops.toption', 'option_value', "=", "possimusut")->ddRawSql()
+    );
+    // $toffers = Toffer::get();
+    // foreach($toffers as $toffer){
+    //     $toffer['company_icon'] = 'https://picsum.photos/'.fake()->numberBetween(50,340).'';
+    //     $toffer->save();
+    // }
 });
 Route::get('/factory/example', function () {
     /** @var App\Models\Tlog $tlog */
-    $tlog = Tlog::factory(1)->make()->first();
-    dd($tlog->tpeople()->associate('llllereiiwe92394j2dkf239f23o')->save());
+    $tlog = Tlog::factory(1)
+        ->make()
+        ->first();
+    dd(
+        $tlog
+            ->tpeople()
+            ->associate('llllereiiwe92394j2dkf239f23o')
+            ->save(),
+    );
 });
