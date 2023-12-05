@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
 use App\Models\Toption;
 use App\Traits\AliasesTrait;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
+use Illuminate\Database\Query\Builder; //when using DB facade
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -53,13 +55,69 @@ class TofferController extends Controller
             ]
         ]);
     }
-
     public function endpointIndex(Request $request)
     {
-        dd($request->all());
+        $options = $request->all();
+        $results = Toffer::select(['*'])
+            ->when(array_key_exists('offer-city,voivodeship,zip_code', $options), function (EloquentBuilder $query) use ($options) {
+                $query->where(function (EloquentBuilder $query) use ($options) {
+                    foreach ($options['offer-city,voivodeship,zip_code'] as $option) {
+                        $query->orWhere(function (EloquentBuilder $query) use ($option) {
+                            $option = explode(',', $option);
+                            $query->where('city', '=', $option[0])->where('voivodeship', '=', $option[1])->where('zip_code', '=', $option[2]);
+                        });
+                    }
+                });
+            })
+            ->when(array_key_exists('offer-min_salary', $options) && array_key_exists('offer-max_salary', $options), function (EloquentBuilder $query) use ($options) {
+                $query->where(function (EloquentBuilder $query) use ($options) {
+                    $query->where('min_salary', '>=', $options['offer-min_salary'])->where('max_salary', '<=', $options['offer-max_salary']);
+                });
+            })
+            ->when(array_key_exists('option-option_type-d', $options), function (EloquentBuilder $query) use ($options) {
+                $query->where(function (EloquentBuilder $query) use ($options) {
+                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
+                        $query->where(function (EloquentBuilder $query) use ($options) {
+                            foreach ($options['option-option_type-d'] as $option) {
+                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
+                                    $query->where('option_type', '=', 'd')->where('option_value', '=', $option);
+                                });
+                            }
+                        });
+                    });
+                });
+            })
+            ->when(array_key_exists('option-option_type-s', $options), function (EloquentBuilder $query) use ($options) {
+                $query->where(function (EloquentBuilder $query) use ($options) {
+                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
+                        $query->where(function (EloquentBuilder $query) use ($options) {
+                            foreach ($options['option-option_type-s'] as $option) {
+                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
+                                    $query->where('option_type', '=', 's')->where('option_value', '=', $option);
+                                });
+                            }
+                        });
+                    });
+                });
+            })
+            ->when(array_key_exists('option-option_type-t', $options), function (EloquentBuilder $query) use ($options) {
+                $query->where(function (EloquentBuilder $query) use ($options) {
+                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
+                        $query->where(function (EloquentBuilder $query) use ($options) {
+                            foreach ($options['option-option_type-t'] as $option) {
+                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
+                                    $query->where('option_type', '=', 't')->where('option_value', '=', $option);
+                                });
+                            }
+                        });
+                    });
+                });
+            })
+            ->get();
+        //dd($results->toArray(), $request->all());
         return response()->json(
             [
-                'offers' => $request->all(),
+                'offers' => $results->toArray(),
             ],
             200,
             [],

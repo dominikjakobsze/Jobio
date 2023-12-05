@@ -1,6 +1,5 @@
-<form
-    id="options"
-    class="bg-white text-gray-700 text-lg font-[600] p-3 gap-3 fixed top-0 left-0 w-[60%] h-[100%] z-[103] overflow-x-hidden overflow-y-auto shadow-2xl drop-shadow-lg f fr fw cs is js ss">
+<form id="options"
+    class="bg-white/90 backdrop-blur-md blur-none shadow-xl drop-shadow-xl text-gray-700 text-lg font-[600] p-3 gap-3 fixed top-0 left-0 w-[60%] h-[100%] z-[103] overflow-x-hidden overflow-y-auto f fr fw cs is js ss">
     @dump($data)
     <p id="send">test</p>
     <div class="flex-[0_0_100%] f fnw fr ic cs js ss gap-5">
@@ -81,8 +80,7 @@
                 class="f fr fnw cc js ic ss flex-[0_0_100%] text-gray-700 relative gap-3 font-normal text-xs cursor-pointer bg-gray-100 pl-4 pr-5 rounded-xl overflow-hidden">
                 <input name="offer-city,voivodeship,zip_code[]"
                     class="flex-[0_0_20px] h-[20px] text-gray-900 bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
-                    type="checkbox"
-                    value="{{ $item['city'] }},{{ $item['voivodeship'] }},{{ $item['zip_code'] }}" />
+                    type="checkbox" value="{{ $item['city'] }},{{ $item['voivodeship'] }},{{ $item['zip_code'] }}" />
                 <p class="flex-[0_0_auto] py-2 font-medium">{{ $item['city'] }} {{ $item['zip_code'] }}
                     {{ Str::ucfirst($item['voivodeship']) }}</p>
             </label>
