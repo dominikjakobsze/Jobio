@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
 use App\Models\Toption;
 use App\Traits\AliasesTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TofferController extends Controller
@@ -39,25 +40,26 @@ class TofferController extends Controller
             ->groupBy(['city', 'voivodeship', 'zip_code'])
             ->get()
             ->toArray();
-        //table[alias].column||[column,column].value
+        //table[alias]-column||[column,column]-value
         return view('toffer.index.index')->with([
             'data' => [
-                'offer.min_salary' => $minSalary,
-                'offer.max_salary' => $maxSalary,
+                'offer-min_salary' => $minSalary,
+                'offer-max_salary' => $maxSalary,
                 'offers' => $offers,
-                'offer.city,voivodeship,zip_code' => $location,
-                'option.option_type.s' => $optionTypeS,
-                'option.option_type.d' => $optionTypeD,
-                'option.option_type.t' => $optionTypeT,
+                'offer-city,voivodeship,zip_code' => $location,
+                'option-option_type-s' => $optionTypeS,
+                'option-option_type-d' => $optionTypeD,
+                'option-option_type-t' => $optionTypeT,
             ]
         ]);
     }
 
-    public function endpointIndex()
+    public function endpointIndex(Request $request)
     {
+        dd($request->all());
         return response()->json(
             [
-                'offers' => Toffer::get()->toArray(),
+                'offers' => $request->all(),
             ],
             200,
             [],
