@@ -1,7 +1,25 @@
-<form id="options"
-    class="bg-white/90 backdrop-blur-md blur-none shadow-xl drop-shadow-xl text-gray-700 text-lg font-[600] p-3 gap-3 fixed top-0 left-0 w-[60%] h-[100%] z-[103] overflow-x-hidden overflow-y-auto f fr fw cs is js ss">
-    @dump($data)
-    <p id="send">test</p>
+<form id="optionsForm"
+    class="bg-white translate-x-[-120%] backdrop-blur-md blur-none shadow-xl drop-shadow-xl text-gray-700 text-lg font-[600] p-3 gap-3 fixed top-0 left-0 w-[100%] md:w-[60%] max-w-[550px] h-[100%] z-[103] overflow-x-hidden overflow-y-auto f fr fw cs is js ss">
+    <div class="flex-[0_0_100%] f fw fr ic cs justify-end ss gap-5">
+        <div id="searchOptionsButton" class="flex-[0_1_auto] f fnw fr ic cs js ss hover:brightness-150 cursor-pointer">
+            <div class="flex-[0_0_auto] p-3 bg-gray-700 rounded-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 text-gray-100">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+        </div>
+        <div id="closeOptionsButton" class="flex-[0_1_auto] f fnw fr ic cs js ss hover:brightness-150 cursor-pointer">
+            <div class="flex-[0_0_auto] p-3 bg-gray-700 rounded-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 text-gray-100">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="flex-[0_0_100%] h-[1px] bg-gray-200"></div>
     <div class="flex-[0_0_100%] f fnw fr ic cs js ss gap-5">
         <h2 class="flex-[0_0_auto]">Wynagrodzenie</h2>
         <img class="flex-[0_0_40px] h-[40px] object-contain" src="{{ url('/endpoint/image/icons-salary.png') }}">
