@@ -115,3 +115,25 @@
     border: 0px solid rgba(202, 17, 162, 0.8) !important;
     border-radius: 100%;
 }
+
+* {
+    --sb-track-color: rgba(17, 24, 39, 0);
+    --sb-thumb-color: rgb(229, 231, 235);
+    --sb-size: 10px;
+
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+}
+
+*::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 1px;
+}

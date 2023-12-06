@@ -28,7 +28,6 @@ class TofferController extends Controller
         )->flatten();
         $minSalary = $salaries->min();
         $maxSalary = $salaries->max();
-        $offers = Toffer::get()->toArray();
         $optionTypeS = Toption::where('option_type', '=', 'S')
             ->get()
             ->toArray();
@@ -38,8 +37,8 @@ class TofferController extends Controller
         $optionTypeT = Toption::where('option_type', '=', 'T')
             ->get()
             ->toArray();
-        $location = Toffer::select(['city', 'voivodeship', 'zip_code', DB::raw('MAX(id) as id')])
-            ->groupBy(['city', 'voivodeship', 'zip_code'])
+        $location = Toffer::select(['city', DB::raw('MAX(id) as id')])
+            ->groupBy(['city'])
             ->get()
             ->toArray();
         //table[alias]-column||[column,column]-value
@@ -49,9 +48,8 @@ class TofferController extends Controller
                     'offer-min_salary' => $minSalary,
                     'offer-max_salary' => $maxSalary,
                 ],
-                'offers' => $offers,
                 'options' => [
-                    'offer-city,voivodeship,zip_code' => $location,
+                    'offer-city' => $location,
                     'option-option_type-s' => $optionTypeS,
                     'option-option_type-d' => $optionTypeD,
                     'option-option_type-t' => $optionTypeT,
@@ -63,12 +61,11 @@ class TofferController extends Controller
     {
         $options = $request->all();
         $results = Toffer::select(['*'])
-            ->when(array_key_exists('offer-city,voivodeship,zip_code', $options), function (EloquentBuilder $query) use ($options) {
+            ->when(array_key_exists('offer-city', $options), function (EloquentBuilder $query) use ($options) {
                 $query->where(function (EloquentBuilder $query) use ($options) {
-                    foreach ($options['offer-city,voivodeship,zip_code'] as $option) {
+                    foreach ($options['offer-city'] as $option) {
                         $query->orWhere(function (EloquentBuilder $query) use ($option) {
-                            $option = explode(',', $option);
-                            $query->where('city', '=', $option[0])->where('voivodeship', '=', $option[1])->where('zip_code', '=', $option[2]);
+                            $query->where('city', '=', $option);
                         });
                     }
                 });
