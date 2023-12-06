@@ -44,14 +44,18 @@ class TofferController extends Controller
             ->toArray();
         //table[alias]-column||[column,column]-value
         return view('toffer.index.index')->with([
-            'data' => [
-                'offer-min_salary' => $minSalary,
-                'offer-max_salary' => $maxSalary,
+            'items' => [
+                'salary' => [
+                    'offer-min_salary' => $minSalary,
+                    'offer-max_salary' => $maxSalary,
+                ],
                 'offers' => $offers,
-                'offer-city,voivodeship,zip_code' => $location,
-                'option-option_type-s' => $optionTypeS,
-                'option-option_type-d' => $optionTypeD,
-                'option-option_type-t' => $optionTypeT,
+                'options' => [
+                    'offer-city,voivodeship,zip_code' => $location,
+                    'option-option_type-s' => $optionTypeS,
+                    'option-option_type-d' => $optionTypeD,
+                    'option-option_type-t' => $optionTypeT,
+                ],
             ]
         ]);
     }
