@@ -73,7 +73,7 @@ class TofferController extends Controller
             ->when(array_key_exists('offer-min_salary', $options) && array_key_exists('offer-max_salary', $options), function (EloquentBuilder $query) use ($options) {
                 $query->when(ctype_digit($options['offer-min_salary']) && ctype_digit($options['offer-max_salary']), function (EloquentBuilder $query) use ($options) {
                     $query->where(function (EloquentBuilder $query) use ($options) {
-                        $query->where('min_salary', '>=', $options['offer-min_salary'])->where('max_salary', '<=', $options['offer-max_salary']);
+                        $query->where('min_salary', '>=', (int)$options['offer-min_salary'])->where('max_salary', '<=', (int)$options['offer-max_salary']);
                     });
                 });
             })
