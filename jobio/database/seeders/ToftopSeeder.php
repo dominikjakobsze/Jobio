@@ -13,6 +13,6 @@ class ToftopSeeder extends Seeder
      */
     public function run(): void
     {
-        Toftop::factory(800)->create();
+        Toftop::factory(500)->create();
     }
 }

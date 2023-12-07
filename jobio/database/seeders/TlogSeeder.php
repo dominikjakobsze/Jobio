@@ -13,6 +13,6 @@ class TlogSeeder extends Seeder
      */
     public function run(): void
     {
-        Tlog::factory(1700)->create();
+        Tlog::factory(900)->create();
     }
 }
