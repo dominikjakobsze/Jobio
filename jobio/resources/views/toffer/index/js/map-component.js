@@ -2,6 +2,7 @@ import "leaflet/dist/leaflet.css";
 import L, { marker } from "leaflet";
 import axios from "axios";
 import { URL } from "../../../../js/app";
+import { addDataToColumnsPanel } from "./columns-component";
 
 let mapBoard = null;
 let markers = [];
@@ -49,6 +50,7 @@ export const addMarkersToMap = async (queryStringData) => {
                 }).addTo(mapBoard),
             );
         });
+        await addDataToColumnsPanel([...result["offers"]]);
     } catch (error) {
         console.log(error);
     }

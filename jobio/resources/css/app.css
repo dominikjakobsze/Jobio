@@ -117,6 +117,10 @@
     background: rgba(255, 0, 0, 0) !important;
 }
 
+.scrollbar-gutter {
+    scrollbar-gutter: stable;
+}
+
 * {
     --sb-track-color: rgba(17, 24, 39, 0);
     --sb-thumb-color: rgb(229, 231, 235);
@@ -135,6 +139,28 @@
 }
 
 *::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 1px;
+}
+
+.custom-scroll-x * {
+    --sb-track-color: rgba(17, 24, 39, 0);
+    --sb-thumb-color: rgb(229, 231, 235);
+    --sb-size: 5px;
+
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+}
+
+.custom-scroll-x *::-webkit-scrollbar {
+    height: var(--sb-size);
+}
+
+.custom-scroll-x *::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 1px;
+}
+
+.custom-scroll-x *::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 1px;
 }
