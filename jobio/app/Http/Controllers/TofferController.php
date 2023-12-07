@@ -62,7 +62,7 @@ class TofferController extends Controller
     public function endpointIndex(Request $request)
     {
         $options = $request->all();
-        $results = Toffer::select(['*'])
+        $results = Toffer::select(['*'])->with(['toftops.toption'])
             ->when(array_key_exists('offer-city', $options), function (EloquentBuilder $query) use ($options) {
                 $query->where(function (EloquentBuilder $query) use ($options) {
                     foreach ($options['offer-city'] as $option) {
