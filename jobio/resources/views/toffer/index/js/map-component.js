@@ -1,6 +1,7 @@
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import L, { marker } from "leaflet";
 import axios from "axios";
+import { URL } from "../../../../js/app";
 
 let mapBoard = null;
 let markers = [];
@@ -33,18 +34,20 @@ export const bindLeafletMapToElement = async () => {
 export const addMarkersToMap = async (queryStringData) => {
     try {
         const response = await axios.get(
-            `/endpoint/toffers?${queryStringData}`,
+            `${URL}/endpoint/toffers?${queryStringData}`,
         );
         const result = await response.data;
+        [...markers]?.map((marker) => {
+            mapBoard.removeLayer(marker);
+        });
         [...result["offers"]]?.map((offer) => {
-            console.log(offer);
-            L.marker([offer["latitude"], offer["longitude"]], {
-                icon: L.icon({
-                    iconUrl:
-                        "https://www.jawg.io/docs/images/icons/eiffel-tower.png",
-                    iconSize: [50, 50],
-                }),
-            }).addTo(mapBoard);
+            markers.push(
+                L.marker([offer["latitude"], offer["longitude"]], {
+                    icon: L.divIcon({
+                        html: `<img src="${offer["company_icon"]}" class="w-[50px] max-w-[50px] h-[50px] object-contain rounded-full" />`,
+                    }),
+                }).addTo(mapBoard),
+            );
         });
     } catch (error) {
         console.log(error);

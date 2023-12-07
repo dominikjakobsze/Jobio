@@ -5,10 +5,12 @@
 @endsection
 
 @section('content')
-    <map-container class="w-full h-[100dvh] overflow-hidden f fr fw cs is js ss z-[200] fixed top-0 left-0">
+    <map-container class="w-full h-[100dvh] overflow-hidden f fr fw cs is js ss z-[199] fixed top-0 left-0">
         <map-board class="flex-[0_0_100%] b w-full h-[100dvh] overflow-hidden bg-gray-100"></map-board>
-        @include('toffer.index.shared.panel-options')
     </map-container>
+    @include('toffer.index.shared.panel-options')
+    @include('toffer.index.shared.panel-columns')
+    @include('toffer.index.shared.map-fields')
 @endsection
 
 @push('css')

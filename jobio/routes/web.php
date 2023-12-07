@@ -45,13 +45,13 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
-    dd(
-        Toffer::with(['toftops.toption'])
-            ->whereRelation('toftops.toption', 'option_value', '=', 'possimusut')
-            ->get()
-            ->toArray(),
-        //Toffer::with(['toftops.toption'])->whereRelation('toftops.toption', 'option_value', "=", "possimusut")->ddRawSql()
-    );
+    // dd(
+    //     Toffer::with(['toftops.toption'])
+    //         ->whereRelation('toftops.toption', 'option_value', '=', 'possimusut')
+    //         ->get()
+    //         ->toArray(),
+    //     //Toffer::with(['toftops.toption'])->whereRelation('toftops.toption', 'option_value', "=", "possimusut")->ddRawSql()
+    // );
     // $toffers = Toffer::get();
     // foreach($toffers as $toffer){
     //     $toffer['company_icon'] = 'https://picsum.photos/'.fake()->numberBetween(50,340).'';
