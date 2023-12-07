@@ -1,4 +1,5 @@
 import axios from "axios";
+import { animationOptionsPanel } from "./animations";
 
 export const sendOptionsForm = async () => {
     document
@@ -17,5 +18,13 @@ export const sendOptionsForm = async () => {
             } catch (error) {
                 console.log(error);
             }
+        });
+};
+
+export const closeOptionsPanel = async () => {
+    document
+        .querySelector("[data-close-panel]")
+        .addEventListener("click", async () => {
+            animationOptionsPanel.play();
         });
 };
