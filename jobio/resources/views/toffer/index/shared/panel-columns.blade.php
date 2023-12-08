@@ -9,4 +9,9 @@
             </svg>
         </panel-toolbar-icon>
     </panel-toolbar>
+    <no-results class="f fr fw is ss cs js bg-white flex-[0_0_70%] mx-auto p-10 gap-5 rounded-2xl">
+        <img src="{{ url('/endpoint/image/images-nooffer.png') }}" class="flex-[0_0_100%] max-h-[150px] object-contain">
+        <h2 class="flex-[0_0_100%] text-gray-300 text-lg font-[300] text-center">Brak wyników spełniających kryteria
+        </h2>
+    </no-results>
 </panel-columns>

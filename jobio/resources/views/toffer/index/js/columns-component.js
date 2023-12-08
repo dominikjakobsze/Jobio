@@ -1,7 +1,7 @@
 import { URL } from "../../../../js/app";
 
 export const addDataToColumnsPanel = async (data) => {
-    console.log(data.length === 0);
+    data = [];
     [
         ...document.querySelectorAll(
             "panel-columns[data-panel-columns] panel-spacer",
@@ -113,4 +113,5 @@ export const addDataToColumnsPanel = async (data) => {
     document
         .querySelector("panel-columns[data-panel-columns]")
         .insertAdjacentHTML("beforeend", result.join(""));
+    console.log(data.length === 0);
 };
