@@ -1,6 +1,7 @@
 import { URL } from "../../../../js/app";
 
 export const addDataToColumnsPanel = async (data) => {
+    console.log(data.length === 0);
     [
         ...document.querySelectorAll(
             "panel-columns[data-panel-columns] panel-spacer",
