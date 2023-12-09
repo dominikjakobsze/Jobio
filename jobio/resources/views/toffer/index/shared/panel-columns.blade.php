@@ -1,5 +1,5 @@
 <panel-columns data-panel-columns
-    class="custom-scroll-x f fr fw cs is js ss gap-5 w-[80%] max-w-[700px] translate-x-[0%] p-4 bg-white z-[201] fixed top-0 left-0 h-[100dvh] overflow-x-hidden overflow-y-auto shadow-lg drop-shadow-lg text-gray-700">
+    class="custom-scroll-x f fr fw cs is js ss gap-3 md:gap-5 w-[100%] md:w-[80%] max-w-[700px] translate-x-[-120%] p-2 md:p-4 bg-white z-[201] fixed top-0 left-0 h-[100dvh] overflow-x-hidden overflow-y-auto shadow-lg drop-shadow-lg text-gray-700">
     <panel-toolbar class="f is cs justify-end ss fr fw p-3 flex-[0_0_100%] gap-5">
         <panel-toolbar-icon data-close-panel-columns
             class="f is cs js ss fr fw flex-[0_1_auto] p-3 bg-gray-100 shadow-sm drop-shadow-sm rounded-xl text-gray-700 hover:brightness-105 cup">
@@ -9,9 +9,4 @@
             </svg>
         </panel-toolbar-icon>
     </panel-toolbar>
-    <no-results class="f fr fw is ss cs js bg-white flex-[0_0_70%] mx-auto p-10 gap-5 rounded-2xl">
-        <img src="{{ url('/endpoint/image/images-nooffer.png') }}" class="flex-[0_0_100%] max-h-[150px] object-contain">
-        <h2 class="flex-[0_0_100%] text-gray-300 text-lg font-[300] text-center">Brak wyników spełniających kryteria
-        </h2>
-    </no-results>
 </panel-columns>
