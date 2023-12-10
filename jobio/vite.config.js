@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     plugins: [
@@ -8,9 +9,11 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/views/toffer/index/index.js",
+                "resources/js/react.jsx",
             ],
             refresh: true,
         }),
+        react(),
     ],
     server: {
         host: "0.0.0.0", //DoNotChange!

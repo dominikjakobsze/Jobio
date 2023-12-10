@@ -46,7 +46,7 @@ export const addDataToColumnsPanel = async (data) => {
                             </panel-item-city>
                         </panel-item-container-nested>
                     </panel-item-container>
-                    <panel-item-container class="f fr fnw cs ic js ss flex-[0_0_100%] gap-2">
+                    <panel-item-container class="hidden md:flex fr fnw cs ic js ss flex-[0_0_100%] gap-2">
                         <panel-item-option
                             class="p-1 flex-[1_0_0] text-gray-500 gap-2 f fr fnw cs ic js self-end overflow-y-hidden overflow-x-scroll md:text-xs font-[600]">
                             ${
@@ -67,7 +67,7 @@ export const addDataToColumnsPanel = async (data) => {
                                 URL + "/endpoint/image/icons-experience.png"
                             }" />
                     </panel-item-container>
-                    <panel-item-container class="f fr fnw cs ic js ss flex-[0_0_100%] gap-2">
+                    <panel-item-container class="hidden md:flex fr fnw cs ic js ss flex-[0_0_100%] gap-2">
                         <panel-item-option
                             class="p-1 flex-[1_0_0] text-gray-500 gap-2 f fr fnw cs ic js self-end overflow-y-hidden overflow-x-scroll md:text-xs font-[600]">
                             ${
@@ -88,7 +88,7 @@ export const addDataToColumnsPanel = async (data) => {
                                 URL + "/endpoint/image/icons-technology.png"
                             }" />
                     </panel-item-container>
-                    <panel-item-container class="f fr fnw cs ic js ss flex-[0_0_100%] gap-2">
+                    <panel-item-container class="hidden md:flex fr fnw cs ic js ss flex-[0_0_100%] gap-2">
                         <panel-item-option
                             class="p-1 flex-[1_0_0] text-gray-500 gap-2 f fr fnw cs ic js self-end overflow-y-hidden overflow-x-scroll md:text-xs font-[600]">
                             ${

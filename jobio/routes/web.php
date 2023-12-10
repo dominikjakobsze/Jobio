@@ -12,6 +12,7 @@ use App\Models\Treport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', [TofferController::class, 'index']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
+
+Route::get('/inertia', function () {
+    return Inertia::render('Show', [
+        'test' => 'test',
+    ]);
+});
 
 Route::get('/login', function () {
     //dd(Hash::make('12345678'));
