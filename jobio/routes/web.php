@@ -31,7 +31,7 @@ Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 
 Route::get('/inertia', function () {
-    return Inertia::render('Show', [
+    return Inertia::render('OffersMapPage/OffersMap', [
         'test' => 'test',
     ]);
 });

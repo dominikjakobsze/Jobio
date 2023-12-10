@@ -11,7 +11,7 @@
     @inertiaHead
 </head>
 
-<body>
+<body style="margin-bottom: 0px">
     @inertia
 </body>
 

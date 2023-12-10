@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class TofferController extends Controller
 {
@@ -44,7 +45,7 @@ class TofferController extends Controller
             ->get()
             ->toArray();
         //table[alias]-column||[column,column]-value
-        return view('toffer.index.index')->with([
+        return Inertia::render('OffersMapPage/OffersMap', [
             'items' => [
                 'salary' => [
                     'offer-min_salary' => $minSalary,
