@@ -8,7 +8,7 @@ const OptionPanel = ({ items }) => {
         <>
             <form
                 ref={formRef}
-                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss p-5 gap-5"
+                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss p-3 gap-5"
             >
                 {items?.options?.map((option) => {
                     return <OptionSection key={uuid()} option={option} />;

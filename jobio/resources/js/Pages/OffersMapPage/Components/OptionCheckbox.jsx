@@ -16,12 +16,12 @@ const OptionCheckbox = ({ itemValue, itemKey }) => {
     if (itemValue === undefined || itemValue === null) {
         return null;
     }
-
+    //return and render
     return (
         <>
             <label
                 onClick={(e) => handleCheck(e)}
-                className="flex-[0_1_auto] f fr fnw js is cs ss bg-red-300 p-1 cup"
+                className="flex-[0_1_auto] f fr fnw js is cs ss p-1 cup"
             >
                 <input
                     ref={checkboxRef}
@@ -32,7 +32,7 @@ const OptionCheckbox = ({ itemValue, itemKey }) => {
                 />
                 <p
                     ref={buttonRef}
-                    className="flex-[0_0_auto] bg-gray-100 px-3 py-[1px] rounded-2xl text-sm text-gray-700 font-[400]"
+                    className="flex-[0_0_auto] bg-gray-100 px-3 py-[3px] rounded-2xl text-sm text-gray-700 font-[400]"
                 >
                     {itemValue}
                 </p>

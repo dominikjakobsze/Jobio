@@ -60,22 +60,26 @@ class TofferController extends Controller
                     [
                         "keyName" => "option-option_type-s[]",
                         "items" => $optionTypeS,
-                        "displayName" => "Doświadczenie"
+                        "displayName" => "Doświadczenie",
+                        "iconUrl" => url('/endpoint/image/icons-experience.png'),
                     ],
                     [
                         "keyName" => "option-option_type-d[]",
                         "items" => $optionTypeD,
-                        "displayName" => "Narzędzia I Inne"
+                        "displayName" => "Narzędzia I Inne",
+                        "iconUrl" => url('/endpoint/image/icons-tools.png'),
                     ],
                     [
                         "keyName" => "option-option_type-t[]",
                         "items" => $optionTypeT,
-                        "displayName" => "Technologia"
+                        "displayName" => "Technologia",
+                        "iconUrl" => url('/endpoint/image/icons-technology.png'),
                     ],
                     [
                         "keyName" => "offer-city[]",
                         "items" => $standardisedLocation,
-                        "displayName" => "Lokalizacja"
+                        "displayName" => "Lokalizacja",
+                        "iconUrl" => url('/endpoint/image/icons-location.png'),
                     ],
                 ],
             ]
