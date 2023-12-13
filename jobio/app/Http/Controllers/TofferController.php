@@ -42,9 +42,13 @@ class TofferController extends Controller
             ->toArray();
         $location = Toffer::select(['city', DB::raw('MAX(id) as id')])
             ->groupBy(['city'])
-            ->get()
-            ->toArray();
-        dd($location);
+            ->get()->toArray();
+        $standardisedLocation = array_map(function ($item) {
+            if (isset($item['city'])) {
+                $item['option_value'] = $item['city'];
+            }
+            return $item;
+        }, $location);
         //table[alias]-column||[column,column]-value
         return Inertia::render('OffersMapPage/OffersMap', [
             'items' => [
@@ -70,7 +74,7 @@ class TofferController extends Controller
                     ],
                     [
                         "keyName" => "offer-city[]",
-                        "items" => $location,
+                        "items" => $standardisedLocation,
                         "displayName" => "Lokalizacja"
                     ],
                 ],
