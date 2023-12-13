@@ -4,8 +4,6 @@ import MapBoard from "./Components/MapBoard";
 import OptionPanel from "./Components/OptionPanel";
 
 const OffersMap = ({ items }) => {
-    const data = usePage();
-    console.log(data.props);
     return (
         <Layout>
             <MapBoard />

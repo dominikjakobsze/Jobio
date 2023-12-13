@@ -44,6 +44,7 @@ class TofferController extends Controller
             ->groupBy(['city'])
             ->get()
             ->toArray();
+        dd($location);
         //table[alias]-column||[column,column]-value
         return Inertia::render('OffersMapPage/OffersMap', [
             'items' => [
@@ -52,10 +53,26 @@ class TofferController extends Controller
                     'offer-max_salary' => $maxSalary,
                 ],
                 'options' => [
-                    'offer-city' => $location,
-                    'option-option_type-s' => $optionTypeS,
-                    'option-option_type-d' => $optionTypeD,
-                    'option-option_type-t' => $optionTypeT,
+                    [
+                        "keyName" => "option-option_type-s[]",
+                        "items" => $optionTypeS,
+                        "displayName" => "Doświadczenie"
+                    ],
+                    [
+                        "keyName" => "option-option_type-d[]",
+                        "items" => $optionTypeD,
+                        "displayName" => "Narzędzia I Inne"
+                    ],
+                    [
+                        "keyName" => "option-option_type-t[]",
+                        "items" => $optionTypeT,
+                        "displayName" => "Technologia"
+                    ],
+                    [
+                        "keyName" => "offer-city[]",
+                        "items" => $location,
+                        "displayName" => "Lokalizacja"
+                    ],
                 ],
             ]
         ]);
