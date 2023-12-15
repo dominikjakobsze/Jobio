@@ -3,6 +3,7 @@ import Layout from "./Components/Layout";
 import MapBoard from "./Components/MapBoard";
 import OptionPanel from "./Components/OptionPanel";
 import React from "react";
+import MapControls from "./Components/MapControls";
 
 const OffersMap = ({ items }) => {
     const [offers, setOffers] = React.useState([]);
@@ -12,6 +13,7 @@ const OffersMap = ({ items }) => {
     return (
         <Layout>
             <MapBoard />
+            <MapControls />
             <OptionPanel items={items} setOffers={setOffers} />
         </Layout>
     );

@@ -2,13 +2,17 @@ import React from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 const MapBoard = () => {
-    const mapRef = React.useRef(null);
+    const mapRef = React.useRef();
+    const mapRefNotInitialized = React.useRef(true);
 
     React.useEffect(() => {
-        defineLeafletMap();
+        if (mapRefNotInitialized.current) {
+            defineLeafletMap();
+        }
     }, []);
 
-    const defineLeafletMap = async () => {
+    const defineLeafletMap = React.useCallback(() => {
+        mapRefNotInitialized.current = false;
         const accessToken =
             "jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh";
         const mapBoard = L.map(mapRef.current).setView(
@@ -30,11 +34,13 @@ const MapBoard = () => {
                 position: "bottomright",
             })
             .addTo(mapBoard);
-    };
+    }, []);
     return (
         <>
-            <div ref={mapRef} className="w-full h-full z-[101] overflow-hidden">
-            </div>
+            <div
+                ref={mapRef}
+                className="w-full h-full z-[100] overflow-hidden"
+            ></div>
         </>
     );
 };

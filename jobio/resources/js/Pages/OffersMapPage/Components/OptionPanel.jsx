@@ -4,6 +4,10 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import SalaryOptionSection from "./SalaryOptionSection";
 import { IoSearchSharp, IoCloseSharp } from "react-icons/io5";
+import {
+    animateOptionPanel,
+    bindElementToAnimateOptionPanel,
+} from "../animations";
 
 const OptionPanel = ({ items, setOffers }) => {
     const formRef = React.useRef(null);
@@ -11,7 +15,6 @@ const OptionPanel = ({ items, setOffers }) => {
     const handleSendForm = async () => {
         const formData = new FormData(formRef.current);
         const queryStrng = new URLSearchParams(formData).toString();
-        console.log(queryStrng);
         try {
             const response = await axios.get(`/endpoint/toffers?${queryStrng}`);
             const results = await response.data;
@@ -23,15 +26,20 @@ const OptionPanel = ({ items, setOffers }) => {
         }
     };
 
+    const closeOptionPanel = () => {
+        animateOptionPanel.reverse();
+    };
+
     React.useEffect(() => {
         handleSendForm();
+        bindElementToAnimateOptionPanel(formRef.current);
     }, []);
 
     return (
         <>
             <form
                 ref={formRef}
-                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
+                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 translate-x-[-120%] bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
             >
                 <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
                     <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
@@ -43,6 +51,7 @@ const OptionPanel = ({ items, setOffers }) => {
                     <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
                         <IoCloseSharp
                             className=" w-[25px] h-[25px] text-gray-700"
+                            onClick={() => closeOptionPanel()}
                         />
                     </div>
                 </div>
