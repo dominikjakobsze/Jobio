@@ -3,6 +3,7 @@ import OptionSection from "./OptionSection";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import SalaryOptionSection from "./SalaryOptionSection";
+import { IoSearchSharp, IoCloseSharp } from "react-icons/io5";
 
 const OptionPanel = ({ items, setOffers }) => {
     const formRef = React.useRef(null);
@@ -30,11 +31,29 @@ const OptionPanel = ({ items, setOffers }) => {
         <>
             <form
                 ref={formRef}
-                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss p-3 gap-5"
+                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss p-3 gap-5"
             >
-                <div onClick={(e) => handleSendForm()}>button</div>
+                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-4">
+                    <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
+                        <IoSearchSharp
+                            className=" w-[25px] h-[25px] text-gray-700"
+                            onClick={(e) => handleSendForm()}
+                        />
+                    </div>
+                    <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
+                        <IoCloseSharp
+                            className=" w-[25px] h-[25px] text-gray-700"
+                        />
+                    </div>
+                </div>
+                <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
                 {React.useMemo(() => {
-                    return <SalaryOptionSection key={uuid()} salary={items?.salary} />;
+                    return (
+                        <SalaryOptionSection
+                            key={uuid()}
+                            salary={items?.salary}
+                        />
+                    );
                 }, [])}
                 {React.useMemo(
                     () =>

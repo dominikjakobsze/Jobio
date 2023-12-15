@@ -117,10 +117,6 @@
     background: rgba(255, 0, 0, 0) !important;
 }
 
-.scrollbar-gutter {
-    scrollbar-gutter: stable;
-}
-
 * {
     --sb-track-color: rgba(17, 24, 39, 0);
     --sb-thumb-color: rgb(229, 231, 235);
