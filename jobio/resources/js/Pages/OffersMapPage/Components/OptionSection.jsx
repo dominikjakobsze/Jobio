@@ -1,7 +1,6 @@
 import React from "react";
 import OptionCheckbox from "./OptionCheckbox";
 import { v4 as uuid } from "uuid";
-import { URL } from "../../../app";
 
 const OptionSection = ({ option }) => {
     return (

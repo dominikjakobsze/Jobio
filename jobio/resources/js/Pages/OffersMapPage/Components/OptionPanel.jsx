@@ -31,9 +31,9 @@ const OptionPanel = ({ items, setOffers }) => {
         <>
             <form
                 ref={formRef}
-                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss p-3 gap-5"
+                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
             >
-                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-4">
+                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
                     <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
                         <IoSearchSharp
                             className=" w-[25px] h-[25px] text-gray-700"
