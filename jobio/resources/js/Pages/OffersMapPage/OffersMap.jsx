@@ -1,21 +1,19 @@
-import { usePage } from "@inertiajs/react";
 import Layout from "./Components/Layout";
 import MapBoard from "./Components/MapBoard";
 import OptionPanel from "./Components/OptionPanel";
 import React from "react";
 import MapControls from "./Components/MapControls";
+import { AnimationContextProvider } from "./Components/AnimationContextProvider";
+import Main from "./Main";
 
 const OffersMap = ({ items }) => {
-    const [offers, setOffers] = React.useState([]);
-    React.useEffect(() => {
-        console.log(offers);
-    }, [offers]);
+    console.log("OffersMap");
     return (
-        <Layout>
-            <MapBoard />
-            <MapControls />
-            <OptionPanel items={items} setOffers={setOffers} />
-        </Layout>
+        <AnimationContextProvider>
+            <Layout>
+                <Main items={items} />
+            </Layout>
+        </AnimationContextProvider>
     );
 };
 

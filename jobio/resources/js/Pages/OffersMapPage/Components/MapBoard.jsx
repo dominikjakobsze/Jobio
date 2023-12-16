@@ -1,23 +1,18 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-const MapBoard = () => {
-    const mapRef = React.useRef();
-    const mapRefNotInitialized = React.useRef(true);
 
-    React.useEffect(() => {
-        if (mapRefNotInitialized.current) {
-            defineLeafletMap();
-        }
-    }, []);
+const MapBoard = ({ offers }) => {
+    console.log("MapBoard");
+    const mapRef = React.useRef(null);
+    const mapLeaflet = React.useRef(null);
 
-    const defineLeafletMap = React.useCallback(() => {
-        mapRefNotInitialized.current = false;
+    const defineMap = React.useCallback(() => {
         const accessToken =
             "jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh";
-        const mapBoard = L.map(mapRef.current).setView(
-            [52.387078, 19.270766],
-            3,
+        mapLeaflet.current = L.map(mapRef.current).setView(
+            [48.7965913, 2.3210938],
+            6,
         );
         L.tileLayer(
             `https://tile.jawg.io/jawg-sunny/{z}/{x}/{y}.png?access-token=${accessToken}`,
@@ -27,20 +22,24 @@ const MapBoard = () => {
                 maxZoom: 22,
                 minZoom: 6,
             },
-        ).addTo(mapBoard);
-        mapBoard.zoomControl.remove();
-        L.control
-            .zoom({
-                position: "bottomright",
-            })
-            .addTo(mapBoard);
+        ).addTo(mapLeaflet.current);
+        mapLeaflet.current.zoomControl.setPosition("topright");
     }, []);
+
+    React.useEffect(() => {
+        if (mapLeaflet.current === null) {
+            defineMap();
+        }
+    }, []);
+
     return (
         <>
             <div
                 ref={mapRef}
                 className="w-full h-full z-[100] overflow-hidden"
-            ></div>
+            >
+            </div>
+            {offers.map(offer => console.log(offer))}
         </>
     );
 };

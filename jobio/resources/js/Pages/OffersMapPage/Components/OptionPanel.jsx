@@ -1,81 +1,94 @@
 import React from "react";
 import OptionSection from "./OptionSection";
-import { v4 as uuid } from "uuid";
 import axios from "axios";
 import SalaryOptionSection from "./SalaryOptionSection";
 import { IoSearchSharp, IoCloseSharp } from "react-icons/io5";
-import {
-    animateOptionPanel,
-    bindElementToAnimateOptionPanel,
-} from "../animations";
-
+import { AnimationContext } from "./AnimationContextProvider";
 const OptionPanel = ({ items, setOffers }) => {
-    const formRef = React.useRef(null);
+    console.log("OptionPanel");
+    const { getOptionPanelTl, bindOptionPanel } =
+        React.useContext(AnimationContext);
 
-    const handleSendForm = async () => {
-        const formData = new FormData(formRef.current);
-        const queryStrng = new URLSearchParams(formData).toString();
-        try {
-            const response = await axios.get(`/endpoint/toffers?${queryStrng}`);
-            const results = await response.data;
-            setOffers((prev) => {
-                return [...results?.offers];
-            });
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
-
-    const closeOptionPanel = () => {
-        animateOptionPanel.reverse();
-    };
+    const formRef = React.useRef();
 
     React.useEffect(() => {
-        handleSendForm();
-        bindElementToAnimateOptionPanel(formRef.current);
+        bindOptionPanel(formRef.current);
     }, []);
 
-    return (
-        <>
-            <form
-                ref={formRef}
-                className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 translate-x-[-120%] bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
-            >
-                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
-                    <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
-                        <IoSearchSharp
-                            className=" w-[25px] h-[25px] text-gray-700"
-                            onClick={(e) => handleSendForm()}
-                        />
+    const sendForm = React.useCallback(async () => {
+        const formData = new FormData(formRef.current);
+        const queryString = new URLSearchParams(formData).toString();
+        console.log(queryString);
+        const response = await axios.get(`/endpoint/toffers?${queryString}`);
+        const result = await response.data;
+        setOffers((prev) => {
+            return [...result?.offers];
+        });
+    });
+
+    return React.useMemo(() => {
+        return (
+            <>
+                <form
+                    ref={formRef}
+                    className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 translate-x-[-120%] bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
+                >
+                    <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
+                        <div
+                            className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup"
+                            onClick={() => sendForm()}
+                        >
+                            <IoSearchSharp className=" w-[25px] h-[25px] text-gray-700" />
+                        </div>
+                        <div
+                            className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup"
+                            onClick={() => getOptionPanelTl().reverse()}
+                        >
+                            <IoCloseSharp className=" w-[25px] h-[25px] text-gray-700" />
+                        </div>
                     </div>
-                    <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
-                        <IoCloseSharp
-                            className=" w-[25px] h-[25px] text-gray-700"
-                            onClick={() => closeOptionPanel()}
-                        />
-                    </div>
-                </div>
-                <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
-                {React.useMemo(() => {
-                    return (
-                        <SalaryOptionSection
-                            key={uuid()}
-                            salary={items?.salary}
-                        />
-                    );
-                }, [])}
-                {React.useMemo(
-                    () =>
-                        items?.options?.map((option) => {
-                            return (
-                                <OptionSection key={uuid()} option={option} />
-                            );
-                        }),
-                    [],
-                )}
-            </form>
-        </>
-    );
+                    <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
+                    {items?.options?.map((item) => {
+                        return (
+                            <OptionSection
+                                key={item?.keyName + item?.displayName}
+                                item={item}
+                            />
+                        );
+                    })}
+                </form>
+            </>
+        );
+    }, []);
+    // return React.useMemo(() => {
+    //     return (
+    //         <>
+    //             <form
+    //                 ref={formRef}
+    //                 className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 translate-x-[0%] bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
+    //             >
+    //                 <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
+    //                     <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
+    //                         <IoSearchSharp
+    //                             onClick={() => sendForm()}
+    //                             className=" w-[25px] h-[25px] text-gray-700"
+    //                         />
+    //                     </div>
+    //                     <div className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup">
+    //                         <IoCloseSharp
+    //                             onClick={() => getOptionPanelTl().reverse()}
+    //                             className=" w-[25px] h-[25px] text-gray-700"
+    //                         />
+    //                     </div>
+    //                 </div>
+    //                 <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
+    //                 {items?.options?.map((item) => {
+    //                     return <OptionSection key={uuid()} item={item} />;
+    //                 })}
+    //             </form>
+    //         </>
+    //     );
+    // }, []);
 };
 
 export default OptionPanel;
