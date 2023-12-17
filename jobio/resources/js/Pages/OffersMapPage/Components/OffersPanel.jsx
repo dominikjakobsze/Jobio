@@ -1,6 +1,7 @@
 import React from "react";
 import { IoCloseSharp, IoSearchSharp } from "react-icons/io5";
 import { AnimationContext } from "./AnimationContextProvider";
+import { LuActivity } from "react-icons/lu";
 
 const OffersPanel = ({ offers }) => {
     console.log("OffersPanel");
@@ -16,7 +17,7 @@ const OffersPanel = ({ offers }) => {
                 ref={offersPanelRef}
                 className="w-full max-w-[500px] h-full absolute z-[102] top-0 left-0 translate-x-[-120%] bg-white/80 backdrop-blur shadow-2xl overflow-x-hidden overflow-y-auto f fr fw js is cs ss py-3 p-[5px] md:p-3 gap-2 md:gap-5"
             >
-                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4">
+                <div className="flex-[0_0_100%] f fr fnw justify-end is cs ss gap-2 md:gap-4 ">
                     <div
                         onClick={() => getOffersPanelTl().reverse()}
                         className="flex-[0_0_auto] f fr fw js is cs ss p-3 bg-gray-100 rounded-full hover:contrast-[80%] cup"
@@ -24,7 +25,17 @@ const OffersPanel = ({ offers }) => {
                         <IoCloseSharp className=" w-[25px] h-[25px] text-gray-700" />
                     </div>
                 </div>
-                <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
+                <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200 ss"></div>
+                {offers?.length === 0 ? (
+                    <>
+                        <div className="p-3 flex-[0_0_100%] f fr is fw cs ss jc gap-2 text-gray-400 text-sm ">
+                            <LuActivity className="flex-[0_0_70px] h-[70px]" />
+                            <p className="flex-[0_0_100%] text-center">
+                                Brak ofert spełniających wymagania!
+                            </p>
+                        </div>
+                    </>
+                ) : null}
                 {offers?.map((offer) => {
                     return (
                         <div

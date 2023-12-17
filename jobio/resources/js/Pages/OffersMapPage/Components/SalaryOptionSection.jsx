@@ -19,6 +19,7 @@ const SalaryOptionSection = ({ salary }) => {
                     {Object.entries(salary)?.map((salary) => {
                         return (
                             <input
+                                key={salary[0]+salary[1]}
                                 type="number"
                                 name={salary[0]}
                                 placeholder={salary[1]}
