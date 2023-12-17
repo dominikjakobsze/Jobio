@@ -19,7 +19,6 @@ const OptionPanel = ({ items, setOffers }) => {
     const sendForm = React.useCallback(async () => {
         const formData = new FormData(formRef.current);
         const queryString = new URLSearchParams(formData).toString();
-        console.log(queryString);
         const response = await axios.get(`/endpoint/toffers?${queryString}`);
         const result = await response.data;
         setOffers((prev) => {
@@ -48,6 +47,7 @@ const OptionPanel = ({ items, setOffers }) => {
                     </div>
                 </div>
                 <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
+                <SalaryOptionSection salary={items?.salary}/>
                 {items?.options?.map((item) => {
                     return (
                         <OptionSection

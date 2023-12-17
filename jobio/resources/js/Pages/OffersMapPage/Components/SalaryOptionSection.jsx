@@ -15,6 +15,18 @@ const SalaryOptionSection = ({ salary }) => {
                         className="flex-[0_0_45px] h-[45px] object-contain"
                     />
                 </div>
+                <div className="flex-[0_0_100%] p-1 f fr fw jc is cs ss gap-5">
+                    {Object.entries(salary)?.map((salary) => {
+                        return (
+                            <input
+                                type="number"
+                                name={salary[0]}
+                                placeholder={salary[1]}
+                                className="flex-[0_0_45%] text-gray-600 text-sm font-[600] ss px-1 bg-transparent border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black"
+                            />
+                        );
+                    })}
+                </div>
             </div>
             <div className="flex-[0_0_100%] p-[0.5px] bg-gray-200"></div>
         </>
