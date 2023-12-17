@@ -39,7 +39,6 @@ const MapBoard = ({ offers }) => {
                 className="w-full h-full z-[100] overflow-hidden"
             >
             </div>
-            {offers.map(offer => console.log(offer))}
         </>
     );
 };

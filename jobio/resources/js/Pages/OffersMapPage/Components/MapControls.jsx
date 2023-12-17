@@ -8,7 +8,8 @@ import gsap from "gsap";
 const MapControls = () => {
     console.log("MapControls");
 
-    const { getOptionPanelTl } = React.useContext(AnimationContext);
+    const { getOptionPanelTl, getOffersPanelTl } =
+        React.useContext(AnimationContext);
 
     return (
         <>
@@ -19,7 +20,10 @@ const MapControls = () => {
                 >
                     <TbFilters className="w-[25px] h-[25px]" />
                 </div>
-                <div className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100">
+                <div
+                    onClick={() => getOffersPanelTl().play()}
+                    className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100"
+                >
                     <LiaColumnsSolid className="w-[25px] h-[25px]" />
                 </div>
                 <div className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100">
