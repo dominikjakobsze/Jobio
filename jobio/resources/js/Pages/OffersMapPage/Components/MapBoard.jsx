@@ -6,6 +6,7 @@ const MapBoard = ({ offers }) => {
     console.log("MapBoard");
     const mapRef = React.useRef(null);
     const mapLeaflet = React.useRef(null);
+    const mapMarkers = React.useRef([]);
 
     const defineMap = React.useCallback(() => {
         const accessToken =
@@ -22,23 +23,46 @@ const MapBoard = ({ offers }) => {
                 maxZoom: 22,
                 minZoom: 6,
             },
-        ).addTo(mapLeaflet.current);
-        mapLeaflet.current.zoomControl.setPosition("topright");
+        ).addTo(mapLeaflet?.current);
+        mapLeaflet?.current?.zoomControl?.setPosition("topright");
     }, []);
 
     React.useEffect(() => {
-        if (mapLeaflet.current === null) {
+        if (mapLeaflet?.current === null) {
             defineMap();
         }
     }, []);
+    React.useEffect(() => {
+        mapMarkers?.current?.map((marker) => {
+            marker?.off();
+            marker?.remove();
+        });
+
+        mapMarkers.current = [];
+        //div icon zrbic i jako data poddac link do ogloszenia
+        offers?.map((offer) => {
+            const marker = L.marker([offer?.latitude, offer?.longitude], {
+                icon: L.icon({
+                    iconUrl: offer?.company_icon,
+                    iconSize: [50, 50],
+                }),
+            }).addTo(mapLeaflet?.current);
+
+            marker.on("click", () => {
+                console.log("test");
+            });
+
+            mapMarkers?.current?.push(marker);
+        });
+        console.log(mapMarkers?.current);
+    }, [offers]);
 
     return (
         <>
             <div
                 ref={mapRef}
                 className="w-full h-full z-[100] overflow-hidden"
-            >
-            </div>
+            ></div>
         </>
     );
 };
