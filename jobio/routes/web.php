@@ -27,6 +27,7 @@ use Inertia\Inertia;
 // https://github.com/barryvdh/laravel-ide-helper#usage
 //image/files-dominik.txt
 Route::get('/', [TofferController::class, 'index']);
+Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 

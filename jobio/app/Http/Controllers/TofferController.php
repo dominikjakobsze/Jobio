@@ -174,9 +174,22 @@ class TofferController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Toffer $toffer)
+    public function show($id)
     {
-        //
+        //$this->authorize('view',Toffer::class);
+        dump($id);
+        try {
+            $offer = Toffer::where('id', '=', $id)->first();
+        } catch (Exception $exception) {
+            dump($exception);
+            return die();
+        }
+        if ($offer === null) {
+            return abort(404, 'Brak Oferty', []);
+        }
+        return Inertia::render('OfferPage/OfferPage', [
+            'offer' => $offer
+        ]);
     }
 
     /**

@@ -21,6 +21,7 @@ class TofferPolicy
      */
     public function view(?Tperson $tperson, Toffer $toffer): Response
     {
+        dd('view');
         return Response::allow();
     }
 

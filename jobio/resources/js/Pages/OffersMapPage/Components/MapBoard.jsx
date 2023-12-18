@@ -1,6 +1,7 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { URL } from "../../../app";
 
 const MapBoard = ({ offers }) => {
     console.log("MapBoard");
@@ -12,7 +13,7 @@ const MapBoard = ({ offers }) => {
         const accessToken =
             "jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh";
         mapLeaflet.current = L.map(mapRef.current).setView(
-            [48.7965913, 2.3210938],
+            [53.123482, 18.008438],
             6,
         );
         L.tileLayer(
@@ -39,22 +40,22 @@ const MapBoard = ({ offers }) => {
         });
 
         mapMarkers.current = [];
-        //div icon zrbic i jako data poddac link do ogloszenia
         offers?.map((offer) => {
             const marker = L.marker([offer?.latitude, offer?.longitude], {
-                icon: L.icon({
-                    iconUrl: offer?.company_icon,
-                    iconSize: [50, 50],
+                icon: L.divIcon({
+                    html: `<img class="w-[50px] h-[50px] rounded-full" src="${offer?.company_icon}"/>`,
+                    data: offer?.id,
                 }),
             }).addTo(mapLeaflet?.current);
 
-            marker.on("click", () => {
-                console.log("test");
+            marker.on("click", (e) => {
+                window.open(
+                    `${URL}/offer/${e?.target.options?.icon?.options?.data}`,
+                );
             });
 
             mapMarkers?.current?.push(marker);
         });
-        console.log(mapMarkers?.current);
     }, [offers]);
 
     return (
