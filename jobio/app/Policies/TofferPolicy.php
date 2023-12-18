@@ -4,24 +4,18 @@ namespace App\Policies;
 
 use App\Models\Toffer;
 use App\Models\Tperson;
+use Auth;
 use Illuminate\Auth\Access\Response;
 
 class TofferPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(?Tperson $tperson): Response
     {
         return Response::allow();
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(?Tperson $tperson, Toffer $toffer): Response
     {
-        dd('view');
         return Response::allow();
     }
 

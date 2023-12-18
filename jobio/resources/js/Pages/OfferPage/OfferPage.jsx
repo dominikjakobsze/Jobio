@@ -1,13 +1,13 @@
 import React from "react";
+import Main from "./Main";
+import Layout from "./Components/Layout";
 
-const OfferPage = ({offer}) => {
+const OfferPage = ({ offer }) => {
     console.log(offer);
     return (
-        <>
-            <div>
-                <p>re</p>
-            </div>
-        </>
+        <Layout>
+            <Main />
+        </Layout>
     );
 };
 

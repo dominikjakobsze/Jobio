@@ -176,8 +176,6 @@ class TofferController extends Controller
      */
     public function show($id)
     {
-        //$this->authorize('view',Toffer::class);
-        dump($id);
         try {
             $offer = Toffer::where('id', '=', $id)->first();
         } catch (Exception $exception) {
@@ -187,6 +185,7 @@ class TofferController extends Controller
         if ($offer === null) {
             return abort(404, 'Brak Oferty', []);
         }
+        $this->authorize('view', $offer);
         return Inertia::render('OfferPage/OfferPage', [
             'offer' => $offer
         ]);
