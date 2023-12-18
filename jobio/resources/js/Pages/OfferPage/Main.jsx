@@ -1,11 +1,13 @@
 import React from "react";
+import TitleSection from "./Components/TitleSection";
 
-const Main = () => {
+const Main = ({ offer }) => {
+    console.log("Main");
     return (
         <>
-            <div>
-                <p>rew</p>
-            </div>
+            {React.useMemo(() => {
+                return <TitleSection offer={offer} />;
+            }, [])}
         </>
     );
 };

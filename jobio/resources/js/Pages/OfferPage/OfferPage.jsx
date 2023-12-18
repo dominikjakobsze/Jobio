@@ -3,10 +3,10 @@ import Main from "./Main";
 import Layout from "./Components/Layout";
 
 const OfferPage = ({ offer }) => {
-    console.log(offer);
+    console.log("OfferPage");
     return (
         <Layout>
-            <Main />
+            <Main offer={offer} />
         </Layout>
     );
 };

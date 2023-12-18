@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
 use App\Models\Toption;
 use App\Policies\TofferPolicy;
-use App\Traits\AliasesTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
@@ -17,7 +16,6 @@ use Inertia\Inertia;
 
 class TofferController extends Controller
 {
-    use AliasesTrait;
     /**
      * Display a listing of the resource.
      */
