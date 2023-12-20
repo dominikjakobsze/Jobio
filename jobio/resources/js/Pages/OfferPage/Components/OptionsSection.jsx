@@ -93,7 +93,7 @@ const OptionsSection = ({ offer }) => {
                         <div
                             key={item?.itemId + uuidv4()}
                             data-key={item?.itemId + uuidv4()}
-                            className="flex-[0_0_auto] px-4 py-2 bg-[#fffaf0] text-[#FF8A29] rounded-xl text-xs font-[500]"
+                            className="flex-[0_0_auto] px-4 py-2 bg-[#F0FFF4] text-[#48BB78] rounded-xl text-xs font-[500]"
                         >
                             {item?.itemValue}
                         </div>
@@ -109,7 +109,7 @@ const OptionsSection = ({ offer }) => {
                         <div
                             key={item?.itemId + uuidv4()}
                             data-key={item?.itemId + uuidv4()}
-                            className="flex-[0_0_auto] px-4 py-2 bg-[#fffaf0] text-[#FF8A29] rounded-xl text-xs font-[500]"
+                            className="flex-[0_0_auto] px-4 py-2 bg-[#F5E9F6] text-[#AB47BC] rounded-xl text-xs font-[500]"
                         >
                             {item?.itemValue}
                         </div>

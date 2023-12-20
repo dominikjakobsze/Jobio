@@ -2,8 +2,9 @@ import React from "react";
 import TitleSection from "./Components/TitleSection";
 import OptionsSection from "./Components/OptionsSection";
 import ApplySection from "./Components/ApplySection";
+import RandomOffersSection from "./Components/RandomOffersSection";
 
-const Main = ({ offer }) => {
+const Main = ({ offer, randomOffers }) => {
     console.log("Main");
     return (
         <>
@@ -12,6 +13,9 @@ const Main = ({ offer }) => {
             }, [])}
             {React.useMemo(() => {
                 return <OptionsSection offer={offer} />;
+            }, [])}
+            {React.useMemo(() => {
+                return <RandomOffersSection randomOffers={randomOffers} />;
             }, [])}
             {React.useMemo(() => {
                 return <ApplySection />;

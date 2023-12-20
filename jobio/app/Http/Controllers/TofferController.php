@@ -176,6 +176,7 @@ class TofferController extends Controller
     {
         try {
             $offer = Toffer::with(['toftops.toption'])->where('id', '=', $id)->first();
+            $randomOffers = Toffer::all()->random(5);
         } catch (Exception $exception) {
             dump($exception);
             return die();
@@ -185,7 +186,8 @@ class TofferController extends Controller
         }
         $this->authorize('view', $offer);
         return Inertia::render('OfferPage/OfferPage', [
-            'offer' => $offer
+            'offer' => $offer,
+            'randomOffers' => $randomOffers
         ]);
     }
 
