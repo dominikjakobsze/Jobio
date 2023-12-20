@@ -33,20 +33,3 @@ const TitleSection = ({ offer }) => {
 
 export default TitleSection;
 
-// {
-//     "id": "9aca7cdd-badb-44d8-868b-8a79fc90d875",
-//     "min_salary": 6461,
-//     "max_salary": 10796,
-//     "title": "Nemo labore quam pariatur ut necessitatibus.",
-//     "page_offer": "\"fsd\"",
-//     "longitude": 18.498106,
-//     "latitude": 53.494455,
-//     "city": "Jeżewo",
-//     "street": "Taszewskie Pole 27B",
-//     "zip_code": "86-131",
-//     "voivodeship": "kujawsko-pomorskie",
-//     "temployer_id": "9aca7c71-8901-4193-b769-f7bd08068d6d",
-//     "company_icon": "https://picsum.photos/264",
-//     "created_at": "2023-12-07T10:24:49.000000Z",
-//     "updated_at": "2023-12-07T11:31:36.000000Z"
-// }
