@@ -1,5 +1,6 @@
 import React from "react";
 import TitleSection from "./Components/TitleSection";
+import OptionsSection from "./Components/OptionsSection";
 
 const Main = ({ offer }) => {
     console.log("Main");
@@ -7,6 +8,9 @@ const Main = ({ offer }) => {
         <>
             {React.useMemo(() => {
                 return <TitleSection offer={offer} />;
+            }, [])}
+            {React.useMemo(() => {
+                return <OptionsSection offer={offer} />;
             }, [])}
         </>
     );

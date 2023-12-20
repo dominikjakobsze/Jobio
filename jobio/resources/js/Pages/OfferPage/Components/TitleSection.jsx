@@ -3,10 +3,6 @@ import React from "react";
 const TitleSection = ({ offer }) => {
     console.log("TitleSection");
 
-    React.useEffect(() => {
-        console.log(offer);
-    }, []);
-
     return (
         <>
             <div className="bg-sky-600 p-5 w-full f fr fw ss js is cs rounded-t-2xl gap-3 text-3xl font-[600] text-gray-100">

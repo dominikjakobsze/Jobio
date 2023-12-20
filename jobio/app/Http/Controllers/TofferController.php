@@ -175,7 +175,7 @@ class TofferController extends Controller
     public function show($id)
     {
         try {
-            $offer = Toffer::where('id', '=', $id)->first();
+            $offer = Toffer::with(['toftops.toption'])->where('id', '=', $id)->first();
         } catch (Exception $exception) {
             dump($exception);
             return die();

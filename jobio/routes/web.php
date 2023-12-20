@@ -10,6 +10,7 @@ use App\Models\Toption;
 use App\Models\Tperson;
 use App\Models\Treport;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -53,18 +54,29 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
-    // dd(
-    //     Toffer::with(['toftops.toption'])
-    //         ->whereRelation('toftops.toption', 'option_value', '=', 'possimusut')
-    //         ->get()
-    //         ->toArray(),
-    //     //Toffer::with(['toftops.toption'])->whereRelation('toftops.toption', 'option_value', "=", "possimusut")->ddRawSql()
-    // );
-    // $toffers = Toffer::get();
-    // foreach($toffers as $toffer){
-    //     $toffer['company_icon'] = 'https://picsum.photos/'.fake()->numberBetween(50,340).'';
-    //     $toffer->save();
-    // }
+    $result = Http::get('https://picsum.photos/200');
+
+    // Check if the request was successful (status code 200)
+    if ($result->successful()) {
+        // Get the content type from the response headers
+        $contentType = $result->header('Content-Type');
+
+        // Map content types to file extensions
+        $extension = ['image/jpeg' => 'jpg', 'image/png' => 'png'][$contentType] ?? 'jpg';
+
+        // Generate a unique filename with the determined extension
+        $filename = 'image_' . uniqid() . date_timestamp_get(now()) . '.' . $extension;
+
+        // Save the image content to the storage disk (configure your disk in filesystems.php)
+        Storage::disk('local')->put('/app/app_files/images/' . $filename, $result->body());
+
+        $url = url('/endpoint/image/images-' . $filename);
+        dump($url, $filename);
+        return "<img src=" . $url . "/>";
+    } else {
+        // Handle the case where the HTTP request was not successful
+        return abort(500, 'File not saved!');
+    }
 });
 Route::get('/factory/example', function () {
     /** @var App\Models\Tlog $tlog */
