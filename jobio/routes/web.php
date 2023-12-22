@@ -56,29 +56,6 @@ Route::get('/logout', function () {
 });
 Route::get('/test', function () {
     ImageGeneratorService::generateImage();
-    $result = Http::get('https://picsum.photos/200');
-
-    // Check if the request was successful (status code 200)
-    if ($result->successful()) {
-        // Get the content type from the response headers
-        $contentType = $result->header('Content-Type');
-
-        // Map content types to file extensions
-        $extension = ['image/jpeg' => 'jpg', 'image/png' => 'png'][$contentType] ?? 'jpg';
-
-        // Generate a unique filename with the determined extension
-        $filename = 'image_' . uniqid() . date_timestamp_get(now()) . '.' . $extension;
-
-        // Save the image content to the storage disk (configure your disk in filesystems.php)
-        Storage::disk('local')->put('/app/app_files/images/' . $filename, $result->body());
-
-        $url = url('/endpoint/image/images-' . $filename);
-        dump($url, $filename);
-        return "<img src=" . $url . "/>";
-    } else {
-        // Handle the case where the HTTP request was not successful
-        return abort(500, 'File not saved!');
-    }
 });
 Route::get('/factory/example', function () {
     /** @var App\Models\Tlog $tlog */

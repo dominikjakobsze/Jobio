@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+use Exception;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+
 class ImageGeneratorService
 {
     protected static $allowedExtensions = [
@@ -26,6 +30,20 @@ class ImageGeneratorService
     }
     public static function generateImage()
     {
-        dd(self::$allowedExtensions, self::randomUrl(), self::makeUniqueFilename('png'));
+        try {
+            $result = Http::get(self::randomUrl());
+        } catch (Exception $exception) {
+            return abort(code: '500', message: 'Fetch Failed - Image.Generator.Service', headers: []);
+        }
+        if ($result->successful()) {
+            Storage::disk('local')->put(
+                '/app/app_files/images/' . self::makeUniqueFilename(
+                    extension: self::$allowedExtensions[$result->header('Content-Type')] ?? 'jpg'
+                ),
+                $result->body()
+            );
+        } else {
+            return abort(code: '500', message: 'Fetch Failed - Image.Generator.Service', headers: []);
+        }
     }
 }
