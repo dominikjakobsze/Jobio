@@ -9,6 +9,7 @@ use App\Models\Toftop;
 use App\Models\Toption;
 use App\Models\Tperson;
 use App\Models\Treport;
+use App\Services\ImageGeneratorService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
+    ImageGeneratorService::generateImage();
     $result = Http::get('https://picsum.photos/200');
 
     // Check if the request was successful (status code 200)

@@ -176,7 +176,7 @@ class TofferController extends Controller
     {
         try {
             $offer = Toffer::with(['toftops.toption'])->where('id', '=', $id)->first();
-            $randomOffers = Toffer::all()->random(5);
+            $randomOffers = Toffer::all()->random(3);
         } catch (Exception $exception) {
             dump($exception);
             return die();
