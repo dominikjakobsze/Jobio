@@ -35,13 +35,20 @@ class ImageGeneratorService
         } catch (Exception $exception) {
             return abort(code: '500', message: 'Fetch Failed - Image.Generator.Service', headers: []);
         }
+        $fileName = self::makeUniqueFilename(
+            extension: self::$allowedExtensions[$result->header('Content-Type')] ?? 'jpg'
+        );
         if ($result->successful()) {
             Storage::disk('local')->put(
-                '/app/app_files/images/' . self::makeUniqueFilename(
-                    extension: self::$allowedExtensions[$result->header('Content-Type')] ?? 'jpg'
-                ),
+                '/app/app_files/images/' . $fileName,
                 $result->body()
             );
+            $url = url('/endpoint/image/images-' . $fileName);
+            $filePath = 'images/' . $fileName;
+            return [
+                'url' => $url,
+                'filePath' => $filePath,
+            ];
         } else {
             return abort(code: '500', message: 'Fetch Failed - Image.Generator.Service', headers: []);
         }
