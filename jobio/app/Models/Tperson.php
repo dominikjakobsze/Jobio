@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable as AuthorizableTrait;
 
 /**
@@ -21,6 +22,7 @@ class Tperson extends Model implements Authenticatable, Authorizable
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
     use AuthenticatableTrait {
         getAuthPassword as getAuthPasswordTrait;
     }
@@ -38,9 +40,9 @@ class Tperson extends Model implements Authenticatable, Authorizable
     {
         return $this->hasMany(Toffer::class, 'temployer_id', 'id');
     }
-    public function tlogs()
+    public function tresume()
     {
-        return $this->hasMany(Tlog::class, 'tperson_id', 'id');
+        return $this->hasOne(Tresume::class, 'tperson_id', 'id');
     }
     public function tfiles()
     {

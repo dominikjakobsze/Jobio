@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string id uuid PK AutoSet
@@ -17,6 +18,7 @@ class Tfile extends Model
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
 
     protected $table = 'tfiles';
     protected $primaryKey = 'id';
@@ -26,7 +28,7 @@ class Tfile extends Model
     protected $keyType = 'string';
     public $timestamps = true;
 
-    public function tpeople(): BelongsTo
+    public function tperson(): BelongsTo
     {
         return $this->belongsTo(Tperson::class, 'tperson_id', 'id');
     }

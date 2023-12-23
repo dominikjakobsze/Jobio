@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         // Toption::factory(18)->create();
         // Toftop::factory(80)->create();
         // Treport::factory(3)->create();
-        // Tlog::factory(170)->create();
         // $this->call([
         //     TpersonSeeder::class,
         //     TofferSeeder::class,
