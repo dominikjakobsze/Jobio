@@ -55,7 +55,7 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
-    ImageGeneratorService::generateImage();
+    dd(ImageGeneratorService::generateImage());
 });
 Route::get('/factory/example', function () {
     /** @var App\Models\Tlog $tlog */
