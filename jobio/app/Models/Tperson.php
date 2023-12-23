@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable as AuthorizableTrait;
+
 /**
  * @property string id uuid PK AutoSet
  * @property string email Unique
@@ -40,6 +41,10 @@ class Tperson extends Model implements Authenticatable, Authorizable
     public function tlogs()
     {
         return $this->hasMany(Tlog::class, 'tperson_id', 'id');
+    }
+    public function tfiles()
+    {
+        return $this->hasMany(Tfile::class, 'tperson_id', 'id');
     }
     public function getAuthPassword()
     {

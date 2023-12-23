@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tfiles', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->unique()->nullable(false);
+            $table->uuid('tperson_id')->nullable(false);
+            $table->text('file_path')->nullable(false);
+            $table->text('url')->nullable(false);
             $table->timestamps();
         });
     }

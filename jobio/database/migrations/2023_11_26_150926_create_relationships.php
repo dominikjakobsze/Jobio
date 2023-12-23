@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -48,6 +49,14 @@ return new class extends Migration {
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
+        Schema::table('tfiles', function (Blueprint $table) {
+            $table
+                ->foreign('tperson_id', 'tfiles_FK_tperson-id_-REF-_tpeople_PK_id')
+                ->references('id')
+                ->on('tpeople')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     /**
@@ -67,6 +76,9 @@ return new class extends Migration {
         });
         Schema::table('tlogs', function (Blueprint $table) {
             $table->dropForeign('tlogs_FK_tperson-id_-REF-_tpeople_PK_id');
+        });
+        Schema::table('tfiles', function (Blueprint $table) {
+            $table->dropForeign('tfiles_FK_tperson-id_-REF-_tpeople_PK_id');
         });
     }
 };
