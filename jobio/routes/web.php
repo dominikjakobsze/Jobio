@@ -3,6 +3,7 @@
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
+use App\Models\Tfile;
 use App\Models\Tlog;
 use App\Models\Toffer;
 use App\Models\Toftop;
@@ -55,17 +56,5 @@ Route::get('/logout', function () {
     Session::regenerateToken();
 });
 Route::get('/test', function () {
-    dd(ImageGeneratorService::generateImage());
-});
-Route::get('/factory/example', function () {
-    /** @var App\Models\Tlog $tlog */
-    $tlog = Tlog::factory(1)
-        ->make()
-        ->first();
-    dd(
-        $tlog
-            ->tpeople()
-            ->associate('llllereiiwe92394j2dkf239f23o')
-            ->save(),
-    );
+    dd('stop');
 });

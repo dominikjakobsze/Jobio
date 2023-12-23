@@ -24,13 +24,12 @@ class DatabaseSeeder extends Seeder
         // Toftop::factory(80)->create();
         // Treport::factory(3)->create();
         // Tlog::factory(170)->create();
-        $this->call([
-            TpersonSeeder::class,
-            TofferSeeder::class,
-            ToptionSeeder::class,
-            ToftopSeeder::class,
-            TreportSeeder::class,
-            TlogSeeder::class
-        ]);
+        // $this->call([
+        //     TpersonSeeder::class,
+        //     TofferSeeder::class,
+        //     ToptionSeeder::class,
+        //     ToftopSeeder::class,
+        //     TreportSeeder::class,
+        // ]);
     }
 }

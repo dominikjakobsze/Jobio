@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Tlog;
 use App\Models\Tperson;
+use App\Models\Tresume;
 use Illuminate\Auth\Access\Response;
 
-class TlogPolicy
+class TresumePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class TlogPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(Tperson $tperson, Tlog $tlog): bool
+    public function view(Tperson $tperson, Tresume $tresume): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class TlogPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(Tperson $tperson, Tlog $tlog): bool
+    public function update(Tperson $tperson, Tresume $tresume): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class TlogPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(Tperson $tperson, Tlog $tlog): bool
+    public function delete(Tperson $tperson, Tresume $tresume): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class TlogPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(Tperson $tperson, Tlog $tlog): bool
+    public function restore(Tperson $tperson, Tresume $tresume): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class TlogPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(Tperson $tperson, Tlog $tlog): bool
+    public function forceDelete(Tperson $tperson, Tresume $tresume): bool
     {
         //
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('tperson_id')->nullable(false);
             $table->text('file_path')->nullable(false);
             $table->text('url')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

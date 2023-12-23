@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTlogRequest;
-use App\Http\Requests\UpdateTlogRequest;
-use App\Models\Tlog;
+use App\Http\Requests\StoreTresumeRequest;
+use App\Http\Requests\UpdateTresumeRequest;
+use App\Models\Tresume;
 
-class TlogController extends Controller
+class TresumeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class TlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTlogRequest $request)
+    public function store(StoreTresumeRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class TlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tlog $tlog)
+    public function show(Tresume $tresume)
     {
         //
     }
@@ -43,7 +43,7 @@ class TlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tlog $tlog)
+    public function edit(Tresume $tresume)
     {
         //
     }
@@ -51,7 +51,7 @@ class TlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTlogRequest $request, Tlog $tlog)
+    public function update(UpdateTresumeRequest $request, Tresume $tresume)
     {
         //
     }
@@ -59,7 +59,7 @@ class TlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tlog $tlog)
+    public function destroy(Tresume $tresume)
     {
         //
     }

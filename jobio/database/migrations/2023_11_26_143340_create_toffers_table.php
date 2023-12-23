@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('voivodeship')->nullable(false);
             $table->uuid('temployer_id')->nullable(false);
             $table->text('company_icon')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -41,14 +41,6 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
-        Schema::table('tlogs', function (Blueprint $table) {
-            $table
-                ->foreign('tperson_id', 'tlogs_FK_tperson-id_-REF-_tpeople_PK_id')
-                ->references('id')
-                ->on('tpeople')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-        });
         Schema::table('tfiles', function (Blueprint $table) {
             $table
                 ->foreign('tperson_id', 'tfiles_FK_tperson-id_-REF-_tpeople_PK_id')
@@ -57,11 +49,16 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
+        Schema::table('tresumes', function (Blueprint $table) {
+            $table
+                ->foreign('tperson_id', 'tresumes_FK_tperson-id_-REF-_tpeople_PK_id')
+                ->references('id')
+                ->on('tpeople')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('treports', function (Blueprint $table) {
@@ -79,6 +76,9 @@ return new class extends Migration
         });
         Schema::table('tfiles', function (Blueprint $table) {
             $table->dropForeign('tfiles_FK_tperson-id_-REF-_tpeople_PK_id');
+        });
+        Schema::table('tresumes', function (Blueprint $table) {
+            $table->dropForeign('tresumes_FK_tperson-id_-REF-_tpeople_PK_id');
         });
     }
 };

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tlogs', function (Blueprint $table) {
+        Schema::create('tresumes', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->nullable(false);
-            $table->uuid('tperson_id')->nullable(true);
-            $table->text('action_message')->nullable(false);
-            $table->text('action_model')->nullable(false);
+            $table->uuid('tperson_id')->nullable(false);
+            $table->text('template_data')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tlogs');
+        Schema::dropIfExists('tresumes');
     }
 };

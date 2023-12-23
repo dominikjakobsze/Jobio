@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('otp',255)->nullable(true)->unique('tpeople_otp_unique');
             $table->string('folder',255)->nullable(false)->unique('tpeople_folder_unique');
             $table->text('role')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
