@@ -43,7 +43,7 @@ class ImageGeneratorService
                 '/app/app_files/images/' . $fileName,
                 $result->body()
             );
-            $url = url('/endpoint/image/images-' . $fileName);
+            $url = '/endpoint/image/images-' . $fileName;
             $filePath = 'images/' . $fileName;
             return [
                 'url' => $url,
