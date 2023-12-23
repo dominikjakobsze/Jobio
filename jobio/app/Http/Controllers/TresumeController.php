@@ -27,7 +27,7 @@ class TresumeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTresumeRequest $request)
+    public function store()
     {
         //
     }
@@ -35,7 +35,7 @@ class TresumeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tresume $tresume)
+    public function show()
     {
         //
     }
@@ -43,7 +43,7 @@ class TresumeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tresume $tresume)
+    public function edit()
     {
         //
     }
@@ -51,7 +51,7 @@ class TresumeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTresumeRequest $request, Tresume $tresume)
+    public function update()
     {
         //
     }
@@ -59,7 +59,7 @@ class TresumeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tresume $tresume)
+    public function destroy()
     {
         //
     }

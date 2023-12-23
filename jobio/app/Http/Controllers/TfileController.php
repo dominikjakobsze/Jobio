@@ -27,7 +27,7 @@ class TfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTfileRequest $request)
+    public function store()
     {
         //
     }
@@ -35,7 +35,7 @@ class TfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tfile $tfile)
+    public function show()
     {
         //
     }
@@ -43,7 +43,7 @@ class TfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tfile $tfile)
+    public function edit()
     {
         //
     }
@@ -51,7 +51,7 @@ class TfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTfileRequest $request, Tfile $tfile)
+    public function update()
     {
         //
     }
@@ -59,7 +59,7 @@ class TfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tfile $tfile)
+    public function destroy()
     {
         //
     }

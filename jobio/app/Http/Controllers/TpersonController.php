@@ -33,7 +33,7 @@ class TpersonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTpersonRequest $request)
+    public function store()
     {
         //
     }
@@ -41,7 +41,7 @@ class TpersonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tperson $tperson)
+    public function show()
     {
         //
     }
@@ -49,7 +49,7 @@ class TpersonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tperson $tperson)
+    public function edit()
     {
         //
     }
@@ -57,7 +57,7 @@ class TpersonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTpersonRequest $request, Tperson $tperson)
+    public function update()
     {
         //
     }
@@ -65,7 +65,7 @@ class TpersonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tperson $tperson)
+    public function destroy()
     {
         //
     }

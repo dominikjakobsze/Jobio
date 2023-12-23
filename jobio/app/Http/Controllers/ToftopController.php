@@ -27,7 +27,7 @@ class ToftopController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreToftopRequest $request)
+    public function store()
     {
         //
     }
@@ -35,7 +35,7 @@ class ToftopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Toftop $toftop)
+    public function show()
     {
         //
     }
@@ -43,7 +43,7 @@ class ToftopController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Toftop $toftop)
+    public function edit()
     {
         //
     }
@@ -51,7 +51,7 @@ class ToftopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateToftopRequest $request, Toftop $toftop)
+    public function update()
     {
         //
     }
@@ -59,7 +59,7 @@ class ToftopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Toftop $toftop)
+    public function destroy()
     {
         //
     }

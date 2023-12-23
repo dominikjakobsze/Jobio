@@ -27,7 +27,7 @@ class ToptionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreToptionRequest $request)
+    public function store()
     {
         //
     }
@@ -35,7 +35,7 @@ class ToptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Toption $toption)
+    public function show()
     {
         //
     }
@@ -43,7 +43,7 @@ class ToptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Toption $toption)
+    public function edit()
     {
         //
     }
@@ -51,7 +51,7 @@ class ToptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateToptionRequest $request, Toption $toption)
+    public function update()
     {
         //
     }
@@ -59,7 +59,7 @@ class ToptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Toption $toption)
+    public function destroy()
     {
         //
     }
