@@ -10,6 +10,7 @@ use App\Models\Toftop;
 use App\Models\Toption;
 use App\Models\Tperson;
 use App\Models\Treport;
+use App\Models\Tresume;
 use App\Services\ImageGeneratorService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +59,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/test', function () {
+    dd(Tresume::factory()->count(30)->create());
     //dd(Toption::factory()->count(3)->create());
     //dd(Tperson::first()->delete());
     //dd(Tperson::factory()->count(3)->create());
