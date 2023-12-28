@@ -59,7 +59,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/test', function () {
-    dd(Tresume::factory()->count(30)->create());
+    dd(Tresume::factory()->count(90)->create());
     //dd(Toption::factory()->count(3)->create());
     //dd(Tperson::first()->delete());
     //dd(Tperson::factory()->count(3)->create());

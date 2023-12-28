@@ -16,24 +16,21 @@ class TpersonFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function () {
-            $emails = Tperson::select(['email', DB::raw("MAX(id) as id")])
+            $uniqueEmails = Tperson::select(['email', DB::raw("MAX(id) as id")])
                 ->groupBy(['email'])
-                ->havingRaw('COUNT(*) > 1')
                 ->get()
-                ->pluck(['email']);
-            Tperson::whereIn('email', $emails)->forceDelete();
-            $folders = Tperson::select(['folder', DB::raw("MAX(id) as id")])
+                ->pluck(['id']);
+            Tperson::whereNotIn('id', $uniqueEmails)->forceDelete();
+            $uniqueFolders = Tperson::select(['folder', DB::raw("MAX(id) as id")])
                 ->groupBy(['folder'])
-                ->havingRaw('COUNT(*) > 1')
                 ->get()
-                ->pluck(['folder']);
-            Tperson::whereIn('folder', $folders)->forceDelete();
-            $otps = Tperson::select(['otp', DB::raw("MAX(id) as id")])
+                ->pluck(['id']);
+            Tperson::whereNotIn('id', $uniqueFolders)->forceDelete();
+            $uniqueOtps = Tperson::select(['otp', DB::raw("MAX(id) as id")])
                 ->groupBy(['otp'])
-                ->havingRaw('COUNT(*) > 1')
                 ->get()
-                ->pluck(['otp']);
-            Tperson::whereIn('otp', $otps)->forceDelete();
+                ->pluck(['id']);
+            Tperson::whereNotIn('id', $uniqueOtps)->forceDelete();
         });
     }
     public function definition(): array
