@@ -59,6 +59,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/test', function () {
+    //Tresume::whereNotNull('id')->forceDelete();
     dd(Tresume::factory()->count(90)->create());
     //dd(Toption::factory()->count(3)->create());
     //dd(Tperson::first()->delete());
