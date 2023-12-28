@@ -58,6 +58,8 @@ Route::get('/logout', function () {
 
 
 Route::get('/test', function () {
-    dd('test');
+    //dd(Toption::factory()->count(3)->create());
+    //dd(Tperson::first()->delete());
+    //dd(Tperson::factory()->count(3)->create());
     //dd(Tperson::factory()->count(70)->create());
 });

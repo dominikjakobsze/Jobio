@@ -25,6 +25,7 @@ class Toption extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function toftops(){
         return $this->hasMany(Toftop::class,'toption_id','id');

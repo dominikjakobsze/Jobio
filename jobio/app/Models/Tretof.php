@@ -21,6 +21,7 @@ class Tretof extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function toffer(): BelongsTo
     {

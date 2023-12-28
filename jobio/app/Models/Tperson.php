@@ -35,6 +35,7 @@ class Tperson extends Model implements Authenticatable, Authorizable
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function toffers()
     {
