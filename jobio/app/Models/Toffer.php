@@ -49,4 +49,8 @@ class Toffer extends Model
     {
         return $this->hasMany(Toftop::class, 'toffer_id', 'id');
     }
+    public function tretofs()
+    {
+        return $this->hasMany(Tretof::class, 'toffer_id', 'id');
+    }
 }

@@ -57,10 +57,28 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
+        Schema::table('tretofs', function (Blueprint $table) {
+            $table
+                ->foreign('toffer_id', 'tretofs_FK_toffer-id_-REF-_toffers_PK_id')
+                ->references('id')
+                ->on('toffers')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table
+                ->foreign('tresume_id', 'tretofs_FK_tresume-id_-REF-_tresumes_PK_id')
+                ->references('id')
+                ->on('tresumes')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('tretofs', function (Blueprint $table) {
+            $table->dropForeign('tretofs_FK_tresume-id_-REF-_tresumes_PK_id');
+            $table->dropForeign('tretofs_FK_toffer-id_-REF-_toffers_PK_id');
+        });
         Schema::table('treports', function (Blueprint $table) {
             $table->dropForeign('treports_FK_resource-id_-REF-_toffers_PK_id');
         });
@@ -70,9 +88,6 @@ return new class extends Migration
         Schema::table('toftops', function (Blueprint $table) {
             $table->dropForeign('toftops_FK_toption-id_-REF-_toptions_PK_id');
             $table->dropForeign('toftops_FK_toffer-id_-REF-_toffers_PK_id');
-        });
-        Schema::table('tlogs', function (Blueprint $table) {
-            $table->dropForeign('tlogs_FK_tperson-id_-REF-_tpeople_PK_id');
         });
         Schema::table('tfiles', function (Blueprint $table) {
             $table->dropForeign('tfiles_FK_tperson-id_-REF-_tpeople_PK_id');

@@ -26,4 +26,8 @@ class Tresume extends Model
     {
         return $this->belongsTo(Tperson::class, 'tperson_id', 'id');
     }
+    public function tretofs()
+    {
+        return $this->hasMany(Tretof::class, 'tresume_id', 'id');
+    }
 }
