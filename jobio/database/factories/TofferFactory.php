@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Toffer;
 use App\Models\Tperson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Http;
@@ -22,7 +23,8 @@ class TofferFactory extends Factory
         sleep(2);
         $employers = Tperson::where("role", "=", "employer")->get();
         if (count($employers) == 0) {
-            abort(500, 'there is no user with role "employer"');
+            Toffer::whereNotNull('id')->forceDelete();
+            return abort(500, 'there is no user with role "employer"');
         }
         $arrayOfIds = [];
         foreach ($employers as $employer) {
@@ -38,7 +40,8 @@ class TofferFactory extends Factory
         $long = fake()->randomFloat(6, $long_min, $long_max);
         $request = Http::get('https://api.jawg.io/places/v1/reverse?access-token=jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh&size=1&lang=pl-PL&point.lat=' . $lat . '&point.lon=' . $long);
         if ($request->failed()) {
-            abort(500, 'request to api failed - cannot process factory');
+            Toffer::whereNotNull('id')->forceDelete();
+            return abort(500, 'request to api failed - cannot process factory');
         }
         $request_data = $request->collect()->toArray()['features'][0]['properties'];
         $street = $request_data['name'] ?? null;
@@ -55,7 +58,8 @@ class TofferFactory extends Factory
             $long = fake()->randomFloat(6, $long_min, $long_max);
             $request = Http::get('https://api.jawg.io/places/v1/reverse?access-token=jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh&size=1&lang=pl-PL&point.lat=' . $lat . '&point.lon=' . $long);
             if ($request->failed()) {
-                abort(500, 'request to api failed - cannot process factory');
+                Toffer::whereNotNull('id')->forceDelete();
+                return abort(500, 'request to api failed - cannot process factory');
             }
             $request_data = $request->collect()->toArray()['features'][0]['properties'];
             $street = $request_data['name'];

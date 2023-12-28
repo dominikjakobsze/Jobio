@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tresumes', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->nullable(false);
-            $table->uuid('tperson_id')->unique('tresumes_tperson-id_unique')->nullable(false);
+            $table->uuid('tperson_id')->unique('tresumes_FK_tperson-id(UNIQUE)_-REF-_tpeople_PK_id')->nullable(false);
             $table->json('template_data')->nullable(false);
             $table->softDeletes();
             $table->timestamps();
