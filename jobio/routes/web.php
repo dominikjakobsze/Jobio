@@ -55,6 +55,9 @@ Route::get('/logout', function () {
     Session::invalidate();
     Session::regenerateToken();
 });
+
+
 Route::get('/test', function () {
-    dd('stop');
+    dd('test');
+    //dd(Tperson::factory()->count(70)->create());
 });

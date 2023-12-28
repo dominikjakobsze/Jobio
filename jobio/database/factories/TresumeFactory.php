@@ -9,15 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TresumeFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function () {
+        });
+    }
     public function definition(): array
     {
         return [
-            //
+            'tperson_id' => null,
+            'template_data' => null
         ];
     }
 }

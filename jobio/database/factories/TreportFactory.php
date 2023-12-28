@@ -14,26 +14,15 @@ class TreportFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function () {
-            //
         });
     }
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
-        $toffers = Toffer::get();
-        if(count($toffers) == 0){
-            abort(500,"there is no offer that can be assigned");
-        }
-        $message = fake()->sentence(57);
         return [
-            "message" => $message,
-            "resource_id" => fake()->randomElement($toffers)['id'],
-            "resource_model" => Toffer::class,
-            "link_source" => fake()->url(),
+            "message" => null,
+            "resource_id" => null,
+            "resource_model" => null,
+            "link_source" => null,
         ];
     }
 }

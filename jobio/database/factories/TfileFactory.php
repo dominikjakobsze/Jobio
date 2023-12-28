@@ -10,13 +10,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TfileFactory extends Factory
 {
+    public function configure(): static
+    {
+        return $this->afterCreating(function () {
+            dd('created');
+        });
+    }
+
     public function definition(): array
     {
-        dd(Tperson::where('role','=','employer')->get());
         return [
-            'tperson_id' => null,
-            'file_path' => null,
-            'url' => null
+            'tperson_id' => fake()->unique()->uuid(),
+            'file_path' => fake()->unique()->words(5, true),
+            'url' => fake()->unique()->words(5, true)
         ];
     }
 }

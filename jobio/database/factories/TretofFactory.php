@@ -2,26 +2,23 @@
 
 namespace Database\Factories;
 
-use App\Models\Toption;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Toption>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\tretof>
  */
-class ToptionFactory extends Factory
+class TretofFactory extends Factory
 {
     public function configure(): static
     {
         return $this->afterCreating(function () {
         });
     }
-
     public function definition(): array
     {
         return [
-            'option_type' => null,
-            'option_value' => null,
+            'toffer_id' => null,
+            'tresume_id' => null,
         ];
     }
 }
