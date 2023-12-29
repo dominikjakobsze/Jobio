@@ -31,14 +31,18 @@ use Inertia\Inertia;
 */
 // https://github.com/barryvdh/laravel-ide-helper#usage
 //image/files-dominik.txt
+
+//normal routes
 Route::get('/', [TofferController::class, 'index']);
 Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
+//endpoints
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 
+//idk
 Route::get('/inertia', function () {
     return Inertia::render('OffersMapPage/OffersMap', [
         'test' => 'test',
