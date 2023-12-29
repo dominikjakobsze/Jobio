@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    @yield('content')
+    @yield('code')
+    @yield('message')
 </body>
 
 </html>
