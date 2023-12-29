@@ -12,6 +12,7 @@ use App\Models\Tperson;
 use App\Models\Treport;
 use App\Models\Tresume;
 use App\Services\ImageGeneratorService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ use Inertia\Inertia;
 //image/files-dominik.txt
 Route::get('/', [TofferController::class, 'index']);
 Route::get('/offer/{id}', [TofferController::class, 'show']);
+Route::get('/sign-in', [TpersonController::class, 'signInView']);
+Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
+Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 
@@ -59,6 +63,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/test', function () {
+    dd(Auth::guard('person')->user());
     //Tresume::whereNotNull('id')->forceDelete();
     //dd(Tresume::factory()->count(50)->create());
     //dd(Toption::factory()->count(3)->create());
