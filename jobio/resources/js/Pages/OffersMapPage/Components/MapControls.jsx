@@ -29,7 +29,7 @@ const MapControls = () => {
                     <LiaColumnsSolid className="w-[25px] h-[25px]" />
                 </div>
                 <div
-                    onClick={() => console.log(URL)}
+                    onClick={() => window.location.href = `${URL}/files`}
                     className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100"
                 >
                     <FiUser className="w-[25px] h-[25px]" />

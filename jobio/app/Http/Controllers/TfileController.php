@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTfileRequest;
 use App\Http\Requests\UpdateTfileRequest;
 use App\Models\Tfile;
+use App\Policies\TfilePolicy;
 
 class TfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showAllFiles()
     {
-        //
+        $this->authorize('viewAny', Tfile::class);
+        dd('test');
     }
 
     /**

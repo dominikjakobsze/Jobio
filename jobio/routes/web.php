@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\TfileController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
+use App\Http\Middleware\EnsureUserIsLoggedIn;
 use App\Models\Tfile;
 use App\Models\Tlog;
 use App\Models\Toffer;
@@ -37,6 +39,9 @@ Route::get('/', [TofferController::class, 'index']);
 Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
+Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
+    Route::get('/files', [TfileController::class, 'showAllFiles']);
+});
 //endpoints
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
