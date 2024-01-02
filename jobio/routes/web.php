@@ -39,6 +39,10 @@ Route::get('/', [TofferController::class, 'index']);
 Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
+Route::get('/error/{code}/{message}', function ($code, $message) {
+    return abort($code, $message);
+});
+//sciezka ktora bedzie wyswietlala errory 403,404 itd itd
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);

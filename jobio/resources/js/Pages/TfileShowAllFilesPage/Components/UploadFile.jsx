@@ -28,18 +28,24 @@ const UploadFile = () => {
     }, []);
     const uploadFile = React.useCallback(async () => {
         formRef.current.submit();
-        // const formData = new FormData(formRef?.current);
-        // const response = await axios.post(
-        //     localUrl + "/endpoint/file",
-        //     formData,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data",
+        // try {
+        //     const formData = new FormData(formRef?.current);
+        //     const response = await axios.post(
+        //         localUrl + "/endpoint/file",
+        //         formData,
+        //         {
+        //             headers: {
+        //                 "Content-Type": "multipart/form-data",
+        //             },
         //         },
-        //     },
-        // );
-        // const data = await response.data();
-        // console.log(data);
+        //     );
+        //     const data = await response.data();
+        //     console.log(data);
+        // } catch (exception) {
+        //     window.location.href =
+        //         localUrl +
+        //         `/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+        // }
     }, []);
 
     return (
@@ -48,7 +54,7 @@ const UploadFile = () => {
                 ref={formRef}
                 className="flex-[0_0_250px] border-sky-300 border-2 border-solid h-[325px] rounded-lg overflow-hidden cursor-pointer"
                 action="/endpoint/file"
-                enctype="multipart/form-data"
+                encType="multipart/form-data"
                 method="post"
             >
                 <label className="f fr fw w-full h-full is jc cc ss overflow-hidden cursor-pointer">

@@ -18,6 +18,9 @@ class TfileController extends Controller
     public function endpointUploadFile(Request $request)
     {
         $this->authorize('viewAny', Tfile::class);
+        if (!$request->hasFile('fileMenager')) {
+            return abort(500, 'Nie wybrano pliku!');
+        }
         dd('test', Auth::guard('person')->user(), $request->allFiles());
     }
 
