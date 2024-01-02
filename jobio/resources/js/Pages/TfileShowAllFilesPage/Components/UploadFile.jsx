@@ -44,7 +44,7 @@ const UploadFile = () => {
         // } catch (exception) {
         //     window.location.href =
         //         localUrl +
-        //         `/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+        //         `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
         // }
     }, []);
 

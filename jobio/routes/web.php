@@ -34,20 +34,17 @@ use Inertia\Inertia;
 // https://github.com/barryvdh/laravel-ide-helper#usage
 //image/files-dominik.txt
 
-//normal routes
 Route::get('/', [TofferController::class, 'index']);
 Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
-Route::get('/error/{code}/{message}', function ($code, $message) {
+Route::get('/general/error/{code}/{message}', function ($code, $message) {
     return abort($code, $message);
 });
-//sciezka ktora bedzie wyswietlala errory 403,404 itd itd
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
 });
-//endpoints
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
