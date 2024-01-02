@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTfileRequest;
-use App\Http\Requests\UpdateTfileRequest;
 use App\Models\Tfile;
-use App\Policies\TfilePolicy;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TfileController extends Controller
@@ -14,6 +13,12 @@ class TfileController extends Controller
     {
         $this->authorize('viewAny', Tfile::class);
         return Inertia::render('TfileShowAllFilesPage/TfileShowAllFilesPage');
+    }
+
+    public function endpointUploadFile(Request $request)
+    {
+        $this->authorize('viewAny', Tfile::class);
+        dd('test', Auth::guard('person')->user(), $request->allFiles());
     }
 
     /**

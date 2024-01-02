@@ -1,12 +1,13 @@
 import { IoAddSharp } from "react-icons/io5";
 import React from "react";
+import axios from "axios";
+import { URL as localUrl } from "../../../app";
 
 const UploadFile = () => {
     console.log("UploadFile");
     const formRef = React.useRef(null);
     const [preview, setPreview] = React.useState({
         objectUrl: null,
-        file: null,
     });
     const displayPreview = React.useCallback((e) => {
         if (e?.target?.files?.length !== 0) {
@@ -15,30 +16,55 @@ const UploadFile = () => {
             if (!allowedImageTypes.includes(fileType)) {
                 return;
             }
-            setPreview
+            if (preview?.objectUrl !== null) {
+                URL.revokeObjectURL(preview?.objectUrl);
+            }
+            setPreview((prev) => {
+                return {
+                    objectUrl: URL.createObjectURL(e?.target?.files[0]),
+                };
+            });
         }
+    }, []);
+    const uploadFile = React.useCallback(async () => {
+        formRef.current.submit();
+        // const formData = new FormData(formRef?.current);
+        // const response = await axios.post(
+        //     localUrl + "/endpoint/file",
+        //     formData,
+        //     {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //         },
+        //     },
+        // );
+        // const data = await response.data();
+        // console.log(data);
     }, []);
 
     return (
         <>
             <form
                 ref={formRef}
-                className="flex-[0_0_250px] bg-sky-300 h-[325px] rounded-lg overflow-hidden cursor-pointer shadow-lg"
-                action=""
+                className="flex-[0_0_250px] border-sky-300 border-2 border-solid h-[325px] rounded-lg overflow-hidden cursor-pointer"
+                action="/endpoint/file"
+                enctype="multipart/form-data"
                 method="post"
             >
                 <label className="f fr fw w-full h-full is jc cc ss overflow-hidden cursor-pointer">
                     <input
+                        name="fileMenager"
                         onChange={(e) => displayPreview(e)}
                         type="file"
                         className="hidden"
                     />
-                    <IoAddSharp className="flex-[0_1_auto] sc text-5xl text-gray-100 text-center font-[900]" />
+                    <IoAddSharp className="flex-[0_1_auto] sc text-5xl text-sky-300 text-center font-[900]" />
                 </label>
             </form>
             <img
+                onClick={() => uploadFile()}
                 src={preview?.objectUrl === null ? null : preview?.objectUrl}
-                className="flex-[0_0_250px] h-[325px] bg-gray-200 rounded-lg shadow-lg"
+                className="flex-[0_0_250px] h-[325px] bg-gray-200 rounded-lg shadow-lg object-cover"
             />
         </>
     );

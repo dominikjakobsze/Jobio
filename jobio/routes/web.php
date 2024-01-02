@@ -41,6 +41,7 @@ Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
+    Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
 });
 //endpoints
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);

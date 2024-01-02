@@ -11,9 +11,9 @@ class TfilePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(?Tperson $tperson): Response
+    public function viewAny(Tperson $tperson): Response
     {
-        if ($tperson->role === 'employer') {
+        if ($tperson?->role === 'employer') {
             return Response::allow();
         }
         return Response::deny('Nie jestes pracodawcą!', 403);
