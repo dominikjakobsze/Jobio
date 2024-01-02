@@ -3,7 +3,9 @@ import { TbFilters } from "react-icons/tb";
 import { LiaColumnsSolid } from "react-icons/lia";
 import { FiUser } from "react-icons/fi";
 import { AnimationContext } from "./AnimationContextProvider";
-import gsap from "gsap";
+import { URL } from "../../../app";
+
+//Przekierowuje na /profile, jesli jest zalogowany to normalnie, jesli nie jest to middleware odsyla do sign-in
 
 const MapControls = () => {
     console.log("MapControls");
@@ -26,7 +28,10 @@ const MapControls = () => {
                 >
                     <LiaColumnsSolid className="w-[25px] h-[25px]" />
                 </div>
-                <div className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100">
+                <div
+                    onClick={() => console.log(URL)}
+                    className="flex-[0_0_auto] bg-white p-1 cup hover:bg-gray-100"
+                >
                     <FiUser className="w-[25px] h-[25px]" />
                 </div>
             </div>

@@ -8,19 +8,27 @@
     <title>@yield('title')</title>
     @vite('resources/js/app.js')
     @vite('resources/css/app.css')
+    {{-- @vite('resources/js/react.jsx') --}}
     @stack('css')
     @stack('js')
 </head>
 
 <body>
-    @yield('code')
-    @yield('message')
+    <div class="w-full min-h-[100dvh] f fr fw ic cc ss jc font-[700] text-2xl text-gray-300 gap-1">
+        <h1 class="ss flex-[0_0_100%] max-w-[700px] text-center">
+            @yield('code')
+        </h1>
+        <p class="ss flex-[0_0_100%]"></p>
+        <h1 class="ss flex-[0_0_100%] max-w-[700px] text-center text-lg">
+            @yield('message')
+        </h1>
+    </div>
 </body>
 
 </html>
 
 {{-- 
-        @extends('base.base')
+        @extends('folder.bladeFile')
 
         @section('title')
             Jobio
@@ -42,4 +50,3 @@
             @vite('resources/views/toffer/index/index.js')
         @endpush  
 --}}
-
