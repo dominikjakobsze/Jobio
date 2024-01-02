@@ -6,13 +6,14 @@ use App\Http\Requests\StoreTfileRequest;
 use App\Http\Requests\UpdateTfileRequest;
 use App\Models\Tfile;
 use App\Policies\TfilePolicy;
+use Inertia\Inertia;
 
 class TfileController extends Controller
 {
     public function showAllFiles()
     {
         $this->authorize('viewAny', Tfile::class);
-        dd('test');
+        return Inertia::render('TfileShowAllFilesPage/TfileShowAllFilesPage');
     }
 
     /**
