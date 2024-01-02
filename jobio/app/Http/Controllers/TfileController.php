@@ -21,7 +21,7 @@ class TfileController extends Controller
         if (!$request->hasFile('fileMenager')) {
             return abort(500, 'Nie wybrano pliku!');
         }
-        dd('test', Auth::guard('person')->user(), $request->allFiles());
+        dd($request->allFiles());
     }
 
     /**
