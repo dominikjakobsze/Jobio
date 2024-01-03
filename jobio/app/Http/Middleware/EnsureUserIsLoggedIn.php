@@ -16,8 +16,8 @@ class EnsureUserIsLoggedIn
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('person')->user() === null){
-            return abort(401,'Musisz być zalogowany');
+        if (Auth::guard('person')->user() === null) {
+            return redirect('/sign-in', 302);
         }
         return $next($request);
     }

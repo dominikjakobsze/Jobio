@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tfile;
+use App\Services\ImageUploadService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
+use PhpParser\Node\Expr\Instanceof_;
 
 class TfileController extends Controller
 {
@@ -21,7 +25,19 @@ class TfileController extends Controller
         if (!$request->hasFile('fileMenager')) {
             return abort(500, 'Nie wybrano pliku!');
         }
-        dd($request->allFiles());
+        $file = $request->file('fileMenager');
+        $result = ImageUploadService::saveImage(file: $file);
+        $tfile = new Tfile([
+            'tperson_id' => Auth::guard('person')->user()->id,
+            'file_path' => $result['filePath'],
+            'url' => $result['url']
+        ]);
+        try {
+            $tfile->save();
+        } catch (Exception $exception) {
+            return abort(500, 'Problem z zapisem do bazy danych');
+        }
+        return response()->json(['success' => true], 200, []);
     }
 
     /**

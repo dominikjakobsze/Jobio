@@ -6,6 +6,7 @@ import { URL as localUrl } from "../../../app";
 const UploadFile = () => {
     console.log("UploadFile");
     const formRef = React.useRef(null);
+    const fileRef = React.useRef(null);
     const [preview, setPreview] = React.useState({
         objectUrl: null,
     });
@@ -27,25 +28,33 @@ const UploadFile = () => {
         }
     }, []);
     const uploadFile = React.useCallback(async () => {
-        formRef.current.submit();
-        // try {
-        //     const formData = new FormData(formRef?.current);
-        //     const response = await axios.post(
-        //         localUrl + "/endpoint/file",
-        //         formData,
-        //         {
-        //             headers: {
-        //                 "Content-Type": "multipart/form-data",
-        //             },
-        //         },
-        //     );
-        //     const data = await response.data();
-        //     console.log(data);
-        // } catch (exception) {
-        //     window.location.href =
-        //         localUrl +
-        //         `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
-        // }
+        //formRef.current.submit();
+        try {
+            const formData = new FormData(formRef?.current);
+            const response = await axios.post(
+                localUrl + "/endpoint/file",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                },
+            );
+            const data = await response.data;
+            //console.log(data);
+            //console.log(...new FormData(formRef.current));
+            formRef.current.reset();
+            fileRef.current.value = null;
+            setPreview((prev) => {
+                return { objectUrl: null };
+            });
+            //console.log(...new FormData(formRef.current));
+        } catch (exception) {
+            //console.log(exception);
+            window.location.href =
+                localUrl +
+                `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+        }
     }, []);
 
     return (
@@ -63,6 +72,7 @@ const UploadFile = () => {
                         onChange={(e) => displayPreview(e)}
                         type="file"
                         className="hidden"
+                        ref={fileRef}
                     />
                     <IoAddSharp className="flex-[0_1_auto] sc text-5xl text-sky-300 text-center font-[900]" />
                 </label>
@@ -70,7 +80,7 @@ const UploadFile = () => {
             <img
                 onClick={() => uploadFile()}
                 src={preview?.objectUrl === null ? null : preview?.objectUrl}
-                className="flex-[0_0_250px] h-[325px] bg-gray-200 rounded-lg shadow-lg object-cover"
+                className="flex-[0_0_250px] cursor-pointer h-[325px] bg-gray-200 rounded-lg shadow-lg object-cover"
             />
         </>
     );
