@@ -28,11 +28,22 @@ const Main = () => {
             <h1 className="flex-[0_0_100%] text-sky-300 text-xl font-[700] ss">
                 Menedżer Plików
             </h1>
-            <div className="flex-[0_0_100%] p-5 max-h-[550px] overflow-x-hidden overflow-y-auto border-y border-gray-300 border-solid f fr fw jc is ss cs gap-5">
+            <p className="bg-gray-300 h-[1px] flex-[0_0_100%]"></p>
+            <div className="flex-[0_0_100%] p-5 max-h-[550px] overflow-x-hidden overflow-y-auto f fr fw jc is ss cs gap-5">
                 {React.useMemo(() => {
-                    return <UploadFile />;
+                    return <UploadFile fetchImages={fetchImages} />;
                 }, [])}
+                {images.map((image) => {
+                    return (
+                        <img
+                            src={localUrl + image?.url}
+                            key={image?.id}
+                            className="flex-[0_0_250px] cursor-pointer h-[325px] bg-gray-200 rounded-lg shadow-lg object-cover"
+                        />
+                    );
+                })}
             </div>
+            <p className="bg-gray-300 h-[1px] flex-[0_0_100%]"></p>
         </div>
     );
 };

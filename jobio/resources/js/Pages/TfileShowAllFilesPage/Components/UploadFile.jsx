@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { URL as localUrl } from "../../../app";
 
-const UploadFile = () => {
+const UploadFile = ({ fetchImages }) => {
     console.log("UploadFile");
     const formRef = React.useRef(null);
     const fileRef = React.useRef(null);
@@ -45,6 +45,7 @@ const UploadFile = () => {
             //console.log(...new FormData(formRef.current));
             formRef.current.reset();
             fileRef.current.value = null;
+            await fetchImages();
             setPreview((prev) => {
                 return { objectUrl: null };
             });
