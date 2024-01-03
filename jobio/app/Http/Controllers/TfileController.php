@@ -7,9 +7,7 @@ use App\Services\ImageUploadService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
-use PhpParser\Node\Expr\Instanceof_;
 
 class TfileController extends Controller
 {
@@ -38,6 +36,16 @@ class TfileController extends Controller
             return abort(500, 'Problem z zapisem do bazy danych');
         }
         return response()->json(['success' => true], 200, []);
+    }
+
+    public function endpointShowFiles()
+    {
+        $this->authorize('viewAny', Tfile::class);
+        return response()->json(
+            Tfile::where('tperson_id', '=', Auth::guard('person')->user()->id)->get()->toArray(),
+            200,
+            []
+        );
     }
 
     /**
