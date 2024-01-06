@@ -3,6 +3,7 @@ import { URL as localUrl } from "../../../app";
 import gsap from "gsap";
 import { FaTrash } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
+import axios from "axios";
 
 const ImageBox = ({ image }) => {
     console.log("ImageBox");
@@ -60,8 +61,27 @@ const ImageBox = ({ image }) => {
                 className="w-auto px-4 py-2 bg-gray-100 shadow-2xl rounded-xl absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] f fr fw jc is cs ss gap-4 text-xl scale-y-[0] scale-x-[0] origin-top-right"
             >
                 <FaTrash
-                    onClick={() => {
-                        deleteFormRef.current.submit();
+                    onClick={async () => {
+                        //deleteFormRef.current.submit();
+                        try {
+                            const formData = new FormData(
+                                deleteFormRef?.current,
+                            );
+                            const response = await axios.post(
+                                localUrl + `/endpoint/file/${image?.id}`,
+                                formData,
+                                {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data",
+                                    },
+                                },
+                            );
+                        } catch (exception) {
+                            //console.log(exception);
+                            window.location.href =
+                                localUrl +
+                                `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+                        }
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
                 />

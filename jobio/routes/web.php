@@ -39,6 +39,7 @@ Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
 Route::get('/general/error/{code}/{message}', function ($code, $message) {
+    //dd($code, $message);
     return abort($code, $message);
 });
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {

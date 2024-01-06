@@ -50,6 +50,12 @@ class TfileController extends Controller
 
     public function endpointDeleteFile($id)
     {
+        $this->authorize('viewAny', Tfile::class);
+        $tfile = Tfile::where('id', '=', $id)->first();
+        if ($tfile === null) {
+            return abort(404, 'Nie istnieje taki plik');
+        }
+        $this->authorize('delete', $tfile);
         dd($id, 'endpointDeleteFile');
     }
 
