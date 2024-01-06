@@ -56,7 +56,13 @@ class TfileController extends Controller
             return abort(404, 'Nie istnieje taki plik');
         }
         $this->authorize('delete', $tfile);
-        dd($id, 'endpointDeleteFile');
+        return response()->json(
+            [
+                'status' => true,
+            ],
+            200,
+            []
+        );
     }
 
     /**

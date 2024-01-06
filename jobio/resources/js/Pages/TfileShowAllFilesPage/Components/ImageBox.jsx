@@ -12,6 +12,19 @@ const ImageBox = ({ image }) => {
     const imgRef = React.useRef(null);
     const deleteFormRef = React.useRef(null);
 
+    const animateTimeline = React.useCallback(() => {
+        if (imgRef.current?.dataset?.status === "not-animated") {
+            imgRef.current.dataset.status = "animated";
+            timelineRef.current.play();
+            return;
+        }
+        if (imgRef.current?.dataset?.status === "animated") {
+            imgRef.current.dataset.status = "not-animated";
+            timelineRef.current.reverse();
+            return;
+        }
+    }, []);
+
     React.useEffect(() => {
         if (timelineRef.current === null || timelineRef.current === undefined) {
             timelineRef.current = gsap
@@ -38,18 +51,7 @@ const ImageBox = ({ image }) => {
     return (
         <div className="flex-[0_0_250px] h-[325px] bg-gray-200 rounded-lg shadow-lg relative overflow-hidden">
             <img
-                onClick={() => {
-                    if (imgRef.current?.dataset?.status === "not-animated") {
-                        imgRef.current.dataset.status = "animated";
-                        timelineRef.current.play();
-                        return;
-                    }
-                    if (imgRef.current?.dataset?.status === "animated") {
-                        imgRef.current.dataset.status = "not-animated";
-                        timelineRef.current.reverse();
-                        return;
-                    }
-                }}
+                onClick={() => animateTimeline()}
                 src={localUrl + image?.url}
                 key={image?.id}
                 className="w-full h-full object-cover rounded-lg cup"
@@ -76,6 +78,7 @@ const ImageBox = ({ image }) => {
                                     },
                                 },
                             );
+                            animateTimeline();
                         } catch (exception) {
                             //console.log(exception);
                             window.location.href =
