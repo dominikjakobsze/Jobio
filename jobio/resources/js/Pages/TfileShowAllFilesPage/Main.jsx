@@ -2,6 +2,7 @@ import React from "react";
 import UploadFile from "./Components/UploadFile";
 import axios from "axios";
 import { URL as localUrl } from "../../app";
+import ImageBox from "./Components/ImageBox";
 
 const Main = () => {
     console.log("Main");
@@ -34,13 +35,7 @@ const Main = () => {
                     return <UploadFile fetchImages={fetchImages} />;
                 }, [])}
                 {images.map((image) => {
-                    return (
-                        <img
-                            src={localUrl + image?.url}
-                            key={image?.id}
-                            className="flex-[0_0_250px] cursor-pointer h-[325px] bg-gray-200 rounded-lg shadow-lg object-cover"
-                        />
-                    );
+                    return <ImageBox key={image?.id} image={image} />;
                 })}
             </div>
             <p className="bg-gray-300 h-[1px] flex-[0_0_100%]"></p>
