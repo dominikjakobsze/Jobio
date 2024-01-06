@@ -48,6 +48,11 @@ class TfileController extends Controller
         );
     }
 
+    public function endpointDeleteFile($id)
+    {
+        dd($id, 'endpointDeleteFile');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
