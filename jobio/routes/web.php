@@ -4,6 +4,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TfileController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
+use App\Http\Middleware\EnsureUserIsEmployer;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
 use App\Models\Tfile;
 use App\Models\Tlog;
@@ -42,7 +43,7 @@ Route::get('/general/error/{code}/{message}', function ($code, $message) {
     //dd($code, $message);
     return abort($code, $message);
 });
-Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
+Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
     Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);
