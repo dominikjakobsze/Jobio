@@ -9,7 +9,7 @@ const Main = () => {
     const sendForm = React.useCallback(async () => {
         const formData = new FormData(formRef.current);
         console.log([...formData]);
-    });
+    }, []);
 
     return (
         <form
