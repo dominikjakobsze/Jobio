@@ -1,6 +1,7 @@
 import React from "react";
 
 let counter = 0;
+//https://chat.openai.com/share/ccb12be5-b5a2-47d0-bc1f-06783281d8e4
 const EditorMenu = ({ editor }) => {
     console.log("EditorMenu " + counter++);
     return (
