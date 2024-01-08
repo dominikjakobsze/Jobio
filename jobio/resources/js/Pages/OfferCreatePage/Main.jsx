@@ -17,7 +17,7 @@ const Main = () => {
             action="/endpoint/file"
             encType="multipart/form-data"
             method="post"
-            className="f fr fw js cs is ss gap-5 custom-scroll-x"
+            className="f fr fw js cs is ss gap-5 custom-scroll-x relative h-auto"
         >
             <div onClick={() => sendForm()}>teeetet</div>
             <OfferEditor />
