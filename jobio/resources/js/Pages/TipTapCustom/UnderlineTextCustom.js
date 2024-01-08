@@ -42,3 +42,15 @@ const UnderlineTextCustom = Mark.create({
 });
 
 export default UnderlineTextCustom;
+
+// editor
+// .chain()
+// .focus()
+// .toggleUnderlineTextCustom({ tdc: "#fb7185" })
+// .run();
+
+// editor
+// .chain()
+// .focus()
+// .toggleUnderlineTextCustom({ tdc: "#818cf8" })
+// .run();

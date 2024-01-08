@@ -40,5 +40,6 @@ const SmallTextCustom = Mark.create({
 });
 
 //editor.commands.toggleMark("smallTextCustom")
+//editor.chain().focus().toggleSmallTextCustom().run();
 
 export default SmallTextCustom;
