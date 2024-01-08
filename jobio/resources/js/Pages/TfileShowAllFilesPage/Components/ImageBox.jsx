@@ -64,27 +64,27 @@ const ImageBox = ({ image }) => {
             >
                 <FaTrash
                     onClick={async () => {
-                        //deleteFormRef.current.submit();
-                        try {
-                            const formData = new FormData(
-                                deleteFormRef?.current,
-                            );
-                            const response = await axios.post(
-                                localUrl + `/endpoint/file/${image?.id}`,
-                                formData,
-                                {
-                                    headers: {
-                                        "Content-Type": "multipart/form-data",
-                                    },
-                                },
-                            );
-                            animateTimeline();
-                        } catch (exception) {
-                            //console.log(exception);
-                            window.location.href =
-                                localUrl +
-                                `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
-                        }
+                        deleteFormRef.current.submit();
+                        // try {
+                        //     const formData = new FormData(
+                        //         deleteFormRef?.current,
+                        //     );
+                        //     const response = await axios.post(
+                        //         localUrl + `/endpoint/file/${image?.id}`,
+                        //         formData,
+                        //         {
+                        //             headers: {
+                        //                 "Content-Type": "multipart/form-data",
+                        //             },
+                        //         },
+                        //     );
+                        //     animateTimeline();
+                        // } catch (exception) {
+                        //     //console.log(exception);
+                        //     window.location.href =
+                        //         localUrl +
+                        //         `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+                        // }
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
                 />

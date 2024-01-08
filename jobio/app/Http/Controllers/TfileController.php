@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tfile;
+use App\Services\DatabaseService;
 use App\Services\ImageUploadService;
 use Exception;
 use Illuminate\Http\Request;
@@ -50,12 +51,12 @@ class TfileController extends Controller
 
     public function endpointDeleteFile($id)
     {
-        $this->authorize('viewAny', Tfile::class);
         $tfile = Tfile::where('id', '=', $id)->first();
         if ($tfile === null) {
             return abort(404, 'Nie istnieje taki plik');
         }
         $this->authorize('delete', $tfile);
+        DatabaseService::deleteWithTryCatch($tfile);
         return response()->json(
             [
                 'status' => true,
