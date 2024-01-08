@@ -51,10 +51,7 @@ class TfileController extends Controller
 
     public function endpointDeleteFile($id)
     {
-        $tfile = Tfile::where('id', '=', $id)->first();
-        if ($tfile === null) {
-            return abort(404, 'Nie istnieje taki plik');
-        }
+        $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
         $this->authorize('delete', $tfile);
         DatabaseService::deleteWithTryCatch($tfile);
         return response()->json(

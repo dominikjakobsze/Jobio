@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DatabaseService
 {
@@ -30,5 +32,19 @@ class DatabaseService
         } catch (Exception $exception) {
             return abort(500, 'Problem z usunięciem rekordu');
         }
+    }
+    public static function firstOrNotFoundWithTryCatch(Builder $builder)
+    {
+        try {
+            $model = $builder->first();
+            if ($model === null) {
+                return abort(404, 'Brak rekordu');
+            }
+        } catch (HttpException $exception) {
+            return abort($exception?->getStatusCode(), $exception?->getMessage());
+        } catch (Exception $exception) {
+            return abort(500, 'Problem z wyciągnięciem rekordu');
+        }
+        return $model;
     }
 }
