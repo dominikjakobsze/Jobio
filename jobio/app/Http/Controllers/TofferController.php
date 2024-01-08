@@ -87,61 +87,7 @@ class TofferController extends Controller
     {
         $options = $request->all();
         $results = Toffer::select(['*'])->with(['toftops.toption'])
-            ->when(array_key_exists('offer-city', $options), function (EloquentBuilder $query) use ($options) {
-                $query->where(function (EloquentBuilder $query) use ($options) {
-                    foreach ($options['offer-city'] as $option) {
-                        $query->orWhere(function (EloquentBuilder $query) use ($option) {
-                            $query->where('city', '=', $option);
-                        });
-                    }
-                });
-            })
-            ->when(array_key_exists('offer-min_salary', $options) && array_key_exists('offer-max_salary', $options), function (EloquentBuilder $query) use ($options) {
-                $query->when(ctype_digit($options['offer-min_salary']) && ctype_digit($options['offer-max_salary']), function (EloquentBuilder $query) use ($options) {
-                    $query->where(function (EloquentBuilder $query) use ($options) {
-                        $query->where('min_salary', '>=', (int)$options['offer-min_salary'])->where('max_salary', '<=', (int)$options['offer-max_salary']);
-                    });
-                });
-            })
-            ->when(array_key_exists('option-option_type-d', $options), function (EloquentBuilder $query) use ($options) {
-                $query->where(function (EloquentBuilder $query) use ($options) {
-                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
-                        $query->where(function (EloquentBuilder $query) use ($options) {
-                            foreach ($options['option-option_type-d'] as $option) {
-                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
-                                    $query->where('option_type', '=', 'd')->where('option_value', '=', $option);
-                                });
-                            }
-                        });
-                    });
-                });
-            })
-            ->when(array_key_exists('option-option_type-s', $options), function (EloquentBuilder $query) use ($options) {
-                $query->where(function (EloquentBuilder $query) use ($options) {
-                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
-                        $query->where(function (EloquentBuilder $query) use ($options) {
-                            foreach ($options['option-option_type-s'] as $option) {
-                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
-                                    $query->where('option_type', '=', 's')->where('option_value', '=', $option);
-                                });
-                            }
-                        });
-                    });
-                });
-            })
-            ->when(array_key_exists('option-option_type-t', $options), function (EloquentBuilder $query) use ($options) {
-                $query->where(function (EloquentBuilder $query) use ($options) {
-                    $query->whereHas('toftops.toption', function (EloquentBuilder $query) use ($options) {
-                        $query->where(function (EloquentBuilder $query) use ($options) {
-                            foreach ($options['option-option_type-t'] as $option) {
-                                $query->orWhere(function (EloquentBuilder $query) use ($option) {
-                                    $query->where('option_type', '=', 't')->where('option_value', '=', $option);
-                                });
-                            }
-                        });
-                    });
-                });
-            })
+            ->options($options)
             ->get();
         //dd($results->toArray(), $request->all());
         return response()->json(
@@ -153,12 +99,9 @@ class TofferController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return Inertia::render('OfferCreatePage/OfferCreatePage', []);
     }
 
     /**

@@ -49,6 +49,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->g
     Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);
     Route::delete('/endpoint/file/{id}', [TfileController::class, 'endpointDeleteFile']);
     Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
+    Route::get('/offer/employer/create', [TofferController::class, 'create']);
 });
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
