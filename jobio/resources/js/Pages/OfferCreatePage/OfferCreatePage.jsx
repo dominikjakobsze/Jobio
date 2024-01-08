@@ -3,7 +3,7 @@ import Main from "./Main";
 
 let counter = 0;
 const OfferCreatePage = () => {
-    console.log("OfferCreatePage" + counter++);
+    console.log("OfferCreatePage " + counter++);
     return <Main />;
 };
 

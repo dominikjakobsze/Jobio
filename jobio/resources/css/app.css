@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     padding: 0;
     margin: 0;
     min-width: 0; /* min-width domyslnie dla grid i flexbox jest ustawiony na auto! */
@@ -159,4 +159,10 @@
 .custom-scroll-x *::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 1px;
+}
+
+/** tiptap editor and display container */
+[data-tiptap] p:empty::before {
+    content: "";
+    display: inline-block;
 }
