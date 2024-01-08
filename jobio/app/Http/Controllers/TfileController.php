@@ -52,7 +52,7 @@ class TfileController extends Controller
     public function endpointDeleteFile($id)
     {
         $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
-        $this->authorize('delete', $tfile);
+        $this->authorize('isUserOwnerOfFile', $tfile);
         DatabaseService::deleteWithTryCatch($tfile);
         return response()->json(
             [
@@ -66,7 +66,7 @@ class TfileController extends Controller
     public function endpointCopyFileLink($id)
     {
         $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
-        $this->authorize('delete', $tfile);
+        $this->authorize('isUserOwnerOfFile', $tfile);
         return response()->json(
             [
                 'url' => url($tfile?->url),

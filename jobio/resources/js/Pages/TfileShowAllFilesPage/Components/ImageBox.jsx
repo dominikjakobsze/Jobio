@@ -5,7 +5,7 @@ import { FaTrash } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
 import axios from "axios";
 
-const ImageBox = ({ image }) => {
+const ImageBox = ({ image, fetchImages }) => {
     console.log("ImageBox");
     const timelineRef = React.useRef(null);
     const menuRef = React.useRef(null);
@@ -79,6 +79,9 @@ const ImageBox = ({ image }) => {
                                 },
                             );
                             animateTimeline();
+                            setTimeout(async () => {
+                                await fetchImages();
+                            }, 1500);
                         });
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
@@ -87,8 +90,10 @@ const ImageBox = ({ image }) => {
                     onClick={async () => {
                         await exceptionBlock(async () => {
                             const response = await axios.get(
-                                localUrl + `/endpoint/file/${image?.id}`,
+                                localUrl + `/endpoint/copy/file/${image?.id}`,
                             );
+                            const data = await response.data;
+                            console.log(data);
                             animateTimeline();
                         });
                     }}

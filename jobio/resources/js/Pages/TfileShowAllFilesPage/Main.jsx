@@ -1,25 +1,21 @@
 import React from "react";
 import UploadFile from "./Components/UploadFile";
 import axios from "axios";
-import { URL as localUrl } from "../../app";
+import { exceptionBlock, URL as localUrl } from "../../app";
 import ImageBox from "./Components/ImageBox";
 
 const Main = () => {
     console.log("Main");
     const [images, setImages] = React.useState([]);
     const fetchImages = React.useCallback(async () => {
-        try {
+        await exceptionBlock(async () => {
             const response = await axios.get(localUrl + "/endpoint/files");
             const data = await response.data;
             console.log(data);
             setImages((prev) => {
                 return [...data];
             });
-        } catch (exception) {
-            window.location.href =
-                localUrl +
-                `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
-        }
+        });
     }, []);
     React.useEffect(() => {
         fetchImages();
@@ -35,7 +31,13 @@ const Main = () => {
                     return <UploadFile fetchImages={fetchImages} />;
                 }, [])}
                 {images.map((image) => {
-                    return <ImageBox key={image?.id} image={image} />;
+                    return (
+                        <ImageBox
+                            key={image?.id}
+                            image={image}
+                            fetchImages={fetchImages}
+                        />
+                    );
                 })}
             </div>
             <p className="bg-gray-300 h-[1px] flex-[0_0_100%]"></p>

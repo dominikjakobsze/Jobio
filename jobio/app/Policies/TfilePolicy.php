@@ -46,7 +46,7 @@ class TfilePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(Tperson $tperson, Tfile $tfile): Response
+    public function isUserOwnerOfFile(Tperson $tperson, Tfile $tfile): Response
     {
         if ($tperson->id !== $tfile->tperson_id) {
             return Response::deny(message: 'Brak uprawnień', code: 403);
