@@ -63,6 +63,19 @@ class TfileController extends Controller
         );
     }
 
+    public function endpointCopyFileLink($id)
+    {
+        $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
+        $this->authorize('delete', $tfile);
+        return response()->json(
+            [
+                'url' => url($tfile?->url),
+            ],
+            200,
+            []
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -40,11 +40,11 @@ class DatabaseService
             if ($model === null) {
                 return abort(404, 'Brak rekordu');
             }
+            return $model;
         } catch (HttpException $exception) {
             return abort($exception?->getStatusCode(), $exception?->getMessage());
         } catch (Exception $exception) {
             return abort(500, 'Problem z wyciągnięciem rekordu');
         }
-        return $model;
     }
 }

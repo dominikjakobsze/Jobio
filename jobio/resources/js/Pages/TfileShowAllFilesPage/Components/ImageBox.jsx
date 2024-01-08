@@ -1,5 +1,5 @@
 import React from "react";
-import { URL as localUrl } from "../../../app";
+import { exceptionBlock, URL as localUrl } from "../../../app";
 import gsap from "gsap";
 import { FaTrash } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
@@ -64,31 +64,36 @@ const ImageBox = ({ image }) => {
             >
                 <FaTrash
                     onClick={async () => {
-                        deleteFormRef.current.submit();
-                        // try {
-                        //     const formData = new FormData(
-                        //         deleteFormRef?.current,
-                        //     );
-                        //     const response = await axios.post(
-                        //         localUrl + `/endpoint/file/${image?.id}`,
-                        //         formData,
-                        //         {
-                        //             headers: {
-                        //                 "Content-Type": "multipart/form-data",
-                        //             },
-                        //         },
-                        //     );
-                        //     animateTimeline();
-                        // } catch (exception) {
-                        //     //console.log(exception);
-                        //     window.location.href =
-                        //         localUrl +
-                        //         `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
-                        // }
+                        //deleteFormRef.current.submit();
+                        await exceptionBlock(async () => {
+                            const formData = new FormData(
+                                deleteFormRef?.current,
+                            );
+                            const response = await axios.post(
+                                localUrl + `/endpoint/file/${image?.id}`,
+                                formData,
+                                {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data",
+                                    },
+                                },
+                            );
+                            animateTimeline();
+                        });
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
                 />
-                <FaShareNodes className="flex-[0_1_auto] text-sky-600 cup hover:text-sky-700" />
+                <FaShareNodes
+                    onClick={async () => {
+                        await exceptionBlock(async () => {
+                            const response = await axios.get(
+                                localUrl + `/endpoint/file/${image?.id}`,
+                            );
+                            animateTimeline();
+                        });
+                    }}
+                    className="flex-[0_1_auto] text-sky-600 cup hover:text-sky-700"
+                />
                 <form
                     ref={deleteFormRef}
                     action={`/endpoint/file/${image?.id}`}
