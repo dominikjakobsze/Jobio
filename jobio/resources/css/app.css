@@ -190,3 +190,7 @@
     font-size: 0.75rem /* 12px */;
     line-height: 1rem /* 16px */;
 }
+[data-tiptap] ol {
+    margin-left: 2rem;
+    list-style-type: disc;
+}

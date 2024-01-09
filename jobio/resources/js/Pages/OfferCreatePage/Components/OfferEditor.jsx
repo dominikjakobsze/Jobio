@@ -51,7 +51,7 @@ const OfferEditor = () => {
             }),
             OrderedList.configure({
                 HTMLAttributes: {
-                    class: "list-disc ml-5",
+                    class: "",
                 },
             }),
             ListItem,

@@ -17,3 +17,14 @@ export const sanitizeContent = (content) => {
     const result = DOMPurify.sanitize(content);
     return result;
 };
+
+export const stringToUpperCase = (value, fallback = null) => {
+    try {
+        return value.toUpperCase();
+    } catch (exception) {
+        if (fallback !== null) {
+            return fallback;
+        }
+        return value;
+    }
+};
