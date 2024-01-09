@@ -102,6 +102,91 @@ const EditorMenu = ({ editor }) => {
             >
                 XS
             </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer text-sky-700"
+                onClick={() =>
+                    editor?.chain().focus().setColor("#0369A1").run()
+                }
+                style={
+                    editor?.isActive("textStyle", { color: "#0369A1" })
+                        ? { backgroundColor: "rgb(209,213,219)" }
+                        : {}
+                }
+            >
+                T
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer"
+                onClick={() =>
+                    editor?.chain().focus().toggleOrderedList().run()
+                }
+                style={
+                    editor?.isActive("orderedList")
+                        ? { backgroundColor: "rgb(209,213,219)" }
+                        : {}
+                }
+            >
+                L
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer text-lime-700"
+                onClick={() =>
+                    editor?.chain().focus().setColor("#4D7C0F").run()
+                }
+                style={
+                    editor?.isActive("textStyle", { color: "#4D7C0F" })
+                        ? { backgroundColor: "rgb(209,213,219)" }
+                        : {}
+                }
+            >
+                T
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer"
+                onClick={() => editor?.chain().focus().unsetColor().run()}
+            >
+                UC
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer bg-lime-300/30"
+                onClick={() =>
+                    editor
+                        ?.chain()
+                        .focus()
+                        .toggleHighlight({ color: "#bef264" })
+                        .run()
+                }
+                style={
+                    editor?.isActive("highlight", { color: "#bef264" })
+                        ? { backgroundColor: "rgb(190,242,100)", opacity: 1 }
+                        : {}
+                }
+            >
+                H
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer bg-sky-300/30"
+                onClick={() =>
+                    editor
+                        ?.chain()
+                        .focus()
+                        .toggleHighlight({ color: "#7DD3FC" })
+                        .run()
+                }
+                style={
+                    editor?.isActive("highlight", { color: "#7DD3FC" })
+                        ? { backgroundColor: "rgb(125,211,252)", opacity: 1 }
+                        : {}
+                }
+            >
+                H
+            </button>
         </div>
     );
 };
