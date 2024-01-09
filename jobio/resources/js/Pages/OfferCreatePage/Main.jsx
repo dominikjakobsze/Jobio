@@ -1,7 +1,7 @@
 import React from "react";
 import OfferEditor from "./Components/OfferEditor";
 import Heading from "./Components/Heading";
-import MapSection from "./Components/MapSection";
+import MapMain from "./Components/MapMain";
 
 let counter = 0;
 const Main = () => {
@@ -22,7 +22,7 @@ const Main = () => {
             className="f fr fw js cs is ss gap-7 custom-scroll-x relative h-auto p-5"
         >
             <Heading>Wybierz Lokalizacje</Heading>
-            <MapSection />
+            <MapMain />
             <Heading>Stwórz treść swojego ogłoszenia</Heading>
             <OfferEditor />
             <div onClick={() => sendForm()}>teeetet</div>
