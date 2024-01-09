@@ -118,20 +118,6 @@ const EditorMenu = ({ editor }) => {
             </button>
             <button
                 type="button"
-                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer"
-                onClick={() =>
-                    editor?.chain().focus().toggleOrderedList().run()
-                }
-                style={
-                    editor?.isActive("orderedList")
-                        ? { backgroundColor: "rgb(209,213,219)" }
-                        : {}
-                }
-            >
-                L
-            </button>
-            <button
-                type="button"
                 className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer text-lime-700"
                 onClick={() =>
                     editor?.chain().focus().setColor("#4D7C0F").run()
@@ -150,6 +136,20 @@ const EditorMenu = ({ editor }) => {
                 onClick={() => editor?.chain().focus().unsetColor().run()}
             >
                 UC
+            </button>
+            <button
+                type="button"
+                className="rounded-md px-3 py-1 flex-[0_0_auto] cursor-pointer"
+                onClick={() =>
+                    editor?.chain().focus().toggleOrderedList().run()
+                }
+                style={
+                    editor?.isActive("orderedList")
+                        ? { backgroundColor: "rgb(209,213,219)" }
+                        : {}
+                }
+            >
+                L
             </button>
             <button
                 type="button"

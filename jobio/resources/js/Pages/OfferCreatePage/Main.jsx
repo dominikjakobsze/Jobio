@@ -1,5 +1,7 @@
 import React from "react";
 import OfferEditor from "./Components/OfferEditor";
+import Heading from "./Components/Heading";
+import MapSection from "./Components/MapSection";
 
 let counter = 0;
 const Main = () => {
@@ -17,10 +19,13 @@ const Main = () => {
             action="/endpoint/file"
             encType="multipart/form-data"
             method="post"
-            className="f fr fw js cs is ss gap-5 custom-scroll-x relative h-auto"
+            className="f fr fw js cs is ss gap-7 custom-scroll-x relative h-auto p-5"
         >
-            <div onClick={() => sendForm()}>teeetet</div>
+            <Heading>Wybierz Lokalizacje</Heading>
+            <MapSection />
+            <Heading>Stwórz treść swojego ogłoszenia</Heading>
             <OfferEditor />
+            <div onClick={() => sendForm()}>teeetet</div>
         </form>
     );
 };
