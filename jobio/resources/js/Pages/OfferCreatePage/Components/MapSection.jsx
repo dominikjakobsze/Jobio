@@ -4,7 +4,7 @@ import L from "leaflet";
 import axios from "axios";
 
 let counter = 0;
-const MapSection = () => {
+const MapSection = ({ setFields }) => {
     console.log("MapSection " + counter++);
 
     const mapMarker = React.useRef(null);
@@ -46,9 +46,6 @@ const MapSection = () => {
             defineMap();
         }
         mapLeaflet?.current?.on("click", handleClick);
-        return () => {
-            mapLeaflet?.current?.off("click", handleClick);
-        };
     }, []);
 
     return (
@@ -57,22 +54,44 @@ const MapSection = () => {
                 ref={mapRef}
                 className="flex-[0_0_95%] mx-auto h-[400px]"
             ></div>
-            <div className="flex-[0_0_95%] text-center">
+            <div className="flex-[0_0_95%] mx-auto text-center">
                 <button
                     onClick={async () => {
                         if (mapMarker.current === null) {
                             return;
                         }
                         const { lat, lng } = mapMarker.current._latlng;
-                        mapLeaflet?.current?.off("click", handleClick);
                         const accessToken =
                             "jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh";
-                        const response = await axios.get(
-                            `https://api.jawg.io/places/v1/reverse?access-token=${accessToken}&point.lat=${lat}&point.lon=${lng}&size=1`,
-                        );
-                        const data = await response.data;
-                        console.log(data);
-                        mapMarker.current = null;
+                        try {
+                            const response = await axios.get(
+                                `https://api.jawg.io/places/v1/reverse?access-token=${accessToken}&point.lat=${lat}&point.lon=${lng}&size=1`,
+                            );
+                            const data = await response.data;
+                            const street =
+                                data?.features?.[0]?.properties?.name ?? "";
+                            const zip_code =
+                                data?.features?.[0]?.properties?.postalcode ??
+                                "";
+                            const voivodeship =
+                                data?.features?.[0]?.properties?.region ?? "";
+                            const city =
+                                data?.features?.[0]?.properties?.localadmin ??
+                                "";
+                            setFields((prev) => {
+                                return {
+                                    street: street,
+                                    zip_code: zip_code,
+                                    voivodeship: voivodeship,
+                                    city: city,
+                                    latitude: lat,
+                                    longitude: lng,
+                                    refresh: !prev?.refresh,
+                                };
+                            });
+                        } catch (exception) {
+                            return;
+                        }
                     }}
                     type="button"
                     className="bg-sky-300/20 text-base font-[600] text-sky-300 py-1 px-4 border-2 border-solid border-sky-500/20 rounded-xl hover:brightness-110"

@@ -5,11 +5,21 @@ import React from "react";
 let counter = 0;
 const MapMain = () => {
     console.log("MapMain " + counter++);
-    
+    const [fields, setFields] = React.useState({
+        street: "",
+        zip_code: "",
+        voivodeship: "",
+        city: "",
+        latitude: "",
+        longitude: "",
+        refresh: true,
+    });
     return (
         <>
-            <MapSection />
-            <MapFields />
+            {React.useMemo(() => {
+                return <MapSection setFields={setFields} />;
+            }, [])}
+            <MapFields fields={fields} />
         </>
     );
 };
