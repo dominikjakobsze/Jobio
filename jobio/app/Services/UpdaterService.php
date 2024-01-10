@@ -14,7 +14,6 @@ class UpdaterService
             foreach ($toAssignArray as $key => $value) {
                 $model->$key = $value;
             }
-            dd($model->getAttributes());
             return $model;
         } catch (Exception $exception) {
             return abort(500, 'Nie udało się przypisać wartości');

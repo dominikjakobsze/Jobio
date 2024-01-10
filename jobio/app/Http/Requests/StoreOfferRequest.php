@@ -17,10 +17,13 @@ class StoreOfferRequest extends FormRequest
     protected function passedValidation()
     {
         $this->transformValidated(function ($validatedData, $setData) {
-            dd($validatedData, $setData());
+            $validatedData['page_offer'] = json_encode(
+                [
+                    'page' => $validatedData['page_offer'],
+                ],
+            );
+            $setData($validatedData);
         });
-        /** @disregard - Ignores intelephense errors only in next line! */
-        dd($this->validator->getData());
     }
 
     public function authorize(): bool

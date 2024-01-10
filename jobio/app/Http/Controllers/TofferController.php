@@ -112,13 +112,13 @@ class TofferController extends Controller
         $validatedData = $storeOfferRequest->validated();
         $validatedData["additionalField"] = "test";
         $validatedData["fakeField"] = "testFake";
-        UpdaterService::assignValuesToModelWithTryCatch(
+        dd(UpdaterService::assignValuesToModelWithTryCatch(
             DifferentiationService::findDifferences(
                 templateArray: Toffer::$template,
                 toCheckArray: $validatedData
             ),
             new Toffer()
-        );
+        ));
     }
 
     public function show($id)
