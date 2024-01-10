@@ -8,6 +8,7 @@ use App\Traits\CustomPassedValidationTrait;
 use App\Traits\TransformValidatedTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreOfferRequest extends FormRequest
 {
@@ -22,6 +23,11 @@ class StoreOfferRequest extends FormRequest
                     'page' => $validatedData['page_offer'],
                 ],
             );
+            $validatedData['temployer_id'] = (string)Auth::guard('person')?->user()?->id;
+            $validatedData['min_salary'] = (int)$validatedData['min_salary'];
+            $validatedData['max_salary'] = (int)$validatedData['max_salary'];
+            $validatedData['longitude'] = (float)$validatedData['longitude'];
+            $validatedData['latitude'] = (float)$validatedData['latitude'];
             $setData($validatedData);
         });
     }
@@ -65,6 +71,8 @@ class StoreOfferRequest extends FormRequest
             "longitude" => ['required', 'numeric'],
             "latitude" => ['required', 'numeric'],
             "page_offer" => ['required', 'string'],
+            //these fields are not sent with form fields but they are needed in passedValidation()
+            "temployer_id" => ['nullable'],
         ];
     }
     public function messages(): array

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
 use App\Models\Toption;
 use App\Policies\TofferPolicy;
+use App\Services\DatabaseService;
 use App\Services\DifferentiationService;
 use App\Services\UpdaterService;
 use Exception;
@@ -110,15 +111,22 @@ class TofferController extends Controller
     public function endpointCreate(StoreOfferRequest $storeOfferRequest)
     {
         $validatedData = $storeOfferRequest->validated();
-        $validatedData["additionalField"] = "test";
-        $validatedData["fakeField"] = "testFake";
-        dd(UpdaterService::assignValuesToModelWithTryCatch(
-            DifferentiationService::findDifferences(
-                templateArray: Toffer::$template,
-                toCheckArray: $validatedData
-            ),
-            new Toffer()
-        ));
+        $sanitizedArray = DifferentiationService::findDifferences(
+            templateArray: Toffer::$template,
+            toCheckArray: $validatedData
+        );
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: $sanitizedArray,
+            model: new Toffer()
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 
     public function show($id)

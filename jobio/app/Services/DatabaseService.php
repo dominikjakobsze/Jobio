@@ -13,7 +13,9 @@ class DatabaseService
     {
         try {
             $model->save();
+            return true;
         } catch (Exception $exception) {
+            dd($exception);
             return abort(500, 'Problem z zapisem do bazy danych');
         }
     }
@@ -21,6 +23,7 @@ class DatabaseService
     {
         try {
             $model->delete();
+            return true;
         } catch (Exception $exception) {
             return abort(500, 'Problem z usunięciem rekordu');
         }
@@ -29,6 +32,7 @@ class DatabaseService
     {
         try {
             $model->forceDelete();
+            return true;
         } catch (Exception $exception) {
             return abort(500, 'Problem z usunięciem rekordu');
         }

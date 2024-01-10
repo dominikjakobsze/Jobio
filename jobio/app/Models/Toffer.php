@@ -49,6 +49,7 @@ class Toffer extends Model
         "longitude" => null,
         "latitude" => null,
         "page_offer" => null,
+        "temployer_id" => null,
     ];
 
     public function tperson()

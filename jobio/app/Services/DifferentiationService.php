@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Collection;
+
 class DifferentiationService
 {
-    private static $templateCollection;
-    private static $toCheckCollection;
+    private static Collection $templateCollection;
+    private static Collection $toCheckCollection;
 
     private static function excludeFieldsThatAreNotInTemplateCollection()
     {
