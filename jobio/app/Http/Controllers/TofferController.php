@@ -133,7 +133,8 @@ class TofferController extends Controller
     {
         try {
             $offer = Toffer::with(['toftops.toption'])->where('id', '=', $id)->first();
-            $randomOffers = Toffer::all()->random(3);
+            $randomOffers = Toffer::where('id', '!=', $id)->get();
+            $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
         } catch (Exception $exception) {
             dump($exception);
             return die();
