@@ -9,6 +9,7 @@ use App\Models\Toffer;
 use App\Models\Toption;
 use App\Policies\TofferPolicy;
 use App\Services\DifferentiationService;
+use App\Services\UpdaterService;
 use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
@@ -109,17 +110,15 @@ class TofferController extends Controller
     public function endpointCreate(StoreOfferRequest $storeOfferRequest)
     {
         $validatedData = $storeOfferRequest->validated();
-        $validatedData['page_offer'] = json_encode(
-            [
-                'page' => $validatedData['page_offer']
-            ]
-        );
         $validatedData["additionalField"] = "test";
         $validatedData["fakeField"] = "testFake";
-        dd(DifferentiationService::findDifferences(
-            templateArray: Toffer::$template,
-            toCheckArray: $validatedData
-        ));
+        UpdaterService::assignValuesToModelWithTryCatch(
+            DifferentiationService::findDifferences(
+                templateArray: Toffer::$template,
+                toCheckArray: $validatedData
+            ),
+            new Toffer()
+        );
     }
 
     public function show($id)

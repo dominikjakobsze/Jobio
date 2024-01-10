@@ -4,11 +4,14 @@ namespace App\Http\Requests;
 
 use App\Rules\GreaterThanField;
 use App\Traits\CustomFailedValidationTrait;
+use App\Traits\CustomPassedValidationTrait;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOfferRequest extends FormRequest
 {
     use CustomFailedValidationTrait;
+    use CustomPassedValidationTrait;
 
     public function authorize(): bool
     {
