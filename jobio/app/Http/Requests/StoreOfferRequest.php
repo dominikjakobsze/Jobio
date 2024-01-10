@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\GreaterThanField;
 use App\Traits\CustomFailedValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class StoreOfferRequest extends FormRequest
 {
     use CustomFailedValidationTrait;
 
@@ -35,7 +36,12 @@ class StorePostRequest extends FormRequest
             "title" => ['required', 'string'],
             "company_icon" => ['required', 'string'],
             "min_salary" => ['required', 'integer'],
-            "max_salary" => ['required', 'integer'],
+            "max_salary" => [
+                'required', 'integer', new GreaterThanField(
+                    fieldName: 'min_salary',
+                    failMessage: 'Pole Minimalna pensja nie może mieć większej wartości niź pole Maksymalna pensja'
+                )
+            ],
             "city" => ['required', 'string'],
             "street" => ['required', 'string'],
             "zip_code" => ['required', 'string'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\StoreTofferRequest;
 use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
@@ -104,17 +105,17 @@ class TofferController extends Controller
         return Inertia::render('OfferCreatePage/OfferCreatePage', []);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store()
+    public function endpointCreate(StoreOfferRequest $storeOfferRequest)
     {
-        //
+        $validatedData = $storeOfferRequest->validated();
+        $validatedData['page_offer'] = json_encode(
+            [
+                'page' => $validatedData['page_offer']
+            ]
+        );
+        dd($validatedData);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         try {

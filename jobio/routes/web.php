@@ -51,9 +51,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->g
     Route::delete('/endpoint/file/{id}', [TfileController::class, 'endpointDeleteFile']);
     Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
     Route::get('/offer/employer/create', [TofferController::class, 'create']);
-    Route::post('/endpoint/offer/employer/create', function (StorePostRequest $storePostRequest) {
-        dd('done');
-    });
+    Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
 });
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
