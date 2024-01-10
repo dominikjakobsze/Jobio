@@ -5,13 +5,23 @@ namespace App\Http\Requests;
 use App\Rules\GreaterThanField;
 use App\Traits\CustomFailedValidationTrait;
 use App\Traits\CustomPassedValidationTrait;
+use App\Traits\TransformValidatedTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOfferRequest extends FormRequest
 {
     use CustomFailedValidationTrait;
-    use CustomPassedValidationTrait;
+    use TransformValidatedTrait;
+
+    protected function passedValidation()
+    {
+        $this->transformValidated(function ($validatedData, $setData) {
+            dd($validatedData, $setData());
+        });
+        /** @disregard - Ignores intelephense errors only in next line! */
+        dd($this->validator->getData());
+    }
 
     public function authorize(): bool
     {
