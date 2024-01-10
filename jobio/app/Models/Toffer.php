@@ -37,6 +37,19 @@ class Toffer extends Model
     protected $keyType = 'string';
     public $timestamps = true;
     protected $dateFormat = 'Y-m-d H:i:s';
+    public static $template = [
+        "title" => null,
+        "company_icon" => null,
+        "min_salary" => null,
+        "max_salary" => null,
+        "city" => null,
+        "street" => null,
+        "zip_code" => null,
+        "voivodeship" => null,
+        "longitude" => null,
+        "latitude" => null,
+        "page_offer" => null,
+    ];
 
     public function tperson()
     {

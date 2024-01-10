@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
 use App\Models\Toption;
 use App\Policies\TofferPolicy;
+use App\Services\DifferentiationService;
 use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
@@ -113,7 +114,12 @@ class TofferController extends Controller
                 'page' => $validatedData['page_offer']
             ]
         );
-        dd($validatedData);
+        $validatedData["additionalField"] = "test";
+        $validatedData["fakeField"] = "testFake";
+        dd(DifferentiationService::findDifferences(
+            templateArray: Toffer::$template,
+            toCheckArray: $validatedData
+        ));
     }
 
     public function show($id)
