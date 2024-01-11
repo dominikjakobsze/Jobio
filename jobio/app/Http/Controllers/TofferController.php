@@ -10,6 +10,7 @@ use App\Models\Toption;
 use App\Policies\TofferPolicy;
 use App\Services\DatabaseService;
 use App\Services\DifferentiationService;
+use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
 use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
@@ -149,12 +150,9 @@ class TofferController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit()
     {
-        //
+        dd(ModelHelperService::$foundModel);
     }
 
     /**

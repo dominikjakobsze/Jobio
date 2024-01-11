@@ -4,6 +4,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TfileController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\TpersonController;
+use App\Http\Middleware\CheckIfModelExists;
 use App\Http\Middleware\EnsureUserIsEmployer;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
 use App\Http\Requests\StorePostRequest;
@@ -51,6 +52,9 @@ Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->g
     Route::delete('/endpoint/file/{id}', [TfileController::class, 'endpointDeleteFile']);
     Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
     Route::get('/offer/employer/create', [TofferController::class, 'create']);
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+        Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
+    });
     Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
 });
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
