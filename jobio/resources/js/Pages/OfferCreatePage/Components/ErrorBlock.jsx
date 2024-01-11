@@ -14,7 +14,7 @@ const ErrorBlock = ({ errors }) => {
                         <p className="flex-[0_1_auto] text-red-300">{error}</p>
                     </div>
                 );
-            })}{" "}
+            })}
         </div>
     ) : null;
 };

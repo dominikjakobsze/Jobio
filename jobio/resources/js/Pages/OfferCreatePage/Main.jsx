@@ -55,8 +55,13 @@ const Main = () => {
             <MapMain />
             <Heading>Stwórz treść swojego ogłoszenia</Heading>
             <OfferEditor />
-            <ErrorBlock errors={errors} />
-            <div onClick={() => sendForm()}>teeetet</div>
+            <div
+                className="bg-sky-300/20 cursor-pointer mx-auto text-base font-[600] text-sky-300 py-1 px-4 border-2 border-solid border-sky-500/20 rounded-xl hover:brightness-110"
+                onClick={() => sendForm()}
+            >
+                Prześlij Formularz
+            </div>
+            <ErrorBlock errors={errors} />{" "}
         </form>
     );
 };
