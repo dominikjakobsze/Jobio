@@ -112,13 +112,12 @@ class TpersonController extends Controller
         return redirect('/', 302, [], null);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function profileSupport()
     {
-        //
+        return Inertia::render('ProfileSupport/ProfileSupport', []);
     }
+
 
     /**
      * Store a newly created resource in storage.

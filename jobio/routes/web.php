@@ -62,6 +62,10 @@ Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
+    Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
+});
+
 //idk
 Route::get('/inertia', function () {
     return Inertia::render('OffersMapPage/OffersMap', [
