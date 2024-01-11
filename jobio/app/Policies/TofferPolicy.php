@@ -9,6 +9,15 @@ use Illuminate\Auth\Access\Response;
 
 class TofferPolicy
 {
+
+    public function isUserOwnerOfOffer(Tperson $tperson, Toffer $toffer)
+    {
+        if ($tperson?->id !== $toffer?->temployer_id) {
+            return Response::deny(message: 'Nie możesz edytować czyjejś oferty!', code: 403);
+        }
+        return Response::allow();
+    }
+
     public function viewAny(?Tperson $tperson): Response
     {
         return Response::allow();

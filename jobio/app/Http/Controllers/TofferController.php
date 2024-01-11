@@ -152,7 +152,16 @@ class TofferController extends Controller
 
     public function edit()
     {
-        dd(ModelHelperService::$foundModel);
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        return Inertia::render('OfferEditPage/OfferEditPage', [
+            'offer' => ModelHelperService::$foundModel
+        ]);
+    }
+
+    public function endpointEdit()
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        dd('test');
     }
 
     /**
