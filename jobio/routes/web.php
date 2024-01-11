@@ -44,7 +44,7 @@ Route::get('/general/error/{code}/{message}', function ($code, $message) {
     //dd($code, $message);
     return abort($code, $message);
 });
-Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->group(function () {
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
     Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);
