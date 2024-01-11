@@ -20,7 +20,7 @@ const Main = ({ offer }) => {
         const result = await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
             const response = await axios.post(
-                localUrl + `/endpoint/offer/employer/create`,
+                localUrl + `/endpoint/offer/employer/edit/${offer?.id}`,
                 formData,
                 {
                     headers: {
@@ -40,7 +40,7 @@ const Main = ({ offer }) => {
     return (
         <form
             ref={formRef}
-            action="/endpoint/offer/employer/create"
+            action={`/endpoint/offer/employer/edit/${offer?.id}`}
             encType="multipart/form-data"
             method="post"
             className="f fr fw js cs is ss gap-7 custom-scroll-x relative h-auto p-5"
@@ -64,6 +64,12 @@ const Main = ({ offer }) => {
             >
                 Prześlij Formularz
             </div>
+            <input
+                type="hidden"
+                name="_method"
+                value="PUT"
+                className="hidden"
+            ></input>
             <ErrorBlock errors={errors} />{" "}
         </form>
     );

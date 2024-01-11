@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="w-full min-h-[100dvh] f fr fw ic cc ss jc font-[700] text-2xl text-gray-300 gap-1">
+    <div class="w-full min-h-[100dvh] f fr fw ic cc ss jc font-[700] text-2xl text-gray-300 gap-1 overflow-hidden">
         <h1 class="ss flex-[0_0_100%] max-w-[700px] text-center">
             @yield('code')
         </h1>

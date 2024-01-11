@@ -38,7 +38,6 @@ use Inertia\Inertia;
 //image/files-dominik.txt
 
 Route::get('/', [TofferController::class, 'index']);
-Route::get('/offer/{id}', [TofferController::class, 'show']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
 Route::get('/general/error/{code}/{message}', function ($code, $message) {
@@ -56,6 +55,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, EnsureUserIsEmployer::class])->g
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
         Route::put('/endpoint/offer/employer/edit/{id}', [TofferController::class, 'endpointEdit']);
+        Route::get('/offer/{id}', [TofferController::class, 'show']);
     });
 });
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);

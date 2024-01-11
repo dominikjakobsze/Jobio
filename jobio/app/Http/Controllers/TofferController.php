@@ -130,22 +130,12 @@ class TofferController extends Controller
         );
     }
 
-    public function show($id)
+    public function show()
     {
-        try {
-            $offer = Toffer::with(['toftops.toption'])->where('id', '=', $id)->first();
-            $randomOffers = Toffer::where('id', '!=', $id)->get();
-            $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
-        } catch (Exception $exception) {
-            dump($exception);
-            return die();
-        }
-        if ($offer === null) {
-            return abort(404, 'Brak Oferty', []);
-        }
-        $this->authorize('view', $offer);
+        $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
+        $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
         return Inertia::render('OfferPage/OfferPage', [
-            'offer' => $offer,
+            'offer' => ModelHelperService::$foundModel,
             'randomOffers' => $randomOffers
         ]);
     }
@@ -158,18 +148,26 @@ class TofferController extends Controller
         ]);
     }
 
-    public function endpointEdit()
+    public function endpointEdit(StoreOfferRequest $storeOfferRequest)
     {
         $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        dd('test');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update()
-    {
-        //
+        $validatedData = $storeOfferRequest->validated();
+        $sanitizedArray = DifferentiationService::findDifferences(
+            templateArray: Toffer::$template,
+            toCheckArray: $validatedData
+        );
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: $sanitizedArray,
+            model: ModelHelperService::$foundModel
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 
     /**
