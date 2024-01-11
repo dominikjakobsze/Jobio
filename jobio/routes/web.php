@@ -66,6 +66,20 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
 });
 
+Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
+    Route::get('/profile', function () {
+        if (Auth::guard('person')?->user()->role === "support") {
+            return redirect('/profile/support');
+        }
+        if (Auth::guard('person')?->user()->role === "employee") {
+            dd('employee');
+        }
+        if (Auth::guard('person')?->user()->role === "employer") {
+            dd('employer');
+        }
+    });
+});
+
 //idk
 Route::get('/inertia', function () {
     return Inertia::render('OffersMapPage/OffersMap', [
