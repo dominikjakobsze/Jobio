@@ -46,6 +46,7 @@ Route::get('/general/error/{code}/{message}', function ($code, $message) {
 });
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
+    Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
     Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);
     Route::delete('/endpoint/file/{id}', [TfileController::class, 'endpointDeleteFile']);

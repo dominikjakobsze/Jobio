@@ -3,13 +3,12 @@ import { IoDocumentAttach } from "react-icons/io5";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { FaPenClip } from "react-icons/fa6";
 import { URL as localUrl } from "../../app";
+import ShHeader from "./ShHeader";
 
 const EmployeeMenu = () => {
     return (
         <>
-            <h1 className="flex-[0_0_100%] text-3xl font-[700] text-gray-700 px-10 pt-10">
-                Panel Użytkownika
-            </h1>
+            <ShHeader title={"Panel Użytkownika"} />
             <h6 className="flex-[0_0_65%] text-sm font-[400] text-gray-400 px-10 my-5">
                 W tym panelu otrzymujesz możliwość stworzenia swojego CV i
                 podejrzenia listy ofert na które aplikowałeś

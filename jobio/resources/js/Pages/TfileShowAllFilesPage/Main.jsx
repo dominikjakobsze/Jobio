@@ -21,7 +21,7 @@ const Main = () => {
         fetchImages();
     }, []);
     return (
-        <div className="w-full min-h-[100dvh] f fr fw cs is js ss bg-gray-100 p-5 overflow-x-hidden gap-4">
+        <div className="w-full min-h-[100dvh] f fr fw cs is js ss bg-gray-100 px-10 p-5 overflow-x-hidden gap-4">
             <h1 className="flex-[0_0_100%] text-sky-300 text-xl font-[700] ss">
                 Menedżer Plików
             </h1>

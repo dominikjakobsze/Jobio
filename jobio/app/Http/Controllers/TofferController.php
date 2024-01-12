@@ -170,6 +170,11 @@ class TofferController extends Controller
         );
     }
 
+    public function showAllOffersPanel()
+    {
+        return Inertia::render('ShowAllOffersPanel/ShowAllOffersPanel', []);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
