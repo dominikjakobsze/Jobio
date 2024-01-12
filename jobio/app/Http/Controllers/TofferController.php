@@ -196,6 +196,19 @@ class TofferController extends Controller
         );
     }
 
+    public function endpointShowAllOffersAfterDelete()
+    {
+        return response()->json(
+            data: [
+                'offers' => DatabaseService::getOrNotFoundWithTryCatch(
+                    Toffer::where('temployer_id', '=', Auth::guard('person')?->user()?->id)
+                )
+            ],
+            status: 200,
+            headers: []
+        );
+    }
+
     /**
      * Remove the specified resource from storage.
      */

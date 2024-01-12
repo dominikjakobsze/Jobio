@@ -4,7 +4,7 @@ import axios from "axios";
 import React from "react";
 
 const AllOffers = ({ offers }) => {
-    const formRef = React.useRef(null);
+    const [nestedOffers, setNestedOffers] = React.useState(offers ?? []);
 
     return (
         <div className="flex-[0_0_100%] px-10 f fr fw js is cs ss gap-5">
@@ -19,13 +19,14 @@ const AllOffers = ({ offers }) => {
                     <FaPlus />
                 </div>
             </div>
-            {offers?.map((offer) => {
+            {nestedOffers?.map((offer) => {
                 return (
                     <div
                         key={offer?.id}
                         className="flex-[0_0_100%] overflow-hidden f fr fnw js ic cs ss gap-5 border-solid border-0 border-t-2 border-gray-200 pt-7"
                     >
                         <img
+                            onClick={() => console.log(nestedOffers)}
                             src={offer?.company_icon}
                             alt=""
                             className="flex-[0_0_50px] ss h-[50px] object-cover rounded-lg bg-gray-200"
@@ -49,8 +50,10 @@ const AllOffers = ({ offers }) => {
                                     // formRef.current.submit();
                                     const result = await exceptionBlock(
                                         async () => {
-                                            const formData = new FormData(
-                                                formRef.current,
+                                            const formData = new FormData();
+                                            formData.append(
+                                                "_method",
+                                                "DELETE",
                                             );
                                             const response = await axios.post(
                                                 localUrl +
@@ -67,29 +70,26 @@ const AllOffers = ({ offers }) => {
                                             return null;
                                         },
                                     );
-                                    if (result !== null) {
-                                        return;
+                                    if (result === null) {
+                                        const nextResult = await exceptionBlock(
+                                            async () => {
+                                                const response =
+                                                    await axios.get(
+                                                        localUrl +
+                                                            "/endpoint/offers/employer",
+                                                    );
+                                                const data =
+                                                    await response.data;
+                                                return data;
+                                            },
+                                        );
+                                        setNestedOffers(nextResult?.offers);
                                     }
-                                    return (window.location.href =
-                                        localUrl + "/offers");
                                 }}
                                 className="flex-[0_0_auto] sc px-5 py-2 cursor-pointer bg-lime-300/50 border-2 border-solid border-lime-500/50 text-lime-400 text-sm font-[700] rounded-xl hover:brightness-110"
                             >
                                 Usuń
                             </p>
-                            <form
-                                ref={formRef}
-                                action={`/endpoint/offer/employer/delete/${offer?.id}`}
-                                encType="multipart/form-data"
-                                className="hidden"
-                                method="post"
-                            >
-                                <input
-                                    type="hidden"
-                                    name="_method"
-                                    value="DELETE"
-                                />
-                            </form>
                             <p
                                 onClick={() => {
                                     window.location.href =

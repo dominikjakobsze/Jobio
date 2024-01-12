@@ -34,12 +34,13 @@ use Inertia\Inertia;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// https://github.com/barryvdh/laravel-ide-helper#usage
-//image/files-dominik.txt
 
 Route::get('/', [TofferController::class, 'index']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
+Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
+Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
+Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 Route::get('/general/error/{code}/{message}', function ($code, $message) {
     //dd($code, $message);
     return abort($code, $message);
@@ -54,6 +55,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
     Route::get('/offer/employer/create', [TofferController::class, 'create']);
     Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
+    Route::get('/endpoint/offers/employer', [TofferController::class, 'endpointShowAllOffersAfterDelete']);
 
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
@@ -65,10 +67,6 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
     Route::get('/offer/{id}', [TofferController::class, 'show']);
 });
-
-Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
-Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
-Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
@@ -82,48 +80,14 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
     Route::get('/profile', function () {
-        if (Auth::guard('person')?->user()->role === "support") {
+        if (Auth::guard('person')?->user()?->role === "support") {
             return redirect('/profile/support');
         }
-        if (Auth::guard('person')?->user()->role === "employee") {
+        if (Auth::guard('person')?->user()?->role === "employee") {
             return redirect('/profile/employee');
         }
-        if (Auth::guard('person')?->user()->role === "employer") {
+        if (Auth::guard('person')?->user()?->role === "employer") {
             return redirect('/profile/employer');
         }
     });
-});
-
-//idk
-Route::get('/inertia', function () {
-    return Inertia::render('OffersMapPage/OffersMap', [
-        'test' => 'test',
-    ]);
-});
-
-Route::get('/login', function () {
-    //dd(Hash::make('12345678'));
-    Auth::guard('person')->attempt([
-        'email' => 'lesly.muller@hotmail.com',
-        'password' => '12345678',
-    ]);
-    /** @var App\Models\Tperson $user **/
-    $user = Auth::guard('person')->user();
-    Session::regenerateToken();
-    Session::regenerate();
-});
-Route::get('/logout', function () {
-    Session::invalidate();
-    Session::regenerateToken();
-});
-
-
-Route::get('/test', function () {
-    dd(Auth::guard('person')->user());
-    //Tresume::whereNotNull('id')->forceDelete();
-    //dd(Tresume::factory()->count(50)->create());
-    //dd(Toption::factory()->count(3)->create());
-    //dd(Tperson::first()->delete());
-    //dd(Tperson::factory()->count(3)->create());
-    //dd(Tperson::factory()->count(30)->create());
 });
