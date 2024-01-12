@@ -115,9 +115,18 @@ class TpersonController extends Controller
 
     public function profileSupport()
     {
-        return Inertia::render('ProfileSupport/ProfileSupport', []);
+        return Inertia::render('Profiles/ProfileSupport', []);
     }
 
+    public function profileEmployee()
+    {
+        return Inertia::render('Profiles/ProfileEmployee', []);
+    }
+
+    public function profileEmployer()
+    {
+        return Inertia::render('Profiles/ProfileEmployer', []);
+    }
 
     /**
      * Store a newly created resource in storage.

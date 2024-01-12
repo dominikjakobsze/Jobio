@@ -65,6 +65,12 @@ Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
 });
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
+    Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
+});
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
+    Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
+});
 
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
     Route::get('/profile', function () {
@@ -72,10 +78,10 @@ Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
             return redirect('/profile/support');
         }
         if (Auth::guard('person')?->user()->role === "employee") {
-            dd('employee');
+            return redirect('/profile/employee');
         }
         if (Auth::guard('person')?->user()->role === "employer") {
-            dd('employer');
+            return redirect('/profile/employer');
         }
     });
 });
