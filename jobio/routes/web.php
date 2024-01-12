@@ -55,9 +55,13 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
         Route::put('/endpoint/offer/employer/edit/{id}', [TofferController::class, 'endpointEdit']);
-        Route::get('/offer/{id}', [TofferController::class, 'show']);
     });
 });
+
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+    Route::get('/offer/{id}', [TofferController::class, 'show']);
+});
+
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
 Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
