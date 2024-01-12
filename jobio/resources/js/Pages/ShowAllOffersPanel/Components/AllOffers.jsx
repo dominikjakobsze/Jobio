@@ -46,29 +46,32 @@ const AllOffers = ({ offers }) => {
                             </p>
                             <p
                                 onClick={async () => {
-                                    formRef.current.submit();
-                                    // const result = await exceptionBlock(
-                                    //     async () => {
-                                    //         const response = await axios.post(
-                                    //             localUrl +
-                                    //                 `/endpoint/offer/employer/delete/${offer?.id}`,
-                                    //             formData,
-                                    //             {
-                                    //                 headers: {
-                                    //                     "Content-Type":
-                                    //                         "multipart/form-data",
-                                    //                 },
-                                    //             },
-                                    //         );
-                                    //         const data = await response.data;
-                                    //         return null;
-                                    //     },
-                                    // );
-                                    // if (result !== null) {
-                                    //     return;
-                                    // }
-                                    // return (window.location.href =
-                                    //     localUrl + "/offers");
+                                    // formRef.current.submit();
+                                    const result = await exceptionBlock(
+                                        async () => {
+                                            const formData = new FormData(
+                                                formRef.current,
+                                            );
+                                            const response = await axios.post(
+                                                localUrl +
+                                                    `/endpoint/offer/employer/delete/${offer?.id}`,
+                                                formData,
+                                                {
+                                                    headers: {
+                                                        "Content-Type":
+                                                            "multipart/form-data",
+                                                    },
+                                                },
+                                            );
+                                            const data = await response.data;
+                                            return null;
+                                        },
+                                    );
+                                    if (result !== null) {
+                                        return;
+                                    }
+                                    return (window.location.href =
+                                        localUrl + "/offers");
                                 }}
                                 className="flex-[0_0_auto] sc px-5 py-2 cursor-pointer bg-lime-300/50 border-2 border-solid border-lime-500/50 text-lime-400 text-sm font-[700] rounded-xl hover:brightness-110"
                             >

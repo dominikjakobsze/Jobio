@@ -18,6 +18,7 @@ use Illuminate\Database\Query\Builder; //when using DB facade
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
 class TofferController extends Controller
