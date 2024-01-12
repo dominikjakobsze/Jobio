@@ -32,8 +32,9 @@ const Main = ({ offer }) => {
             return null;
         });
         if (result !== null) {
-            setErrors(result);
+            return setErrors(result);
         }
+        return (window.location.href = localUrl + "/offers");
         //console.log([...formData]);
     }, []);
 

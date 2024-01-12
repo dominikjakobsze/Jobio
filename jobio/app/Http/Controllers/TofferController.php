@@ -16,6 +16,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -172,7 +173,26 @@ class TofferController extends Controller
 
     public function showAllOffersPanel()
     {
-        return Inertia::render('ShowAllOffersPanel/ShowAllOffersPanel', []);
+        return Inertia::render('ShowAllOffersPanel/ShowAllOffersPanel', [
+            'offers' => DatabaseService::getOrNotFoundWithTryCatch(
+                Toffer::where(
+                    'temployer_id',
+                    '=',
+                    Auth::guard('person')?->user()?->id
+                )
+            ),
+        ]);
+    }
+
+    public function endpointDelete()
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        $result = DatabaseService::deleteWithTryCatch(ModelHelperService::$foundModel);
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 
     /**

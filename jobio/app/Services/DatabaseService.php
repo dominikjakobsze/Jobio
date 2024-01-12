@@ -51,4 +51,18 @@ class DatabaseService
             return abort(500, 'Problem z wyciągnięciem rekordu');
         }
     }
+    public static function getOrNotFoundWithTryCatch(Builder $builder)
+    {
+        try {
+            $model = $builder->get();
+            if ($model === null) {
+                return abort(404, 'Brak rekordu');
+            }
+            return $model;
+        } catch (HttpException $exception) {
+            return abort($exception?->getStatusCode(), $exception?->getMessage());
+        } catch (Exception $exception) {
+            return abort(500, 'Problem z wyciągnięciem rekordu');
+        }
+    }
 }

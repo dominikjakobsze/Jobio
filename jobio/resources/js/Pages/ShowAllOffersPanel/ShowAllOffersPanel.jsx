@@ -3,13 +3,15 @@ import HomeCrums from "../Shared/HomeCrums";
 import { URL as localUrl } from "../../app";
 import Main from "./Main";
 
-const ShowAllOffersPanel = () => {
+const ShowAllOffersPanel = ({ offers }) => {
     return (
         <>
-            <div className="w-full bg-gray-100 f fr fw js is cs ss min-h-[100dvh]">
-                <MenuHeader />
-                <HomeCrums name={"Profil"} link={localUrl + "/profile"} />
-                <Main />
+            <div className="bg-gray-100 min-h-[100dvh] w-full">
+                <div className="w-full f fr fw js is cs ss">
+                    <MenuHeader />
+                    <HomeCrums name={"Profil"} link={localUrl + "/profile"} />
+                    <Main offers={offers} />
+                </div>
             </div>
         </>
     );

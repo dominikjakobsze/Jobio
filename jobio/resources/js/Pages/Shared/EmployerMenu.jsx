@@ -24,46 +24,28 @@ const EmployerMenu = () => {
                     title={"Mapa Ofert"}
                     IconComponent={FaMapLocationDot}
                 />
-                <div className="flex-[0_1_auto] f fr fw jc is ss cs rounded-xl bg-gray-200/50 p-5 hover:brightness-110 cursor-pointer gap-1">
-                    <FaMapLocationDot className="text-gray-700 text-5xl font-[700]" />
-                    <h1 className="text-gray-700 text-lg font-[700] flex-[0_0_100%] text-center">
-                        Mapa Ofert
-                    </h1>
-                </div>
-                <div
-                    onClick={() => {
+                <ShOptionBlock
+                    clickHandler={() => {
                         window.location.href = localUrl + "/offers";
                     }}
-                    className="flex-[0_1_auto] f fr fw jc is ss cs rounded-xl bg-gray-200/50 p-5 hover:brightness-110 cursor-pointer gap-1"
-                >
-                    <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
-                    <h1 className="text-gray-700 text-lg font-[700] flex-[0_0_100%] text-center">
-                        Oferty
-                    </h1>
-                </div>
-                <div className="flex-[0_1_auto] f fr fw jc is ss cs rounded-xl bg-gray-200/50 p-5 hover:brightness-110 cursor-pointer gap-1">
-                    <IoOptions className="text-gray-700 text-5xl font-[700]" />
-                    <h1 className="text-gray-700 text-lg font-[700] flex-[0_0_100%] text-center">
-                        Filtrowanie
-                    </h1>
-                </div>
-                <div className="flex-[0_1_auto] f fr fw jc is ss cs rounded-xl bg-gray-200/50 p-5 hover:brightness-110 cursor-pointer gap-1">
-                    <IoDocumentAttach className="text-gray-700 text-5xl font-[700]" />
-                    <h1 className="text-gray-700 text-lg font-[700] flex-[0_0_100%] text-center">
-                        Lista Aplikacji
-                    </h1>
-                </div>
-                <div
-                    onClick={() => {
+                    title={"Oferty"}
+                    IconComponent={MdLocalOffer}
+                />
+                <ShOptionBlock
+                    title={"Filtrowanie"}
+                    IconComponent={IoOptions}
+                />
+                <ShOptionBlock
+                    title={"Lista Aplikacji"}
+                    IconComponent={IoDocumentAttach}
+                />
+                <ShOptionBlock
+                    clickHandler={() => {
                         window.location.href = localUrl + "/files";
                     }}
-                    className="flex-[0_1_auto] f fr fw jc is ss cs rounded-xl bg-gray-200/50 p-5 hover:brightness-110 cursor-pointer gap-1"
-                >
-                    <FaImages className="text-gray-700 text-5xl font-[700]" />
-                    <h1 className="text-gray-700 text-lg font-[700] flex-[0_0_100%] text-center">
-                        Pliki
-                    </h1>
-                </div>
+                    title={"Pliki"}
+                    IconComponent={FaImages}
+                />
             </div>
         </>
     );

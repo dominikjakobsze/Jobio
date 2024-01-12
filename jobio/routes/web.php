@@ -44,6 +44,7 @@ Route::get('/general/error/{code}/{message}', function ($code, $message) {
     //dd($code, $message);
     return abort($code, $message);
 });
+
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
@@ -53,9 +54,11 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
     Route::get('/offer/employer/create', [TofferController::class, 'create']);
     Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
+
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
         Route::put('/endpoint/offer/employer/edit/{id}', [TofferController::class, 'endpointEdit']);
+        Route::delete('/endpoint/offer/employer/delete/{id}', [TofferController::class, 'endpointDelete']);
     });
 });
 
