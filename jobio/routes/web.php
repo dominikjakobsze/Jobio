@@ -3,6 +3,7 @@
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TfileController;
 use App\Http\Controllers\TofferController;
+use App\Http\Controllers\ToptionController;
 use App\Http\Controllers\TpersonController;
 use App\Http\Middleware\CheckIfModelExists;
 use App\Http\Middleware\EnsureUserIsEmployer;
@@ -70,6 +71,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfMode
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
+    Route::get('/options', [ToptionController::class, 'all']);
 });
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);

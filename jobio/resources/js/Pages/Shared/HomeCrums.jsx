@@ -3,7 +3,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 const HomeCrums = ({ name, link }) => {
     return (
-        <div className="px-10 flex-[0_0_100%] f fr fw js ic cs ss text-xs font-[700] text-gray-700">
+        <div className="flex-[0_0_100%] f fr fw js ic cs ss text-xs font-[700] text-gray-700">
             <div className="flex-[0_0_100%]"></div>
             <div
                 onClick={() => {
