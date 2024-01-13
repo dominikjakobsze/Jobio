@@ -6,6 +6,7 @@ import { URL as localUrl } from "../../../app";
 import React from "react";
 import Main from "./Main";
 import MenuContainerLayout from "../../Shared/MenuContainerLayout";
+import Spacer from "../../Shared/Spacer";
 
 let counter = 0;
 const ToptionAll = ({ options }) => {
@@ -13,14 +14,18 @@ const ToptionAll = ({ options }) => {
     return (
         <>
             <MenuContainerLayout>
+                <Spacer type={"extra-large"} />
                 <MenuHeader />
+                <Spacer type={"extra-small"} />
                 <HomeCrums
                     name={"Panel Wsparcia"}
                     link={localUrl + "/profile/support"}
                 />
+                <Spacer type={"extra-large"} />
                 <ShHeader title={"Zarządzanie Opcjami Filtrowania"} />
+                <Spacer type={"small"} />
                 <ShSubHeader>Umożliwia definiowanie nowych filtrów</ShSubHeader>
-                <div className="flex-[0_0_100%]"></div>
+                <Spacer type={"extra-large"} />
                 <Main options={options} />
             </MenuContainerLayout>
         </>
