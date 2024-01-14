@@ -72,6 +72,8 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfMode
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
     Route::get('/options', [ToptionController::class, 'all']);
+    Route::get('/option-create', [ToptionController::class, 'createForm']);
+    Route::post('/endpoint/option', [ToptionController::class, 'endpointCreate']);
 });
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);

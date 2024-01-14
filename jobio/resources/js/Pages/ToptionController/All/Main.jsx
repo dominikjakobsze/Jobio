@@ -3,15 +3,17 @@ import React from "react";
 import ButtonCreate from "../../Shared/ButtonCreate";
 import ShHeader from "../../Shared/ShHeader";
 import SideBySideContainer from "../../Shared/SideBySideContainer";
+import Spacer from "../../Shared/Spacer";
+import ShSubHeader from "../../Shared/ShSubHeader";
+import AllOptions from "./Components/AllOptions";
 
 let counter = 0;
 const Main = ({ options }) => {
     console.log("Main " + counter++);
-    const [innerOptions, setInnerOptions] = React.useState(options ?? []);
     return (
         <>
             <SideBySideContainer
-                LeftComponent={<ButtonCreate />}
+                LeftComponent={<ButtonCreate link={"/option-create"}/>}
                 RightComponent={
                     <ShHeader
                         title={"Dodaj nową opcję filtrowania"}
@@ -21,12 +23,24 @@ const Main = ({ options }) => {
                 }
                 gapNumber={"gap-8"}
                 flexAuto={true}
-                flexPosition={"js ic cs ss"}
+                flexPosition={
+                    "items-center content-start justify-center lg:justify-start self-start"
+                }
                 debug={false}
             />
-            {innerOptions?.map((option) => {
-                console.log(option);
-            })}
+            <Spacer type={"extra-large"} />
+            <ShHeader
+                title={"Lista wszystkich filtrów"}
+                textSize={"text-2xl"}
+            />
+            <Spacer type={"small"} />
+            <ShSubHeader>
+                Lista wszystkich aktywnych filtrów w systemie.
+                <br /> S - oznacza filtr dotyczący doświadczenia,
+                <br /> D - oznacza filtr dotyczący narzędzii i innych,
+                <br /> T - oznacza filtr dotyczący technologii
+            </ShSubHeader>
+            <AllOptions options={options} />
         </>
     );
 };

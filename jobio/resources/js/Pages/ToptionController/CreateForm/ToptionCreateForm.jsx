@@ -1,16 +1,13 @@
-import MenuHeader from "../../Shared/MenuHeader";
 import HomeCrums from "../../Shared/HomeCrums";
+import MenuContainerLayout from "../../Shared/MenuContainerLayout";
+import MenuHeader from "../../Shared/MenuHeader";
+import Spacer from "../../Shared/Spacer";
+import { URL as localUrl } from "../../../app";
 import ShHeader from "../../Shared/ShHeader";
 import ShSubHeader from "../../Shared/ShSubHeader";
-import { URL as localUrl } from "../../../app";
-import React from "react";
 import Main from "./Main";
-import MenuContainerLayout from "../../Shared/MenuContainerLayout";
-import Spacer from "../../Shared/Spacer";
 
-let counter = 0;
-const ToptionAll = ({ options }) => {
-    console.log("ToptionAll " + counter++);
+const ToptionCreateForm = () => {
     return (
         <>
             <MenuContainerLayout>
@@ -18,15 +15,17 @@ const ToptionAll = ({ options }) => {
                 <MenuHeader />
                 <Spacer type={"extra-small"} />
                 <HomeCrums
-                    name={"Panel Wsparcia"}
-                    link={localUrl + "/profile/support"}
+                    link={`${localUrl}/options`}
+                    name={"Wszystkie Filtry"}
                 />
                 <Spacer type={"extra-large"} />
-                <ShHeader title={"Zarządzanie Opcjami Filtrowania"} />
+                <ShHeader title={"Dodaj nową opcję filtrowania"} />
                 <Spacer type={"small"} />
-                <ShSubHeader>Umożliwia definiowanie nowych filtrów</ShSubHeader>
+                <ShSubHeader>
+                    Wszystko co istotne dla filtrowania ofert pracy.
+                </ShSubHeader>
                 <Spacer type={"extra-large"} />
-                <Main options={options} />
+                <Main />
                 <Spacer type={"extra-large"} />
                 <Spacer type={"medium"} />
             </MenuContainerLayout>
@@ -34,4 +33,4 @@ const ToptionAll = ({ options }) => {
     );
 };
 
-export default ToptionAll;
+export default ToptionCreateForm;

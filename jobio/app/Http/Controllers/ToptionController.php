@@ -17,14 +17,14 @@ class ToptionController extends Controller
         ]);
     }
 
-    public function index()
-    {
-        //
-    }
-
     public function createForm()
     {
-        //
+        return Inertia::render('ToptionController/CreateForm/ToptionCreateForm', []);
+    }
+
+    public function endpointCreate()
+    {
+        dd('endpointCreate');
     }
 
     public function store()

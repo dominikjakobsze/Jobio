@@ -11,21 +11,21 @@ const SideBySideContainer = ({
     console.log(leftFlex, rightFlex);
     return (
         <div
-            className={`flex-[0_0_100%] f fr fw ${
+            className={`flex-[0_0_100%] text-center lg:text-left flex-nowrap f fr ${
                 flexPosition ?? "js cs ss is"
             } ${gapNumber ?? ""} ${debug ? "bg-red-100" : ""}`}
         >
             {flexAuto ? (
                 <>
                     <div
-                        className={`flex-[0_1_auto] ${
+                        className={`flex-[0_1_auto] whitespace-pre-wrap text-clip break-all overflow-hidden ${
                             debug ? "bg-purple-50" : ""
                         }`}
                     >
                         {LeftComponent}
                     </div>
                     <div
-                        className={`flex-[0_1_auto] ${
+                        className={`flex-[0_1_auto] whitespace-pre-wrap text-clip break-all overflow-hidden ${
                             debug ? "bg-orange-50" : ""
                         }`}
                     >

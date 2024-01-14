@@ -4,17 +4,20 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { MdLocalOffer } from "react-icons/md";
 import { IoOptions } from "react-icons/io5";
 import { URL as localUrl } from "../../app";
+import ShHeader from "./ShHeader";
+import ShSubHeader from "./ShSubHeader";
+import Spacer from "./Spacer";
 
 const SupportMenu = () => {
     return (
         <>
-            <h1 className="flex-[0_0_100%] text-3xl font-[700] text-gray-700 px-10 pt-10">
-                Panel Działu Wsparcia
-            </h1>
-            <h6 className="flex-[0_0_65%] text-sm font-[400] text-gray-400 px-10 my-5">
+            <ShHeader title={"Panel Działu Wsparcia"} />
+            <Spacer type={"small"} />
+            <ShSubHeader>
                 W tym panelu otrzymujesz możliwość zarządzania całym systemem i
                 jego opcjami, wprowadzaj zmiany ostrożnie!
-            </h6>
+            </ShSubHeader>
+            <Spacer type={"small"} />
             <div className="f fr fw js cs is ss flex-[0_0_100%] bg-transparent p-10 gap-5">
                 <div
                     onClick={() => {
