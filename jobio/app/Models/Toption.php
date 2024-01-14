@@ -27,7 +27,13 @@ class Toption extends Model
     public $timestamps = true;
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function toftops(){
-        return $this->hasMany(Toftop::class,'toption_id','id');
+    public static $template = [
+        "option_type" => null,
+        "option_value" => null
+    ];
+
+    public function toftops()
+    {
+        return $this->hasMany(Toftop::class, 'toption_id', 'id');
     }
 }

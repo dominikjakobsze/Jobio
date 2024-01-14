@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreToptionRequest;
-use App\Http\Requests\UpdateToptionRequest;
+use App\Http\Requests\StoreOptionRequest;
 use App\Models\Toption;
+use App\Services\DatabaseService;
+use App\Services\DifferentiationService;
+use App\Services\UpdaterService;
 use Inertia\Inertia;
 
 class ToptionController extends Controller
@@ -22,9 +24,25 @@ class ToptionController extends Controller
         return Inertia::render('ToptionController/CreateForm/ToptionCreateForm', []);
     }
 
-    public function endpointCreate()
+    public function endpointCreate(StoreOptionRequest $storeOptionRequest)
     {
-        dd('endpointCreate');
+        $validatedData = $storeOptionRequest->validated();
+        $sanitizedArray = DifferentiationService::findDifferences(
+            templateArray: Toption::$template,
+            toCheckArray: $validatedData
+        );
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: $sanitizedArray,
+            model: new Toption()
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 
     public function store()
