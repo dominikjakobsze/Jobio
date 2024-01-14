@@ -1,8 +1,10 @@
 import React from "react";
 import { FaArrowsUpDown } from "react-icons/fa6";
-import axios from "axios";
+import SendFormButton from "./SendFormButton";
 
+let counter = 0;
 const SelectBlock = ({ handleSendForm }) => {
+    console.log("SelectBlock " + counter++);
     const formRef = React.useRef(null);
     const selectRef = React.useRef(null);
     const fakeSelectRef = React.useRef(null);
@@ -83,12 +85,10 @@ const SelectBlock = ({ handleSendForm }) => {
                     className="px-0.5 bg-transparent border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black flex-[0_0_85%] max-w-[350px] placeholder:font-[700] placeholder:text-gray-300 text-base font-[700] text-gray-600"
                 />
                 <div className="flex-[0_0_100%] p-5"></div>
-                <div
-                    onClick={() => handleSendForm(formRef)}
-                    className="bg-sky-300/20 text-base font-[600] text-sky-300 py-1 px-4 border-2 border-solid border-sky-500/20 rounded-xl hover:brightness-110 flex-[0_1_auto] cursor-pointer"
-                >
-                    Prześlij Formularz
-                </div>
+                <SendFormButton
+                    formRef={formRef}
+                    handleSendForm={handleSendForm}
+                />
             </form>
         </div>
     );

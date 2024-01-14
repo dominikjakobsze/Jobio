@@ -194,3 +194,8 @@
     margin-left: 2rem;
     list-style-type: disc;
 }
+
+.imgMap-50px-important {
+    width: 50px !important;
+    height: 50px !important;
+}

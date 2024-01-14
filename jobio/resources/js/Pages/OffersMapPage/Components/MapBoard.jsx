@@ -43,7 +43,7 @@ const MapBoard = ({ offers }) => {
         offers?.map((offer) => {
             const marker = L.marker([offer?.latitude, offer?.longitude], {
                 icon: L.divIcon({
-                    html: `<img class="w-[50px] h-[50px] rounded-full" src="${offer?.company_icon}"/>`,
+                    html: `<img class="imgMap-50px-important rounded-full" src="${offer?.company_icon}"/>`,
                     data: offer?.id,
                 }),
             }).addTo(mapLeaflet?.current);
