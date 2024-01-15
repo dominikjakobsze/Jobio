@@ -4,15 +4,38 @@ import ActionButton from "../../../Shared/ActionButton";
 import Spacer from "../../../Shared/Spacer";
 import axios from "axios";
 import { exceptionBlock } from "../../../../app";
+import { URL as localUrl } from "../../../../app";
 
 let counter = 0;
 const AllOptions = ({ options }) => {
     console.log("AllOptions " + counter++);
+
     const [innerOptions, setInnerOptions] = React.useState(options ?? []);
+    const [inputText, setInputText] = React.useState("");
+
     const formRef = React.useRef(null);
 
     const handleClickDelete = async (id) => {
-        console.log(id);
+        const result = await exceptionBlock(async () => {
+            const formData = new FormData();
+            formData.append("_method", "DELETE");
+            const response = await axios.post(
+                `${localUrl}/endpoint/option/${id}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                },
+            );
+            const data = response.data;
+            const refreshResponse = await axios.get(
+                `${localUrl}/endpoint/options`,
+            );
+            const refreshData = refreshResponse.data;
+            setInnerOptions(refreshData?.["options"]);
+            setInputText("");
+        });
     };
 
     const sendForm = async () => {
@@ -22,7 +45,7 @@ const AllOptions = ({ options }) => {
             const queryString = new URLSearchParams(formData).toString();
             //console.log(queryString);
             const response = await axios.get(
-                `/endpoint/options/sort?${queryString}`,
+                `${localUrl}/endpoint/options/sort?${queryString}`,
             );
             const data = response.data;
             setInnerOptions(data?.options);
@@ -44,6 +67,8 @@ const AllOptions = ({ options }) => {
                     className="flex-[0_0_90%] max-w-[300px] px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black bg-transparent font-[700] text-gray-700 text-sm placeholder:text-gray-400"
                     type="text"
                     name="option_value"
+                    value={inputText}
+                    onChange={(e) => setInputText(e.currentTarget.value)}
                 />
             </form>
             <Spacer type={"medium"} />

@@ -6,7 +6,7 @@ export const exceptionBlock = async (functionToCheck) => {
     try {
         return await functionToCheck();
     } catch (exception) {
-        //console.log(exception);
+        console.log(exception);
         if (
             exception?.response?.status === 409 ||
             exception?.response?.status === "409"

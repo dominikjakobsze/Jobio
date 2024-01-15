@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOptionRequest;
 use App\Models\Toption;
 use App\Services\DatabaseService;
 use App\Services\DifferentiationService;
+use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -55,7 +56,27 @@ class ToptionController extends Controller
         ], status: 200, headers: []);
     }
 
+    public function endpointDelete()
+    {
+        return response()->json(
+            data: [
+                'result' => DatabaseService::forceDeleteWithTryCatch(model: ModelHelperService::$foundModel),
+            ],
+            status: 200,
+            headers: []
+        );
+    }
 
+    public function endpointAll()
+    {
+        return response()->json(
+            data: [
+                'options' => Toption::all(),
+            ],
+            status: 200,
+            headers: []
+        );
+    }
 
 
 

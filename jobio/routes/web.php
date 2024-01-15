@@ -70,11 +70,18 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfMode
 });
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
+    //views&forms
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
     Route::get('/options', [ToptionController::class, 'all']);
     Route::get('/option-create', [ToptionController::class, 'createForm']);
+    //endpoints
     Route::post('/endpoint/option', [ToptionController::class, 'endpointCreate']);
     Route::get('/endpoint/options/sort', [ToptionController::class, 'endpointSort']);
+    Route::get('/endpoint/options', [ToptionController::class, 'endpointAll']);
+
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toption'])->group(function () {
+        Route::delete('/endpoint/option/{id}', [ToptionController::class, 'endpointDelete']);
+    });
 });
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
