@@ -1,5 +1,5 @@
 import React from "react";
-import { sanitizeContent } from "../../../app";
+import { sanitizeContent } from "../../../../app";
 
 let counter = 0;
 const PageSection = ({ offer }) => {

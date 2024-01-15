@@ -2,7 +2,7 @@ import React from "react";
 import Main from "./Main";
 import Layout from "./Components/Layout";
 
-const OfferPage = ({ offer,randomOffers }) => {
+const TofferGeneralShow = ({ offer, randomOffers }) => {
     console.log("OfferPage");
     return (
         <Layout>
@@ -11,4 +11,4 @@ const OfferPage = ({ offer,randomOffers }) => {
     );
 };
 
-export default OfferPage;
+export default TofferGeneralShow;

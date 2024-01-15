@@ -10,11 +10,15 @@ const Main = () => {
     const handleSendForm = React.useCallback(async (formRef) => {
         const result = await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
-            const response = await axios.post("/endpoint/option", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
+            const response = await axios.post(
+                "/endpoint/support/option",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
                 },
-            });
+            );
             const result = response.data;
             return null;
         });
@@ -24,7 +28,7 @@ const Main = () => {
             });
             return;
         }
-        return (window.location.href = localUrl + "/options");
+        return (window.location.href = localUrl + "/support/options");
     }, []);
 
     const [errors, setErrors] = React.useState([]);

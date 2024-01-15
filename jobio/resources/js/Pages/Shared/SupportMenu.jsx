@@ -31,21 +31,21 @@ const SupportMenu = () => {
                 />
                 <MenuBlockButton
                     actionTitle={"Użytkownicy"}
-                    link={`${localUrl}/`}
+                    link={`${localUrl}/support/users`}
                     IconComponent={
                         <LuUsers2 className="text-gray-700 text-5xl font-[700]" />
                     }
                 />
                 <MenuBlockButton
                     actionTitle={"Oferty"}
-                    link={`${localUrl}/`}
+                    link={`${localUrl}/support/offers`}
                     IconComponent={
                         <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
                     }
                 />
                 <MenuBlockButton
                     actionTitle={"Filtrowanie"}
-                    link={`${localUrl}/options`}
+                    link={`${localUrl}/support/options`}
                     IconComponent={
                         <IoOptions className="text-gray-700 text-5xl font-[700]" />
                     }

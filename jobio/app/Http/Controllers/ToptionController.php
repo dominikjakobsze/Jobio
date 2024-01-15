@@ -14,21 +14,21 @@ use Inertia\Inertia;
 class ToptionController extends Controller
 {
 
-    public function all()
+    public function supportAll()
     {
-        return Inertia::render('ToptionController/All/ToptionAll', [
+        return Inertia::render('ToptionControllerSupport/SupportAll/ToptionSupportAll', [
             'options' => Toption::all(),
         ]);
     }
 
-    public function createForm()
+    public function supportCreateForm()
     {
-        return Inertia::render('ToptionController/CreateForm/ToptionCreateForm', []);
+        return Inertia::render('ToptionControllerSupport/SupportCreateForm/ToptionSupportCreateForm', []);
     }
 
 
 
-    public function endpointCreate(StoreOptionRequest $storeOptionRequest)
+    public function endpointSupportCreate(StoreOptionRequest $storeOptionRequest)
     {
         $validatedData = $storeOptionRequest->validated();
         $sanitizedArray = DifferentiationService::findDifferences(
@@ -49,14 +49,14 @@ class ToptionController extends Controller
         );
     }
 
-    public function endpointSort(Request $request)
+    public function endpointSupportSort(Request $request)
     {
         return response()->json(data: [
             'options' => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_value', 'like', '%' . $request->all()['option_value'] . '%'))
         ], status: 200, headers: []);
     }
 
-    public function endpointDelete()
+    public function endpointSupportDelete()
     {
         return response()->json(
             data: [
@@ -67,7 +67,7 @@ class ToptionController extends Controller
         );
     }
 
-    public function endpointAll()
+    public function endpointSupportAll()
     {
         return response()->json(
             data: [

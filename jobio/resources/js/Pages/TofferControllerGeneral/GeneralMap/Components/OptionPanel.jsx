@@ -19,7 +19,7 @@ const OptionPanel = ({ items, setOffers }) => {
     const sendForm = React.useCallback(async () => {
         const formData = new FormData(formRef.current);
         const queryString = new URLSearchParams(formData).toString();
-        const response = await axios.get(`/endpoint/toffers?${queryString}`);
+        const response = await axios.get(`/endpoint/general/offers?${queryString}`);
         const result = await response.data;
         setOffers((prev) => {
             return [...result?.offers];

@@ -1,52 +1,66 @@
 import React from "react";
 import { IoDocumentAttach } from "react-icons/io5";
 import { FaMapLocationDot } from "react-icons/fa6";
+import { FaImages } from "react-icons/fa";
 import { MdLocalOffer } from "react-icons/md";
 import { IoOptions } from "react-icons/io5";
-import { FaImages } from "react-icons/fa";
 import { URL as localUrl } from "../../app";
 import ShHeader from "./ShHeader";
 import ShSubHeader from "./ShSubHeader";
-import ShOptionBlock from "./ShOptionBlock";
+import Spacer from "./Spacer";
+import MenuBlockButtonsContainer from "./MenuBlockButtonsContainer";
+import MenuBlockButton from "./MenuBlockButton";
 
 const EmployerMenu = () => {
     return (
         <>
             <ShHeader title={"Panel Pracodawcy"} />
+            <Spacer type={"small"} />
             <ShSubHeader>
                 W tym panelu otrzymujesz możliwość zarządzania swoimi
                 ogłoszeniami, możesz je edytować, usunąć, przypisać filtry i
                 sprawdzić kto zaaplikował na Twoje ogłoszenie, przejrzeć CV i je
                 odrzucić (użytkownik nie będzie o tym wiedział).
             </ShSubHeader>
-            <div className="f fr fw js cs is ss flex-[0_0_100%] bg-transparent p-10 gap-5">
-                <ShOptionBlock
-                    title={"Mapa Ofert"}
-                    IconComponent={FaMapLocationDot}
+            <Spacer type={"extra-large"} />
+            <Spacer type={"medium"} />
+            <MenuBlockButtonsContainer>
+                <MenuBlockButton
+                    actionTitle={"Mapa Ofert"}
+                    link={`${localUrl}/`}
+                    IconComponent={
+                        <FaMapLocationDot className="text-gray-700 text-5xl font-[700]" />
+                    }
                 />
-                <ShOptionBlock
-                    clickHandler={() => {
-                        window.location.href = localUrl + "/offers";
-                    }}
-                    title={"Oferty"}
-                    IconComponent={MdLocalOffer}
+                <MenuBlockButton
+                    actionTitle={"Oferty"}
+                    link={`${localUrl}/support/offers`}
+                    IconComponent={
+                        <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
+                    }
                 />
-                <ShOptionBlock
-                    title={"Filtrowanie"}
-                    IconComponent={IoOptions}
+                <MenuBlockButton
+                    actionTitle={"Przypisz Filtry"}
+                    link={`${localUrl}/support/options`}
+                    IconComponent={
+                        <IoOptions className="text-gray-700 text-5xl font-[700]" />
+                    }
                 />
-                <ShOptionBlock
-                    title={"Lista Aplikacji"}
-                    IconComponent={IoDocumentAttach}
+                <MenuBlockButton
+                    actionTitle={"Pliki"}
+                    link={`${localUrl}/support/options`}
+                    IconComponent={
+                        <FaImages className="text-gray-700 text-5xl font-[700]" />
+                    }
                 />
-                <ShOptionBlock
-                    clickHandler={() => {
-                        window.location.href = localUrl + "/files";
-                    }}
-                    title={"Pliki"}
-                    IconComponent={FaImages}
+                <MenuBlockButton
+                    actionTitle={"Aplikacje"}
+                    link={`${localUrl}/support/options`}
+                    IconComponent={
+                        <IoDocumentAttach className="text-gray-700 text-5xl font-[700]" />
+                    }
                 />
-            </div>
+            </MenuBlockButtonsContainer>
         </>
     );
 };

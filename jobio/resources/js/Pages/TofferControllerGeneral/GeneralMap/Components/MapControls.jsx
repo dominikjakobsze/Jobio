@@ -3,7 +3,7 @@ import { TbFilters } from "react-icons/tb";
 import { LiaColumnsSolid } from "react-icons/lia";
 import { FiUser } from "react-icons/fi";
 import { AnimationContext } from "./AnimationContextProvider";
-import { URL } from "../../../app";
+import { URL } from "../../../../app";
 
 //Przekierowuje na /profile, jesli jest zalogowany to normalnie, jesli nie jest to middleware odsyla do sign-in
 

@@ -6,7 +6,7 @@ import MapControls from "./Components/MapControls";
 import { AnimationContextProvider } from "./Components/AnimationContextProvider";
 import Main from "./Main";
 
-const OffersMap = ({ items }) => {
+const TofferGeneralMap = ({ items }) => {
     console.log("OffersMap");
     return (
         <AnimationContextProvider>
@@ -17,4 +17,4 @@ const OffersMap = ({ items }) => {
     );
 };
 
-export default OffersMap;
+export default TofferGeneralMap;

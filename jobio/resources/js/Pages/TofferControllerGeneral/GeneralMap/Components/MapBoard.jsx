@@ -1,7 +1,7 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { URL } from "../../../app";
+import { URL } from "../../../../app";
 
 const MapBoard = ({ offers }) => {
     console.log("MapBoard");
@@ -50,7 +50,7 @@ const MapBoard = ({ offers }) => {
 
             marker.on("click", (e) => {
                 window.open(
-                    `${URL}/offer/${e?.target.options?.icon?.options?.data}`,
+                    `${URL}/general/offer/${e?.target.options?.icon?.options?.data}`,
                 );
             });
 

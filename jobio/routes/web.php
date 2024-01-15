@@ -36,18 +36,22 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [TofferController::class, 'index']);
 Route::get('/sign-in', [TpersonController::class, 'signInView']);
 Route::get('/sign-in/{email}/{otp}', [TpersonController::class, 'signInLogin']);
 Route::post('/endpoint/sign-in', [TpersonController::class, 'endpointSignIn']);
-Route::get('/endpoint/toffers', [TofferController::class, 'endpointIndex']);
 Route::get('/endpoint/image/{path}', [ResourceController::class, 'display']);
 Route::get('/general/error/{code}/{message}', function ($code, $message) {
     //dd($code, $message);
     return abort($code, $message);
 });
+Route::get('/', [TofferController::class, 'generalMap']);
+Route::get('/endpoint/general/offers', [TofferController::class, 'generalAll']);
+Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+    Route::get('/general/offer/{id}', [TofferController::class, 'generalShow']);
+});
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
+    Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
     Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
@@ -65,29 +69,33 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     });
 });
 
-Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
-    Route::get('/offer/{id}', [TofferController::class, 'show']);
-});
-
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
     //views&forms
     Route::get('/profile/support', [TpersonController::class, 'profileSupport']);
-    Route::get('/options', [ToptionController::class, 'all']);
-    Route::get('/option-create', [ToptionController::class, 'createForm']);
+    Route::get('/support/options', [ToptionController::class, 'supportAll']);
+    Route::get('/support/option-create', [ToptionController::class, 'supportCreateForm']);
+    Route::get('/support/offers', [TofferController::class, 'supportAll']);
     //endpoints
-    Route::post('/endpoint/option', [ToptionController::class, 'endpointCreate']);
-    Route::get('/endpoint/options/sort', [ToptionController::class, 'endpointSort']);
-    Route::get('/endpoint/options', [ToptionController::class, 'endpointAll']);
-
+    Route::post('/endpoint/support/option', [ToptionController::class, 'endpointSupportCreate']);
+    Route::get('/endpoint/support/options/sort', [ToptionController::class, 'endpointSupportSort']);
+    Route::get('/endpoint/support/options', [ToptionController::class, 'endpointSupportAll']);
+    Route::get('/endpoint/support/offers', [TofferController::class, 'endpointSupportAll']);
+    Route::get('/endpoint/support/offers/sort', [TofferController::class, 'endpointSupportSort']);
+    //Additional Middlewares
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toption'])->group(function () {
-        Route::delete('/endpoint/option/{id}', [ToptionController::class, 'endpointDelete']);
+        //views&forms
+        //endpoints
+        Route::delete('/endpoint/support/option/{id}', [ToptionController::class, 'endpointSupportDelete']);
+    });
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+        //views&forms
+        //endpoints
+        Route::delete('/endpoint/support/offer/{id}', [TofferController::class, 'endpointSupportDelete']);
     });
 });
+
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
-});
-Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
-    Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
 });
 
 Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {

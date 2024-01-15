@@ -26,7 +26,7 @@ class TofferController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function generalMap()
     {
         $this->authorize('viewAny', Toffer::class);
         $salaries = collect(
@@ -55,7 +55,7 @@ class TofferController extends Controller
             return $item;
         }, $location);
         //table[alias]-column||[column,column]-value
-        return Inertia::render('OffersMapPage/OffersMap', [
+        return Inertia::render('TofferControllerGeneral/GeneralMap/TofferGeneralMap', [
             'items' => [
                 'salary' => [
                     'offer-min_salary' => $minSalary,
@@ -90,13 +90,12 @@ class TofferController extends Controller
             ]
         ]);
     }
-    public function endpointIndex(Request $request)
+    public function generalAll(Request $request)
     {
         $options = $request->all();
         $results = Toffer::select(['*'])->with(['toftops.toption'])
             ->options($options)
             ->get();
-        //dd($results->toArray(), $request->all());
         return response()->json(
             [
                 'offers' => $results->toArray(),
@@ -132,11 +131,11 @@ class TofferController extends Controller
         );
     }
 
-    public function show()
+    public function generalShow()
     {
         $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
         $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
-        return Inertia::render('OfferPage/OfferPage', [
+        return Inertia::render('TofferControllerGeneral/GeneralShow/TofferGeneralShow', [
             'offer' => ModelHelperService::$foundModel,
             'randomOffers' => $randomOffers
         ]);
@@ -209,11 +208,37 @@ class TofferController extends Controller
         );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy()
+    public function supportAll()
     {
-        //
+        return Inertia::render(
+            'TofferControllerSupport/SupportAll/TofferSupportAll',
+            [
+                'offers' => Toffer::all(),
+            ]
+        );
+    }
+
+    public function endpointSupportSort(Request $request)
+    {
+        return response()->json(data: [
+            'offers' => DatabaseService::getOrNotFoundWithTryCatch(Toffer::where('title', 'like', '%' . $request->all()['title'] . '%'))
+        ], status: 200, headers: []);
+    }
+
+    public function endpointSupportDelete()
+    {
+        return response()->json(
+            data: [
+                'result' => DatabaseService::deleteWithTryCatch(model: ModelHelperService::$foundModel),
+            ],
+            status: 200,
+            headers: []
+        );
+    }
+    public function endpointSupportAll()
+    {
+        return response()->json(data: [
+            'offers' => Toffer::all(),
+        ], status: 200, headers: []);
     }
 }

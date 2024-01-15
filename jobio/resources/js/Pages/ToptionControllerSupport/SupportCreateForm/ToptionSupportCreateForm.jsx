@@ -15,7 +15,7 @@ const ToptionCreateForm = () => {
                 <MenuHeader />
                 <Spacer type={"extra-small"} />
                 <HomeCrums
-                    link={`${localUrl}/options`}
+                    link={`${localUrl}/support/options`}
                     name={"Wszystkie Filtry"}
                 />
                 <Spacer type={"extra-large"} />

@@ -9,8 +9,8 @@ import MenuContainerLayout from "../../Shared/MenuContainerLayout";
 import Spacer from "../../Shared/Spacer";
 
 let counter = 0;
-const ToptionAll = ({ options }) => {
-    console.log("ToptionAll " + counter++);
+const ToptionSupportAll = ({ options }) => {
+    console.log("ToptionSupportAll " + counter++);
     return (
         <>
             <MenuContainerLayout>
@@ -33,4 +33,4 @@ const ToptionAll = ({ options }) => {
     );
 };
 
-export default ToptionAll;
+export default ToptionSupportAll;

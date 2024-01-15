@@ -13,7 +13,7 @@ const Main = ({ options }) => {
     return (
         <>
             <SideBySideContainer
-                LeftComponent={<ButtonCreate link={"/option-create"} />}
+                LeftComponent={<ButtonCreate link={"/support/option-create"} />}
                 RightComponent={
                     <ShHeader
                         title={"Dodaj nową opcję filtrowania"}

@@ -32,7 +32,7 @@ const SelectBlock = ({ handleSendForm }) => {
         <div className="flex-[0_0_100%] flex flex-wrap flex-row items-start justify-start content-start self-start">
             <form
                 ref={formRef}
-                action={`/endpoint/option`}
+                action={`/endpoint/support/option`}
                 encType="multipart/form-data"
                 method="post"
                 className="flex-[0_0_100%] flex flex-wrap flex-row items-start justify-center lg:justify-start content-start self-start"

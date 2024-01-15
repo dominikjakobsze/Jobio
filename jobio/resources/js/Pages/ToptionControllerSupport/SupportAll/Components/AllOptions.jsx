@@ -20,7 +20,7 @@ const AllOptions = ({ options }) => {
             const formData = new FormData();
             formData.append("_method", "DELETE");
             const response = await axios.post(
-                `${localUrl}/endpoint/option/${id}`,
+                `${localUrl}/endpoint/support/option/${id}`,
                 formData,
                 {
                     headers: {
@@ -30,7 +30,7 @@ const AllOptions = ({ options }) => {
             );
             const data = response.data;
             const refreshResponse = await axios.get(
-                `${localUrl}/endpoint/options`,
+                `${localUrl}/endpoint/support/options`,
             );
             const refreshData = refreshResponse.data;
             setInnerOptions(refreshData?.["options"]);
@@ -45,7 +45,7 @@ const AllOptions = ({ options }) => {
             const queryString = new URLSearchParams(formData).toString();
             //console.log(queryString);
             const response = await axios.get(
-                `${localUrl}/endpoint/options/sort?${queryString}`,
+                `${localUrl}/endpoint/support/options/sort?${queryString}`,
             );
             const data = response.data;
             setInnerOptions(data?.options);
@@ -58,7 +58,7 @@ const AllOptions = ({ options }) => {
                 ref={formRef}
                 onChange={() => sendForm()}
                 onSubmit={(e) => e.preventDefault()}
-                action={`/endpoint/options/sort`}
+                action={`/endpoint/support/options/sort`}
                 method="get"
                 className="flex flex-row flex-wrap flex-[0_0_100%] items-start content-start self-start lg:justify-start justify-center"
             >

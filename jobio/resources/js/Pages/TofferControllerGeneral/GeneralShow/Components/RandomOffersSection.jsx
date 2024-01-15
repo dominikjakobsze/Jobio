@@ -1,5 +1,5 @@
 import React from "react";
-import { URL } from "../../../app";
+import { URL } from "../../../../app";
 
 const RandomOffersSection = ({ randomOffers }) => {
     console.log("RandomOffersSection");
