@@ -1,9 +1,9 @@
 import { IoAddSharp } from "react-icons/io5";
 import React from "react";
 import axios from "axios";
-import { URL as localUrl } from "../../../../app";
+import { exceptionBlock, URL as localUrl } from "../../../../app";
 
-const UploadFile = ({ fetchImages }) => {
+const UploadFile = ({ fetchImages, setErrors }) => {
     console.log("UploadFile");
     const formRef = React.useRef(null);
     const fileRef = React.useRef(null);
@@ -25,14 +25,14 @@ const UploadFile = ({ fetchImages }) => {
                     objectUrl: URL.createObjectURL(e?.target?.files[0]),
                 };
             });
+            setErrors([]);
         }
     }, []);
     const uploadFile = React.useCallback(async () => {
-        //formRef.current.submit();
-        try {
+        const result = await exceptionBlock(async () => {
             const formData = new FormData(formRef?.current);
             const response = await axios.post(
-                localUrl + "/endpoint/file",
+                localUrl + "/endpoint/employer/file",
                 formData,
                 {
                     headers: {
@@ -41,20 +41,17 @@ const UploadFile = ({ fetchImages }) => {
                 },
             );
             const data = await response.data;
-            //console.log(data);
-            //console.log(...new FormData(formRef.current));
             formRef.current.reset();
             fileRef.current.value = null;
             await fetchImages();
             setPreview((prev) => {
                 return { objectUrl: null };
             });
-            //console.log(...new FormData(formRef.current));
-        } catch (exception) {
-            //console.log(exception);
-            window.location.href =
-                localUrl +
-                `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+            setErrors([]);
+            return null;
+        });
+        if (result !== null) {
+            setErrors(result);
         }
     }, []);
 

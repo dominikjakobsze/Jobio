@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFileRequest;
 use App\Models\Tfile;
 use App\Services\DatabaseService;
+use App\Services\DifferentiationService;
 use App\Services\ImageUploadService;
+use App\Services\ModelHelperService;
+use App\Services\UpdaterService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,28 +21,25 @@ class TfileController extends Controller
         return Inertia::render('TfileControllerEmployer/EmployerAll/TfileEmployerAll');
     }
 
-    public function endpointUploadFile(Request $request)
+    public function endpointEmployerUpload(StoreFileRequest $storeFileRequest)
     {
-        $this->authorize('viewAny', Tfile::class);
-        if (!$request->hasFile('fileMenager')) {
-            return abort(500, 'Nie wybrano pliku!');
-        }
-        $file = $request->file('fileMenager');
-        $result = ImageUploadService::saveImage(file: $file);
-        $tfile = new Tfile([
-            'tperson_id' => Auth::guard('person')->user()->id,
-            'file_path' => $result['filePath'],
-            'url' => $result['url']
-        ]);
-        try {
-            $tfile->save();
-        } catch (Exception $exception) {
-            return abort(500, 'Problem z zapisem do bazy danych');
-        }
+        $validatedData = $storeFileRequest->validated();
+        $result = ImageUploadService::saveImage(file: $validatedData['fileMenager']);
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: [
+                "tperson_id" => Auth::guard('person')?->user()?->id,
+                "file_path" => $result['filePath'],
+                "url" => $result['url'],
+            ],
+            model: new Tfile()
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
         return response()->json(['success' => true], 200, []);
     }
 
-    public function endpointShowFiles()
+    public function endpointEmployerAll()
     {
         $this->authorize('viewAny', Tfile::class);
         return response()->json(
@@ -48,27 +49,24 @@ class TfileController extends Controller
         );
     }
 
-    public function endpointDeleteFile($id)
+    public function endpointEmployerDestroy()
     {
-        $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
-        $this->authorize('isUserOwnerOfFile', $tfile);
-        DatabaseService::deleteWithTryCatch($tfile);
+        $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
         return response()->json(
             [
-                'status' => true,
+                'status' => DatabaseService::forceDeleteWithTryCatch(ModelHelperService::$foundModel),
             ],
             200,
             []
         );
     }
 
-    public function endpointCopyFileLink($id)
+    public function endpointEmployerCopyLink()
     {
-        $tfile = DatabaseService::firstOrNotFoundWithTryCatch(Tfile::where('id', '=', $id));
-        $this->authorize('isUserOwnerOfFile', $tfile);
+        $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
         return response()->json(
             [
-                'url' => url($tfile?->url),
+                'url' => url(ModelHelperService::$foundModel?->url),
             ],
             200,
             []

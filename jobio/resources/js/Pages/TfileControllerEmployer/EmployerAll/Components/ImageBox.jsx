@@ -70,7 +70,8 @@ const ImageBox = ({ image, fetchImages }) => {
                                 deleteFormRef?.current,
                             );
                             const response = await axios.post(
-                                localUrl + `/endpoint/file/${image?.id}`,
+                                localUrl +
+                                    `/endpoint/employer/file/${image?.id}`,
                                 formData,
                                 {
                                     headers: {
@@ -90,7 +91,8 @@ const ImageBox = ({ image, fetchImages }) => {
                     onClick={async () => {
                         await exceptionBlock(async () => {
                             const response = await axios.get(
-                                localUrl + `/endpoint/copy/file/${image?.id}`,
+                                localUrl +
+                                    `/endpoint/employer/copy-file/${image?.id}`,
                             );
                             const data = await response.data;
                             console.log(data);

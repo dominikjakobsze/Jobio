@@ -52,15 +52,19 @@ Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])-
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     //views&forms
+    Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
     Route::get('/employer/files', [TfileController::class, 'employerAll']);
     //endpoints
+    Route::post('/endpoint/employer/file', [TfileController::class, 'endpointEmployerUpload']);
+    Route::get('/endpoint/employer/files', [TfileController::class, 'endpointEmployerAll']);
     //Additional Middlewares
-    Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Tfile'])->group(function () {
+        Route::delete('/endpoint/employer/file/{id}', [TfileController::class, 'endpointEmployerDestroy']);
+        Route::get('/endpoint/employer/copy-file/{id}', [TfileController::class, 'endpointEmployerCopyLink']);
+    });
+
+    //** */
     Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
-    Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
-    Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);
-    Route::delete('/endpoint/file/{id}', [TfileController::class, 'endpointDeleteFile']);
-    Route::get('/endpoint/copy/file/{id}', [TfileController::class, 'endpointCopyFileLink']);
     Route::get('/offer/employer/create', [TofferController::class, 'create']);
     Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
     Route::get('/endpoint/offers/employer', [TofferController::class, 'endpointShowAllOffersAfterDelete']);
