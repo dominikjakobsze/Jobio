@@ -70,7 +70,7 @@ const AllOptions = ({ options }) => {
                                         "bg-purple-300/50 border border-solid border-purple-500/50 text-purple-400"
                                     }
                                     handleClick={async () =>
-                                        handleClickDelete(option?.id)
+                                        await handleClickDelete(option?.id)
                                     }
                                 />,
                             ]}
