@@ -1,5 +1,5 @@
 import React from "react";
-import { exceptionBlock, URL as localUrl } from "../../../app";
+import { exceptionBlock, URL as localUrl } from "../../../../app";
 import gsap from "gsap";
 import { FaTrash } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";

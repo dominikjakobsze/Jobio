@@ -12,10 +12,9 @@ use Inertia\Inertia;
 
 class TfileController extends Controller
 {
-    public function showAllFiles()
+    public function employerAll()
     {
-        $this->authorize('viewAny', Tfile::class);
-        return Inertia::render('TfileShowAllFilesPage/TfileShowAllFilesPage');
+        return Inertia::render('TfileControllerEmployer/EmployerAll/TfileEmployerAll');
     }
 
     public function endpointUploadFile(Request $request)

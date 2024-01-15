@@ -51,8 +51,11 @@ Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])-
 });
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
+    //views&forms
+    Route::get('/employer/files', [TfileController::class, 'employerAll']);
+    //endpoints
+    //Additional Middlewares
     Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
-    Route::get('/files', [TfileController::class, 'showAllFiles']);
     Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
     Route::post('/endpoint/file', [TfileController::class, 'endpointUploadFile']);
     Route::get('/endpoint/files', [TfileController::class, 'endpointShowFiles']);

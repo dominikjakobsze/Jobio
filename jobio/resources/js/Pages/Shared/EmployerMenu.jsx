@@ -48,7 +48,7 @@ const EmployerMenu = () => {
                 />
                 <MenuBlockButton
                     actionTitle={"Pliki"}
-                    link={`${localUrl}/support/options`}
+                    link={`${localUrl}/employer/files`}
                     IconComponent={
                         <FaImages className="text-gray-700 text-5xl font-[700]" />
                     }

@@ -1,7 +1,7 @@
 import { IoAddSharp } from "react-icons/io5";
 import React from "react";
 import axios from "axios";
-import { URL as localUrl } from "../../../app";
+import { URL as localUrl } from "../../../../app";
 
 const UploadFile = ({ fetchImages }) => {
     console.log("UploadFile");
