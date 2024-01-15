@@ -54,7 +54,7 @@ const AllOptions = ({ options }) => {
                             key={option?.id}
                             left={option?.option_type}
                             leftClasses={
-                                "p-3 bg-violet-300/50 text-violet-400 border border-solid border-violet-500/50 rounded-full"
+                                "py-2 px-3 bg-violet-300/50 text-violet-400 border border-solid border-violet-500/50 rounded-full"
                             }
                             right={option?.option_value}
                             rightClasses={"text-gray-500"}
