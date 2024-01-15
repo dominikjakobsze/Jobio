@@ -13,7 +13,7 @@ const Main = ({ options }) => {
     return (
         <>
             <SideBySideContainer
-                LeftComponent={<ButtonCreate link={"/option-create"}/>}
+                LeftComponent={<ButtonCreate link={"/option-create"} />}
                 RightComponent={
                     <ShHeader
                         title={"Dodaj nową opcję filtrowania"}
@@ -40,6 +40,8 @@ const Main = ({ options }) => {
                 <br /> D - oznacza filtr dotyczący narzędzii i innych,
                 <br /> T - oznacza filtr dotyczący technologii
             </ShSubHeader>
+            <Spacer type={"extra-large"} />
+            <Spacer type={"medium"} />
             <AllOptions options={options} />
         </>
     );
