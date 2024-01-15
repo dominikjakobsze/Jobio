@@ -7,6 +7,7 @@ use App\Models\Toption;
 use App\Services\DatabaseService;
 use App\Services\DifferentiationService;
 use App\Services\UpdaterService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ToptionController extends Controller
@@ -23,6 +24,8 @@ class ToptionController extends Controller
     {
         return Inertia::render('ToptionController/CreateForm/ToptionCreateForm', []);
     }
+
+
 
     public function endpointCreate(StoreOptionRequest $storeOptionRequest)
     {
@@ -44,6 +47,17 @@ class ToptionController extends Controller
             headers: []
         );
     }
+
+    public function endpointSort(Request $request)
+    {
+        return response()->json(data: [
+            'options' => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_value', 'like', '%' . $request->all()['option_value'] . '%'))
+        ], status: 200, headers: []);
+    }
+
+
+
+
 
     public function store()
     {

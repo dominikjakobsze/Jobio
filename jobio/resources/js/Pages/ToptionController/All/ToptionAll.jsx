@@ -28,7 +28,6 @@ const ToptionAll = ({ options }) => {
                 <Spacer type={"extra-large"} />
                 <Main options={options} />
                 <Spacer type={"extra-large"} />
-                <Spacer type={"medium"} />
             </MenuContainerLayout>
         </>
     );
