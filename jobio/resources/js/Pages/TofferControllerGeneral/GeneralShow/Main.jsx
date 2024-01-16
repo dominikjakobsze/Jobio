@@ -19,7 +19,9 @@ const Main = ({ offer, randomOffers }) => {
                 return <PageSection offer={offer} />;
             }, [])}
             {React.useMemo(() => {
-                return <RandomOffersSection randomOffers={randomOffers} />;
+                return randomOffers?.length > 0 ? (
+                    <RandomOffersSection randomOffers={randomOffers} />
+                ) : null;
             }, [])}
             {React.useMemo(() => {
                 return <ApplySection />;

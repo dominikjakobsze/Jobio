@@ -10,6 +10,7 @@ const PageSection = ({ offer }) => {
     const [staticMap, setStaticMap] = React.useState(
         `https://api.jawg.io/static?marker=color:012a4b,size:medium,label:O%7C${offer?.latitude},${offer?.longitude}&zoom=15&center=${offer?.latitude},${offer?.longitude}&size=1920x350&layer=jawg-streets&format=png&access-token=jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh`,
     );
+    console.log(page.length);
     return (
         <>
             <img
@@ -19,7 +20,9 @@ const PageSection = ({ offer }) => {
             <div
                 dangerouslySetInnerHTML={{ __html: sanitizeContent(page) }}
                 data-tiptap
-                className="w-full p-5 mx-auto my-10 bg-white rounded-xl whitespace-pre-wrap text-base text-gray-700 font-[400] min-h-[300px]"
+                className={`w-full p-5 mx-auto my-10 bg-white rounded-xl whitespace-pre-wrap text-base text-gray-700 font-[400] ${
+                    page?.length > 40 ? "min-h-[300px]" : "min-h-[50px]"
+                }`}
             ></div>
         </>
     );
