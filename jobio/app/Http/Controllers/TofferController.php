@@ -12,6 +12,7 @@ use App\Services\DatabaseService;
 use App\Services\DifferentiationService;
 use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
+use Database\Seeders\DatabaseSeeder;
 use Exception;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder; //when using Model
 use Illuminate\Database\Query\Builder; //when using DB facade
@@ -113,6 +114,18 @@ class TofferController extends Controller
     }
 
     //                                      EMPLOYER
+    public function employerAssignFilters()
+    {
+        return Inertia::render('TofferControllerEmployer/EmployerAssignFilters/TofferEmployerAssignFilters', [
+            "offer" => ModelHelperService::$foundModel,
+            "options" => [
+                "Technologia" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "T")),
+                "Narzędzia i Inne" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "D")),
+                "Doświadczenie" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "S")),
+            ],
+        ]);
+    }
+
     public function employerCreate()
     {
         return Inertia::render('TofferControllerEmployer/EmployerCreate/TofferEmployerCreate', []);
@@ -137,6 +150,11 @@ class TofferController extends Controller
         return Inertia::render('TofferControllerEmployer/EmployerEdit/TofferEmployerEdit', [
             'offer' => ModelHelperService::$foundModel
         ]);
+    }
+
+    public function endpointEmployerAssignFilters()
+    {
+        dd('here');
     }
 
     public function endpointEmployerEdit(StoreOfferRequest $storeOfferRequest)

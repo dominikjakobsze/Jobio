@@ -26,24 +26,10 @@ const EmployerMenu = () => {
             <Spacer type={"medium"} />
             <MenuBlockButtonsContainer>
                 <MenuBlockButton
-                    actionTitle={"Mapa Ofert"}
-                    link={`${localUrl}/`}
-                    IconComponent={
-                        <FaMapLocationDot className="text-gray-700 text-5xl font-[700]" />
-                    }
-                />
-                <MenuBlockButton
                     actionTitle={"Oferty"}
                     link={`${localUrl}/employer/offers`}
                     IconComponent={
                         <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
-                    }
-                />
-                <MenuBlockButton
-                    actionTitle={"Przypisz Filtry"}
-                    link={`${localUrl}/support/options`}
-                    IconComponent={
-                        <IoOptions className="text-gray-700 text-5xl font-[700]" />
                     }
                 />
                 <MenuBlockButton

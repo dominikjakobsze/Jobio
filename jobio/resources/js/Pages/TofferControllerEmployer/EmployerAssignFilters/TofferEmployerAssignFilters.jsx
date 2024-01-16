@@ -1,13 +1,13 @@
-import MenuHeader from "../../Shared/MenuHeader";
 import HomeCrums from "../../Shared/HomeCrums";
-import { URL as localUrl } from "../../../app";
-import Main from "./Main";
 import MenuContainerLayout from "../../Shared/MenuContainerLayout";
-import Spacer from "../../Shared/Spacer";
+import MenuHeader from "../../Shared/MenuHeader";
 import ShHeader from "../../Shared/ShHeader";
 import ShSubHeader from "../../Shared/ShSubHeader";
+import Spacer from "../../Shared/Spacer";
+import { URL as localUrl } from "../../../app";
+import Main from "./Main";
 
-const TofferEmployerAll = ({ offers }) => {
+const TofferEmployerAssignFilters = ({offer, options}) => {
     return (
         <>
             <MenuContainerLayout>
@@ -15,19 +15,16 @@ const TofferEmployerAll = ({ offers }) => {
                 <MenuHeader />
                 <Spacer type={"extra-small"} />
                 <HomeCrums
-                    name={"Panel Pracodawcy"}
-                    link={localUrl + "/profile/employer"}
+                    name={"Zarządzanie Ofertami Pracy"}
+                    link={localUrl + "/employer/offers"}
                 />
                 <Spacer type={"extra-large"} />
-                <ShHeader title={"Zarządzanie Ofertami Pracy"} />
-                <Spacer type={"small"} />
-                <ShSubHeader>Umożliwia zarządzanie ofertami pracy</ShSubHeader>
+                <Main offer={offer} options={options}/>
                 <Spacer type={"extra-large"} />
-                <Main offers={offers} />
                 <Spacer type={"extra-large"} />
             </MenuContainerLayout>
         </>
     );
 };
 
-export default TofferEmployerAll;
+export default TofferEmployerAssignFilters;

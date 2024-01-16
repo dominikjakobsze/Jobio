@@ -46,6 +46,10 @@ const AllOffers = ({ offers }) => {
         window.location.href = `${localUrl}/general/offer/${id}`;
     };
 
+    const handleClickFilters = async (id) => {
+        window.location.href = `${localUrl}/employer/offer-filters/${id}`;
+    };
+
     const sendForm = async () => {
         await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
@@ -129,6 +133,16 @@ const AllOffers = ({ offers }) => {
                                     }
                                     handleClick={async () =>
                                         await handleClickShow(offer?.id)
+                                    }
+                                />,
+                                <ActionButton
+                                    key={offer?.id + offer?.title + "f"}
+                                    text={"Przypisz Filtry"}
+                                    typeClasses={
+                                        "bg-lime-300/50 border border-solid border-lime-500/50 text-lime-400"
+                                    }
+                                    handleClick={async () =>
+                                        await handleClickFilters(offer?.id)
                                     }
                                 />,
                             ]}
