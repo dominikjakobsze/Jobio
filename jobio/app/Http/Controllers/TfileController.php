@@ -41,9 +41,8 @@ class TfileController extends Controller
 
     public function endpointEmployerAll()
     {
-        $this->authorize('viewAny', Tfile::class);
         return response()->json(
-            Tfile::where('tperson_id', '=', Auth::guard('person')->user()->id)->get()->toArray(),
+            DatabaseService::getOrNotFoundWithTryCatch(Tfile::where('tperson_id', '=', Auth::guard('person')->user()->id)),
             200,
             []
         );
@@ -54,7 +53,7 @@ class TfileController extends Controller
         $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
         return response()->json(
             [
-                'status' => DatabaseService::forceDeleteWithTryCatch(ModelHelperService::$foundModel),
+                'status' => DatabaseService::deleteWithTryCatch(ModelHelperService::$foundModel),
             ],
             200,
             []
@@ -71,53 +70,5 @@ class TfileController extends Controller
             200,
             []
         );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update()
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy()
-    {
-        //
     }
 }

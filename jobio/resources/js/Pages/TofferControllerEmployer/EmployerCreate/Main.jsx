@@ -6,8 +6,9 @@ import SalarySection from "./Components/SalarySection";
 import TitleField from "./Components/TitleField";
 import ImageFields from "./Components/ImageFields";
 import axios from "axios";
-import { exceptionBlock, URL as localUrl } from "../../app";
+import { exceptionBlock, URL as localUrl } from "../../../app";
 import ErrorBlock from "./Components/ErrorBlock";
+import SendFormButton from "../../Shared/SendFormButton";
 
 let counter = 0;
 const Main = () => {
@@ -20,7 +21,7 @@ const Main = () => {
         const result = await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
             const response = await axios.post(
-                localUrl + `/endpoint/offer/employer/create`,
+                localUrl + `/endpoint/employer/offer`,
                 formData,
                 {
                     headers: {
@@ -34,7 +35,7 @@ const Main = () => {
         if (result !== null) {
             return setErrors(result);
         }
-        return (window.location.href = localUrl + "/offers");
+        return (window.location.href = localUrl + "/employer/offers");
         //console.log([...formData]);
     }, []);
 
@@ -44,7 +45,7 @@ const Main = () => {
             action="/endpoint/offer/employer/create"
             encType="multipart/form-data"
             method="post"
-            className="f fr fw js cs is ss gap-7 custom-scroll-x relative h-auto p-5"
+            className="f fr fw js cs is ss gap-7 custom-scroll-x relative bg-white py-10 px-5 rounded-2xl shadow-standard"
         >
             <Heading>Jak ma nazywać się ogłoszenie?</Heading>
             <TitleField />
@@ -56,13 +57,8 @@ const Main = () => {
             <MapMain />
             <Heading>Stwórz treść swojego ogłoszenia</Heading>
             <OfferEditor />
-            <div
-                className="bg-sky-300/20 cursor-pointer mx-auto text-base font-[600] text-sky-300 py-1 px-4 border-2 border-solid border-sky-500/20 rounded-xl hover:brightness-110"
-                onClick={() => sendForm()}
-            >
-                Prześlij Formularz
-            </div>
-            <ErrorBlock errors={errors} />{" "}
+            <SendFormButton mxAuto={"mx-auto"} handleSendForm={sendForm} />
+            <ErrorBlock errors={errors} />
         </form>
     );
 };

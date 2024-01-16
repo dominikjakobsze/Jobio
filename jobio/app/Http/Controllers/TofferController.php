@@ -23,9 +23,37 @@ use Inertia\Inertia;
 
 class TofferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function edit()
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        return Inertia::render('OfferEditPage/OfferEditPage', [
+            'offer' => ModelHelperService::$foundModel
+        ]);
+    }
+
+    public function endpointEdit(StoreOfferRequest $storeOfferRequest)
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        $validatedData = $storeOfferRequest->validated();
+        $sanitizedArray = DifferentiationService::findDifferences(
+            templateArray: Toffer::$template,
+            toCheckArray: $validatedData
+        );
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: $sanitizedArray,
+            model: ModelHelperService::$foundModel
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
+    }
+
+    // GENERAL
     public function generalMap()
     {
         $this->authorize('viewAny', Toffer::class);
@@ -104,13 +132,67 @@ class TofferController extends Controller
             [],
         );
     }
-
-    public function create()
+    public function generalShow()
     {
-        return Inertia::render('OfferCreatePage/OfferCreatePage', []);
+        $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
+        $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
+        return Inertia::render('TofferControllerGeneral/GeneralShow/TofferGeneralShow', [
+            'offer' => ModelHelperService::$foundModel,
+            'randomOffers' => $randomOffers
+        ]);
     }
 
-    public function endpointCreate(StoreOfferRequest $storeOfferRequest)
+    // EMPLOYER
+    public function employerCreate()
+    {
+        return Inertia::render('TofferControllerEmployer/EmployerCreate/TofferEmployerCreate', []);
+    }
+
+    public function employerAll()
+    {
+        return Inertia::render('TofferControllerEmployer/EmployerAll/TofferEmployerAll', [
+            'offers' => DatabaseService::getOrNotFoundWithTryCatch(
+                Toffer::where(
+                    'temployer_id',
+                    '=',
+                    Auth::guard('person')?->user()?->id
+                )
+            ),
+        ]);
+    }
+
+    public function endpointEmployerAll()
+    {
+        return response()->json(
+            data: [
+                'offers' => DatabaseService::getOrNotFoundWithTryCatch(
+                    Toffer::where('temployer_id', '=', Auth::guard('person')?->user()?->id)
+                )
+            ],
+            status: 200,
+            headers: []
+        );
+    }
+
+    public function endpointEmployerDestroy()
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        $result = DatabaseService::deleteWithTryCatch(ModelHelperService::$foundModel);
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
+    }
+
+    public function endpointEmployerSort(Request $request)
+    {
+        return response()->json(data: [
+            'offers' => DatabaseService::getOrNotFoundWithTryCatch(Toffer::where('title', 'like', '%' . $request->all()['title'] . '%'))
+        ], status: 200, headers: []);
+    }
+
+    public function endpointEmployerCreate(StoreOfferRequest $storeOfferRequest)
     {
         $validatedData = $storeOfferRequest->validated();
         $sanitizedArray = DifferentiationService::findDifferences(
@@ -131,83 +213,7 @@ class TofferController extends Controller
         );
     }
 
-    public function generalShow()
-    {
-        $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
-        $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
-        return Inertia::render('TofferControllerGeneral/GeneralShow/TofferGeneralShow', [
-            'offer' => ModelHelperService::$foundModel,
-            'randomOffers' => $randomOffers
-        ]);
-    }
-
-    public function edit()
-    {
-        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        return Inertia::render('OfferEditPage/OfferEditPage', [
-            'offer' => ModelHelperService::$foundModel
-        ]);
-    }
-
-    public function endpointEdit(StoreOfferRequest $storeOfferRequest)
-    {
-        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        $validatedData = $storeOfferRequest->validated();
-        $sanitizedArray = DifferentiationService::findDifferences(
-            templateArray: Toffer::$template,
-            toCheckArray: $validatedData
-        );
-        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
-            toAssignArray: $sanitizedArray,
-            model: ModelHelperService::$foundModel
-        );
-        $result = DatabaseService::saveWithTryCatch(
-            model: $returnedModel
-        );
-        return response()->json(
-            data: $result,
-            status: 200,
-            headers: []
-        );
-    }
-
-    public function showAllOffersPanel()
-    {
-        return Inertia::render('ShowAllOffersPanel/ShowAllOffersPanel', [
-            'offers' => DatabaseService::getOrNotFoundWithTryCatch(
-                Toffer::where(
-                    'temployer_id',
-                    '=',
-                    Auth::guard('person')?->user()?->id
-                )
-            ),
-        ]);
-    }
-
-    public function endpointDelete()
-    {
-        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        $result = DatabaseService::deleteWithTryCatch(ModelHelperService::$foundModel);
-        return response()->json(
-            data: $result,
-            status: 200,
-            headers: []
-        );
-    }
-
-    public function endpointShowAllOffersAfterDelete()
-    {
-        return response()->json(
-            data: [
-                'offers' => DatabaseService::getOrNotFoundWithTryCatch(
-                    Toffer::where('temployer_id', '=', Auth::guard('person')?->user()?->id)
-                )
-            ],
-            status: 200,
-            headers: []
-        );
-    }
-
+    // SUPPORT
     public function supportAll()
     {
         return Inertia::render(

@@ -34,7 +34,7 @@ const EmployerMenu = () => {
                 />
                 <MenuBlockButton
                     actionTitle={"Oferty"}
-                    link={`${localUrl}/support/offers`}
+                    link={`${localUrl}/employer/offers`}
                     IconComponent={
                         <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
                     }

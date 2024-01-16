@@ -10,7 +10,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import ListItem from "@tiptap/extension-list-item";
 import { EditorContent, useEditor } from "@tiptap/react";
 import React from "react";
-import { sanitizeContent } from "../../../app";
+import { sanitizeContent } from "../../../../app";
 import EditorMenu from "./EditorMenu";
 
 let counter = 0;

@@ -54,25 +54,33 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     //views&forms
     Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
     Route::get('/employer/files', [TfileController::class, 'employerAll']);
+    Route::get('/employer/offer-create', [TofferController::class, 'employerCreate']);
+    Route::get('/employer/offers', [TofferController::class, 'employerAll']);
     //endpoints
     Route::post('/endpoint/employer/file', [TfileController::class, 'endpointEmployerUpload']);
     Route::get('/endpoint/employer/files', [TfileController::class, 'endpointEmployerAll']);
+    Route::post('/endpoint/employer/offer', [TofferController::class, 'endpointEmployerCreate']);
+    Route::get('/endpoint/employer/offers/sort', [TofferController::class, 'endpointEmployerSort']);
+    Route::get('/endpoint/employer/offers', [TofferController::class, 'endpointEmployerAll']);
     //Additional Middlewares
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Tfile'])->group(function () {
+        //views&forms
+        //endpoints
         Route::delete('/endpoint/employer/file/{id}', [TfileController::class, 'endpointEmployerDestroy']);
         Route::get('/endpoint/employer/copy-file/{id}', [TfileController::class, 'endpointEmployerCopyLink']);
     });
-
-    //** */
-    Route::get('/offers', [TofferController::class, 'showAllOffersPanel']);
-    Route::get('/offer/employer/create', [TofferController::class, 'create']);
-    Route::post('/endpoint/offer/employer/create', [TofferController::class, 'endpointCreate']);
-    Route::get('/endpoint/offers/employer', [TofferController::class, 'endpointShowAllOffersAfterDelete']);
-
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+        //views&forms
+        //endpoints
+        Route::delete('/endpoint/employer/offer/{id}', [TofferController::class, 'endpointEmployerDestroy']);
+    });
+
+    //** TO REFACTOR */
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
+        //views&forms
         Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
+        //endpoints
         Route::put('/endpoint/offer/employer/edit/{id}', [TofferController::class, 'endpointEdit']);
-        Route::delete('/endpoint/offer/employer/delete/{id}', [TofferController::class, 'endpointDelete']);
     });
 });
 

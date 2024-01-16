@@ -1,5 +1,5 @@
 import React from "react";
-import { stringToUpperCase } from "../../../app";
+import { stringToUpperCase } from "../../../../app";
 
 let counter = 0;
 const MapFields = ({ fields }) => {
@@ -37,7 +37,7 @@ const MapFields = ({ fields }) => {
         <>
             <input
                 type="text"
-                className="placeholder:text-gray-300 flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                className="placeholder:text-gray-300 flex-[0_0_40%] lg:flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
                 name="city"
                 placeholder="Miasto"
                 onChange={(e) => {
@@ -47,7 +47,7 @@ const MapFields = ({ fields }) => {
             />
             <input
                 type="text"
-                className="placeholder:text-gray-300 flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                className="placeholder:text-gray-300 flex-[0_0_40%] lg:flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
                 name="street"
                 placeholder="Ulica"
                 onChange={(e) => {
@@ -57,7 +57,7 @@ const MapFields = ({ fields }) => {
             />
             <input
                 type="text"
-                className="placeholder:text-gray-300 flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                className="placeholder:text-gray-300 flex-[0_0_40%] lg:flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
                 name="zip_code"
                 placeholder="Kod Pocztowy"
                 onChange={(e) => {
@@ -67,7 +67,7 @@ const MapFields = ({ fields }) => {
             />
             <input
                 type="text"
-                className="placeholder:text-gray-300 flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                className="placeholder:text-gray-300 flex-[0_0_40%] lg:flex-[0_0_45%] text-center text-gray-500 text-sm font-[700] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
                 name="voivodeship"
                 placeholder="Województwo"
                 onChange={(e) => {
