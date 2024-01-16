@@ -100,7 +100,9 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/support/options', [ToptionController::class, 'supportAll']);
     Route::get('/support/option-create', [ToptionController::class, 'supportCreateForm']);
     Route::get('/support/offers', [TofferController::class, 'supportAll']);
+    Route::get('/support/people', [TpersonController::class, 'supportAll']);
     //endpoints
+    Route::get('/endpoint/support/people/sort', [TpersonController::class, 'endpointSupportSort']);
     Route::post('/endpoint/support/option', [ToptionController::class, 'endpointSupportCreate']);
     Route::get('/endpoint/support/options/sort', [ToptionController::class, 'endpointSupportSort']);
     Route::get('/endpoint/support/options', [ToptionController::class, 'endpointSupportAll']);
@@ -111,6 +113,11 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
         //views&forms
         //endpoints
         Route::delete('/endpoint/support/option/{id}', [ToptionController::class, 'endpointSupportDelete']);
+    });
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Tperson'])->group(function () {
+        //views&forms
+        //endpoints
+        Route::patch('/endpoint/support/people/{id}', [TpersonController::class, 'endpointSupportEdit']);
     });
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         //views&forms

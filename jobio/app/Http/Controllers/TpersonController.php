@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePersonRoleRequest;
 use App\Models\Toffer;
 use App\Models\Tperson;
+use App\Services\DatabaseService;
+use App\Services\ModelHelperService;
+use App\Services\UpdaterService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,43 +132,36 @@ class TpersonController extends Controller
         return Inertia::render('Profiles/ProfileEmployer', []);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store()
+    public function supportAll()
     {
-        //
+        return Inertia::render('TpersonControllerSupport/SupportAll/TpersonSupportAll', [
+            "users" => DatabaseService::getOrNotFoundWithTryCatch(Tperson::where("role", "!=", "support")),
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
+    public function endpointSupportSort(Request $request)
     {
-        //
+        return response()->json(data: [
+            'users' => DatabaseService::getOrNotFoundWithTryCatch(Tperson::where('email', 'like', '%' . $request->all()['email'] . '%')->where("role", "!=", "support"))
+        ], status: 200, headers: []);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit()
+    public function endpointSupportEdit(StorePersonRoleRequest $storePersonRoleRequest)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update()
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy()
-    {
-        //
+        $validatedData = $storePersonRoleRequest->validated();
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: [
+                "role" => $validatedData["role"]
+            ],
+            model: ModelHelperService::$foundModel
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 }

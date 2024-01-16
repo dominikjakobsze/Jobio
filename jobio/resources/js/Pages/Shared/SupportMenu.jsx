@@ -23,15 +23,8 @@ const SupportMenu = () => {
             <Spacer type={"medium"} />
             <MenuBlockButtonsContainer>
                 <MenuBlockButton
-                    actionTitle={"Mapa Ofert"}
-                    link={`${localUrl}/`}
-                    IconComponent={
-                        <FaMapLocationDot className="text-gray-700 text-5xl font-[700]" />
-                    }
-                />
-                <MenuBlockButton
                     actionTitle={"Użytkownicy"}
-                    link={`${localUrl}/support/users`}
+                    link={`${localUrl}/support/people`}
                     IconComponent={
                         <LuUsers2 className="text-gray-700 text-5xl font-[700]" />
                     }
