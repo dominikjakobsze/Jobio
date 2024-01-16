@@ -4,11 +4,16 @@ import OptionsSection from "./Components/OptionsSection";
 import ApplySection from "./Components/ApplySection";
 import RandomOffersSection from "./Components/RandomOffersSection";
 import PageSection from "./Components/PageSection";
+import HomeCrums from "../../Shared/HomeCrums";
+import Spacer from "../../Shared/Spacer";
 
 const Main = ({ offer, randomOffers }) => {
     console.log("Main");
     return (
         <>
+            <Spacer type={"small"} />
+            <HomeCrums />
+            <Spacer type={"medium"} />
             {React.useMemo(() => {
                 return <TitleSection offer={offer} />;
             }, [])}

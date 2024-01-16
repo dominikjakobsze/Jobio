@@ -2,6 +2,7 @@ import React from "react";
 import { IoCloseSharp, IoSearchSharp } from "react-icons/io5";
 import { AnimationContext } from "./AnimationContextProvider";
 import { LuActivity } from "react-icons/lu";
+import { URL as localUrl } from "../../../../app";
 
 const OffersPanel = ({ offers }) => {
     console.log("OffersPanel");
@@ -39,14 +40,16 @@ const OffersPanel = ({ offers }) => {
                 {offers?.map((offer) => {
                     return (
                         <div
+                            onClick={() => {
+                                window.location.href = `${localUrl}/general/offer/${offer?.id}`;
+                            }}
                             key={offer?.id}
-                            className="p-3 bg-gray-100 flex-[0_0_100%] f fr is fw cs ss jc gap-2 rounded-2xl shadow-lg hover:shadow-inner cup hover:"
+                            className="p-3 hover:bg-gray-100 flex-[0_0_100%] f fr is fw cs ss jc gap-2 rounded-2xl shadow-standard cup"
                         >
                             <div className="flex-[0_1_auto] f fr fnw is cs self-stretch jc">
                                 <img
-                                    className="flex-[0_0_70px] h-[70px] md:flex-[0_0_120px] md:h-[120px] rounded-2xl object-contain"
+                                    className="flex-[0_0_60px] min-w-[60px] max-w-[60px] lg:flex-[0_0_150px] lg:min-w-[150px] lg:max-w-[150px] h-[60px] md:flex-[0_0_120px] md:h-[120px] rounded-full lg:rounded-2xl object-cover"
                                     src={offer?.company_icon}
-                                    alt=""
                                 />
                             </div>
                             <div className="flex-[1_0_0] f fr fw js items-stretch content-stretch self-stretch font-[600] text-sm text-gray-700">
