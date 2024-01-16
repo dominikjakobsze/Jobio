@@ -37,6 +37,15 @@ class DatabaseService
             return abort(500, 'Problem z usunięciem rekordu');
         }
     }
+    public static function forceDeleteQueryWithTryCatch(Builder $builder)
+    {
+        try {
+            $builder->forceDelete();
+            return true;
+        } catch (Exception $exception) {
+            return abort(500, 'Problem z usunięciem rekordu');
+        }
+    }
     public static function firstOrNotFoundWithTryCatch(Builder $builder)
     {
         try {

@@ -22,7 +22,7 @@ const FilterCheckbox = ({ option_value, option_id }) => {
                     className="hidden"
                     ref={checkboxRef}
                     type="checkbox"
-                    name="option_type[]"
+                    name="toption_id[]"
                     value={option_id}
                 />
                 {option_value}

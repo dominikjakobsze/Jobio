@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAssignFiltersRequest;
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\StoreTofferRequest;
 use App\Http\Requests\UpdateTofferRequest;
 use App\Models\Toffer;
+use App\Models\Toftop;
 use App\Models\Toption;
 use App\Policies\TofferPolicy;
 use App\Services\DatabaseService;
@@ -152,9 +154,28 @@ class TofferController extends Controller
         ]);
     }
 
-    public function endpointEmployerAssignFilters()
+    public function endpointEmployerAssignFilters(StoreAssignFiltersRequest $storeAssignFiltersRequest)
     {
-        dd('here');
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        $validatedData = $storeAssignFiltersRequest->validated();
+        DatabaseService::forceDeleteQueryWithTryCatch(Toftop::where('toffer_id', '=', ModelHelperService::$foundModel?->id));
+        foreach ($validatedData['toption_id'] as $option) {
+            $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+                toAssignArray: [
+                    "toffer_id" => $validatedData["toffer_id"],
+                    "toption_id" => $option,
+                ],
+                model: new Toftop()
+            );
+            DatabaseService::saveWithTryCatch(
+                model: $returnedModel
+            );
+        }
+        return response()->json(
+            data: true,
+            status: 200,
+            headers: []
+        );
     }
 
     public function endpointEmployerEdit(StoreOfferRequest $storeOfferRequest)
