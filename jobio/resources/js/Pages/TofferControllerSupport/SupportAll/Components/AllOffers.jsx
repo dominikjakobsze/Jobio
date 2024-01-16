@@ -94,7 +94,7 @@ const AllOffers = ({ offers }) => {
                             }
                             ActionButtons={[
                                 <ActionButton
-                                    key={offer?.id + offer?.title}
+                                    key={offer?.id + offer?.title + "d"}
                                     text={"Usuń"}
                                     typeClasses={
                                         "bg-purple-300/50 border border-solid border-purple-500/50 text-purple-400"
@@ -102,6 +102,16 @@ const AllOffers = ({ offers }) => {
                                     handleClick={async () =>
                                         await handleClickDelete(offer?.id)
                                     }
+                                />,
+                                <ActionButton
+                                    key={offer?.id + offer?.title + "s"}
+                                    text={"Podgląd"}
+                                    typeClasses={
+                                        "bg-lime-300/50 border border-solid border-lime-500/50 text-lime-400"
+                                    }
+                                    handleClick={async () => {
+                                        window.location.href = `${localUrl}/general/offer/${offer?.id}`;
+                                    }}
                                 />,
                             ]}
                         />
