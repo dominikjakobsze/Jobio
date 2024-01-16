@@ -6,7 +6,7 @@ import SalarySection from "./Components/SalarySection";
 import TitleField from "./Components/TitleField";
 import ImageFields from "./Components/ImageFields";
 import axios from "axios";
-import { exceptionBlock, URL as localUrl } from "../../app";
+import { exceptionBlock, URL as localUrl } from "../../../app";
 import ErrorBlock from "./Components/ErrorBlock";
 
 let counter = 0;
@@ -20,7 +20,7 @@ const Main = ({ offer }) => {
         const result = await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
             const response = await axios.post(
-                localUrl + `/endpoint/offer/employer/edit/${offer?.id}`,
+                localUrl + `/endpoint/employer/offer/${offer?.id}`,
                 formData,
                 {
                     headers: {
@@ -44,7 +44,7 @@ const Main = ({ offer }) => {
             action={`/endpoint/offer/employer/edit/${offer?.id}`}
             encType="multipart/form-data"
             method="post"
-            className="f fr fw js cs is ss gap-7 custom-scroll-x relative h-auto p-5"
+            className="f fr fw js cs is ss gap-7 custom-scroll-x relative bg-white py-10 px-5 rounded-2xl shadow-standard"
         >
             <Heading>Jak ma nazywać się ogłoszenie?</Heading>
             <TitleField title={offer?.title} />

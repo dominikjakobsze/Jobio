@@ -1,5 +1,5 @@
 import React from "react";
-import { stringToUpperCase } from "../../../app";
+import { stringToUpperCase } from "../../../../app";
 
 let counter = 0;
 const MapFields = ({ fields }) => {

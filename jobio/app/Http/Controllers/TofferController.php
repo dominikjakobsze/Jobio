@@ -23,37 +23,7 @@ use Inertia\Inertia;
 
 class TofferController extends Controller
 {
-    public function edit()
-    {
-        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        return Inertia::render('OfferEditPage/OfferEditPage', [
-            'offer' => ModelHelperService::$foundModel
-        ]);
-    }
-
-    public function endpointEdit(StoreOfferRequest $storeOfferRequest)
-    {
-        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
-        $validatedData = $storeOfferRequest->validated();
-        $sanitizedArray = DifferentiationService::findDifferences(
-            templateArray: Toffer::$template,
-            toCheckArray: $validatedData
-        );
-        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
-            toAssignArray: $sanitizedArray,
-            model: ModelHelperService::$foundModel
-        );
-        $result = DatabaseService::saveWithTryCatch(
-            model: $returnedModel
-        );
-        return response()->json(
-            data: $result,
-            status: 200,
-            headers: []
-        );
-    }
-
-    // GENERAL
+    //                                      GENERAL
     public function generalMap()
     {
         $this->authorize('viewAny', Toffer::class);
@@ -142,7 +112,7 @@ class TofferController extends Controller
         ]);
     }
 
-    // EMPLOYER
+    //                                      EMPLOYER
     public function employerCreate()
     {
         return Inertia::render('TofferControllerEmployer/EmployerCreate/TofferEmployerCreate', []);
@@ -159,6 +129,36 @@ class TofferController extends Controller
                 )
             ),
         ]);
+    }
+
+    public function employerEdit()
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        return Inertia::render('TofferControllerEmployer/EmployerEdit/TofferEmployerEdit', [
+            'offer' => ModelHelperService::$foundModel
+        ]);
+    }
+
+    public function endpointEmployerEdit(StoreOfferRequest $storeOfferRequest)
+    {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
+        $validatedData = $storeOfferRequest->validated();
+        $sanitizedArray = DifferentiationService::findDifferences(
+            templateArray: Toffer::$template,
+            toCheckArray: $validatedData
+        );
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: $sanitizedArray,
+            model: ModelHelperService::$foundModel
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
     }
 
     public function endpointEmployerAll()
@@ -213,7 +213,7 @@ class TofferController extends Controller
         );
     }
 
-    // SUPPORT
+    //                                                  SUPPORT
     public function supportAll()
     {
         return Inertia::render(

@@ -38,6 +38,14 @@ const AllOffers = ({ offers }) => {
         });
     };
 
+    const handleClickEdit = async (id) => {
+        window.location.href = `${localUrl}/employer/offer-edit/${id}`;
+    };
+
+    const handleClickShow = async (id) => {
+        window.location.href = `${localUrl}/general/offer/${id}`;
+    };
+
     const sendForm = async () => {
         await exceptionBlock(async () => {
             const formData = new FormData(formRef.current);
@@ -101,6 +109,26 @@ const AllOffers = ({ offers }) => {
                                     }
                                     handleClick={async () =>
                                         await handleClickDelete(offer?.id)
+                                    }
+                                />,
+                                <ActionButton
+                                    key={offer?.id + offer?.title}
+                                    text={"Edytuj"}
+                                    typeClasses={
+                                        "bg-yellow-300/50 border border-solid border-yellow-500/50 text-yellow-400"
+                                    }
+                                    handleClick={async () =>
+                                        await handleClickEdit(offer?.id)
+                                    }
+                                />,
+                                <ActionButton
+                                    key={offer?.id + offer?.title}
+                                    text={"Podgląd"}
+                                    typeClasses={
+                                        "bg-indigo-300/50 border border-solid border-indigo-500/50 text-indigo-400"
+                                    }
+                                    handleClick={async () =>
+                                        await handleClickShow(offer?.id)
                                     }
                                 />,
                             ]}

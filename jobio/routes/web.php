@@ -71,16 +71,10 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     });
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         //views&forms
+        Route::get('/employer/offer-edit/{id}', [TofferController::class, 'employerEdit']);
         //endpoints
         Route::delete('/endpoint/employer/offer/{id}', [TofferController::class, 'endpointEmployerDestroy']);
-    });
-
-    //** TO REFACTOR */
-    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
-        //views&forms
-        Route::get('/offer/employer/edit/{id}', [TofferController::class, 'edit']);
-        //endpoints
-        Route::put('/endpoint/offer/employer/edit/{id}', [TofferController::class, 'endpointEdit']);
+        Route::put('/endpoint/employer/offer/{id}', [TofferController::class, 'endpointEmployerEdit']);
     });
 });
 
