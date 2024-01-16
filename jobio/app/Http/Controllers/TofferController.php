@@ -118,8 +118,10 @@ class TofferController extends Controller
     //                                      EMPLOYER
     public function employerAssignFilters()
     {
+        $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
         return Inertia::render('TofferControllerEmployer/EmployerAssignFilters/TofferEmployerAssignFilters', [
             "offer" => ModelHelperService::$foundModel,
+            "active_options" => DatabaseService::firstOrNotFoundWithTryCatch(ModelHelperService::$foundModel->with(["toftops.toption"]))?->toftops,
             "options" => [
                 "Technologia" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "T")),
                 "Narzędzia i Inne" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "D")),

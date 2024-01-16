@@ -29,7 +29,7 @@ class StoreAssignFiltersRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            "option_id" => "Filtr",
+            "toption_id" => "Filtr",
         ];
     }
 
@@ -37,13 +37,13 @@ class StoreAssignFiltersRequest extends FormRequest
     {
         return [
             "toption_id" => ["required"],
-            "toffer_id" => ["nullable"],
+            "toffer_id" => ["nullable"]
         ];
     }
     public function messages(): array
     {
         return [
-            "required" => "Pole :attribute jest wymagane",
+            "required" => "Wybierz przynajmniej jeden filtr!",
         ];
     }
 }

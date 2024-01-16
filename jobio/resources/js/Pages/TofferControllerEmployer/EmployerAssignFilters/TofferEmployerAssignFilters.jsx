@@ -7,7 +7,7 @@ import Spacer from "../../Shared/Spacer";
 import { URL as localUrl } from "../../../app";
 import Main from "./Main";
 
-const TofferEmployerAssignFilters = ({offer, options}) => {
+const TofferEmployerAssignFilters = ({offer, options, active_options}) => {
     return (
         <>
             <MenuContainerLayout>
@@ -19,7 +19,7 @@ const TofferEmployerAssignFilters = ({offer, options}) => {
                     link={localUrl + "/employer/offers"}
                 />
                 <Spacer type={"extra-large"} />
-                <Main offer={offer} options={options}/>
+                <Main offer={offer} options={options} active_options={active_options}/>
                 <Spacer type={"extra-large"} />
                 <Spacer type={"extra-large"} />
             </MenuContainerLayout>
