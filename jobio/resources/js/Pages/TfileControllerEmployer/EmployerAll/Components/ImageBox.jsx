@@ -64,26 +64,26 @@ const ImageBox = ({ image, fetchImages }) => {
             >
                 <FaTrash
                     onClick={async () => {
-                        //deleteFormRef.current.submit();
-                        await exceptionBlock(async () => {
-                            const formData = new FormData(
-                                deleteFormRef?.current,
-                            );
-                            const response = await axios.post(
-                                localUrl +
-                                    `/endpoint/employer/file/${image?.id}`,
-                                formData,
-                                {
-                                    headers: {
-                                        "Content-Type": "multipart/form-data",
-                                    },
-                                },
-                            );
-                            animateTimeline();
-                            setTimeout(async () => {
-                                await fetchImages();
-                            }, 1500);
-                        });
+                        deleteFormRef.current.submit();
+                        // await exceptionBlock(async () => {
+                        //     const formData = new FormData(
+                        //         deleteFormRef?.current,
+                        //     );
+                        //     const response = await axios.post(
+                        //         localUrl +
+                        //             `/endpoint/employer/file/${image?.id}`,
+                        //         formData,
+                        //         {
+                        //             headers: {
+                        //                 "Content-Type": "multipart/form-data",
+                        //             },
+                        //         },
+                        //     );
+                        //     animateTimeline();
+                        //     setTimeout(async () => {
+                        //         await fetchImages();
+                        //     }, 1500);
+                        // });
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
                 />
@@ -103,7 +103,7 @@ const ImageBox = ({ image, fetchImages }) => {
                 />
                 <form
                     ref={deleteFormRef}
-                    action={`/endpoint/file/${image?.id}`}
+                    action={`/endpoint/employer/file/${image?.id}`}
                     encType="multipart/form-data"
                     method="post"
                     className="hidden"

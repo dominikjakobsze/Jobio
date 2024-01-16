@@ -12,6 +12,7 @@ use App\Services\UpdaterService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TfileController extends Controller
@@ -50,10 +51,11 @@ class TfileController extends Controller
 
     public function endpointEmployerDestroy()
     {
+        dd(Storage::disk("local")->path("/app/app_files/" . ModelHelperService::$foundModel->toArray()["file_path"]));
         $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
         return response()->json(
             [
-                'status' => DatabaseService::deleteWithTryCatch(ModelHelperService::$foundModel),
+                'status' => DatabaseService::forceDeleteWithTryCatch(ModelHelperService::$foundModel),
             ],
             200,
             []
