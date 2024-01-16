@@ -23,7 +23,7 @@ use Inertia\Inertia;
 
 class TofferController extends Controller
 {
-    //                                      GENERAL
+    //                                       GENERAL
     public function generalMap()
     {
         $this->authorize('viewAny', Toffer::class);

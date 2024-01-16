@@ -102,7 +102,7 @@ const AllOffers = ({ offers }) => {
                             }
                             ActionButtons={[
                                 <ActionButton
-                                    key={offer?.id + offer?.title}
+                                    key={offer?.id + offer?.title + "d"}
                                     text={"Usuń"}
                                     typeClasses={
                                         "bg-purple-300/50 border border-solid border-purple-500/50 text-purple-400"
@@ -112,7 +112,7 @@ const AllOffers = ({ offers }) => {
                                     }
                                 />,
                                 <ActionButton
-                                    key={offer?.id + offer?.title}
+                                    key={offer?.id + offer?.title + "e"}
                                     text={"Edytuj"}
                                     typeClasses={
                                         "bg-yellow-300/50 border border-solid border-yellow-500/50 text-yellow-400"
@@ -122,7 +122,7 @@ const AllOffers = ({ offers }) => {
                                     }
                                 />,
                                 <ActionButton
-                                    key={offer?.id + offer?.title}
+                                    key={offer?.id + offer?.title + "s"}
                                     text={"Podgląd"}
                                     typeClasses={
                                         "bg-indigo-300/50 border border-solid border-indigo-500/50 text-indigo-400"

@@ -60,6 +60,7 @@ const OfferEditor = ({ page_offer }) => {
         ],
         content: content,
         onUpdate: ({ editor }) => {
+            console.log(sanitizeContent(editor.getHTML()));
             setContent(sanitizeContent(editor.getHTML()));
         },
     });
@@ -68,9 +69,10 @@ const OfferEditor = ({ page_offer }) => {
         <>
             <EditorMenu editor={editor} />
             <textarea
+                readOnly
                 className="hidden"
                 name="page_offer"
-                defaultValue={content}
+                value={content}
             ></textarea>
             <div
                 data-tiptap

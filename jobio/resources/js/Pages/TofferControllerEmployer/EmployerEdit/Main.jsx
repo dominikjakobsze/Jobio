@@ -34,7 +34,7 @@ const Main = ({ offer }) => {
         if (result !== null) {
             return setErrors(result);
         }
-        return (window.location.href = localUrl + "/offers");
+        return (window.location.href = localUrl + "/employer/offers");
         //console.log([...formData]);
     }, []);
 
