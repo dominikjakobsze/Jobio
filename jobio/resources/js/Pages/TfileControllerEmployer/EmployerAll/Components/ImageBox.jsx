@@ -5,7 +5,7 @@ import { FaTrash } from "react-icons/fa6";
 import { FaShareNodes } from "react-icons/fa6";
 import axios from "axios";
 
-const ImageBox = ({ image, fetchImages }) => {
+const ImageBox = ({ image, fetchImages, setLink }) => {
     console.log("ImageBox");
     const timelineRef = React.useRef(null);
     const menuRef = React.useRef(null);
@@ -64,26 +64,26 @@ const ImageBox = ({ image, fetchImages }) => {
             >
                 <FaTrash
                     onClick={async () => {
-                        deleteFormRef.current.submit();
-                        // await exceptionBlock(async () => {
-                        //     const formData = new FormData(
-                        //         deleteFormRef?.current,
-                        //     );
-                        //     const response = await axios.post(
-                        //         localUrl +
-                        //             `/endpoint/employer/file/${image?.id}`,
-                        //         formData,
-                        //         {
-                        //             headers: {
-                        //                 "Content-Type": "multipart/form-data",
-                        //             },
-                        //         },
-                        //     );
-                        //     animateTimeline();
-                        //     setTimeout(async () => {
-                        //         await fetchImages();
-                        //     }, 1500);
-                        // });
+                        // deleteFormRef.current.submit();
+                        await exceptionBlock(async () => {
+                            const formData = new FormData(
+                                deleteFormRef?.current,
+                            );
+                            const response = await axios.post(
+                                localUrl +
+                                    `/endpoint/employer/file/${image?.id}`,
+                                formData,
+                                {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data",
+                                    },
+                                },
+                            );
+                            animateTimeline();
+                            setTimeout(async () => {
+                                await fetchImages();
+                            }, 1500);
+                        });
                     }}
                     className="flex-[0_1_auto] text-red-500 cup hover:text-red-600"
                 />
@@ -95,7 +95,7 @@ const ImageBox = ({ image, fetchImages }) => {
                                     `/endpoint/employer/copy-file/${image?.id}`,
                             );
                             const data = await response.data;
-                            console.log(data);
+                            setLink(data);
                             animateTimeline();
                         });
                     }}

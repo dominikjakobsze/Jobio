@@ -9,6 +9,7 @@ const Main = () => {
     console.log("Main");
     const [images, setImages] = React.useState([]);
     const [errors, setErrors] = React.useState([]);
+    const [link, setLink] = React.useState(null);
     const fetchImages = React.useCallback(async () => {
         await exceptionBlock(async () => {
             const response = await axios.get(
@@ -27,6 +28,9 @@ const Main = () => {
     }, []);
     return (
         <div className="flex-[0_0_100%] f fr fw justify-center lg:justify-start is ss cs gap-5">
+            <div className="flex-[0_0_100%] text-sky-300 font-[700] text-sm whitespace-pre-wrap text-clip overflow-hidden break-all">
+                {link?.url}
+            </div>
             {React.useMemo(() => {
                 return <ErrorContainer errors={errors} />;
             }, [errors])}
@@ -44,6 +48,7 @@ const Main = () => {
                         key={image?.id}
                         image={image}
                         fetchImages={fetchImages}
+                        setLink={setLink}
                     />
                 );
             })}

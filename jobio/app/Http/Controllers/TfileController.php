@@ -51,8 +51,10 @@ class TfileController extends Controller
 
     public function endpointEmployerDestroy()
     {
-        dd(Storage::disk("local")->path("/app/app_files/" . ModelHelperService::$foundModel->toArray()["file_path"]));
         $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
+        if (Storage::disk("local")->exists("/app/app_files/" . ModelHelperService::$foundModel->toArray()["file_path"]) === true) {
+            Storage::disk("local")->delete("/app/app_files/" . ModelHelperService::$foundModel->toArray()["file_path"]);
+        }
         return response()->json(
             [
                 'status' => DatabaseService::forceDeleteWithTryCatch(ModelHelperService::$foundModel),
@@ -64,7 +66,6 @@ class TfileController extends Controller
 
     public function endpointEmployerCopyLink()
     {
-        $this->authorize('isUserOwnerOfFile', ModelHelperService::$foundModel);
         return response()->json(
             [
                 'url' => url(ModelHelperService::$foundModel?->url),
