@@ -34,7 +34,7 @@ class StorePersonRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "role" => ["required", "in:Employer,Employee"],
+            "role" => ["required", "in:employer,employee"],
         ];
     }
     public function messages(): array

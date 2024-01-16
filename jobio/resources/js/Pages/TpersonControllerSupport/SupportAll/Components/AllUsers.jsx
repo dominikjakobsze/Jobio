@@ -32,6 +32,7 @@ const AllUsers = ({ users }) => {
     return (
         <>
             <ErrorContainer errors={errors} />
+            <Spacer type={"large"} />
             <form
                 ref={formRef}
                 onChange={() => sendForm()}
@@ -83,7 +84,7 @@ const AllUsers = ({ users }) => {
                                                 );
                                                 formData.append(
                                                     "role",
-                                                    "employee1",
+                                                    "employee",
                                                 );
                                                 const response =
                                                     await axios.post(
@@ -104,6 +105,7 @@ const AllUsers = ({ users }) => {
                                                     refreshResponse.data;
                                                 setInnerUsers(data?.users);
                                                 setInputText("");
+                                                setErrors("");
                                                 return null;
                                             },
                                         );
@@ -128,7 +130,7 @@ const AllUsers = ({ users }) => {
                                                 );
                                                 formData.append(
                                                     "role",
-                                                    "employer1",
+                                                    "employer",
                                                 );
                                                 const response =
                                                     await axios.post(
@@ -149,6 +151,7 @@ const AllUsers = ({ users }) => {
                                                     refreshResponse.data;
                                                 setInnerUsers(data?.users);
                                                 setInputText("");
+                                                setErrors("");
                                                 return null;
                                             },
                                         );
