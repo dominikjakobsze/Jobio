@@ -49,6 +49,20 @@ Route::get('/endpoint/general/offers', [TofferController::class, 'generalAll']);
 Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
     Route::get('/general/offer/{id}', [TofferController::class, 'generalShow']);
 });
+Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
+    Route::get('/profile', function () {
+        if (Auth::guard('person')?->user()?->role === "support") {
+            return redirect('/profile/support');
+        }
+        if (Auth::guard('person')?->user()?->role === "employee") {
+            return redirect('/profile/employee');
+        }
+        if (Auth::guard('person')?->user()?->role === "employer") {
+            return redirect('/profile/employer');
+        }
+    });
+});
+
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     //views&forms
@@ -105,18 +119,4 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
-});
-
-Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
-    Route::get('/profile', function () {
-        if (Auth::guard('person')?->user()?->role === "support") {
-            return redirect('/profile/support');
-        }
-        if (Auth::guard('person')?->user()?->role === "employee") {
-            return redirect('/profile/employee');
-        }
-        if (Auth::guard('person')?->user()?->role === "employer") {
-            return redirect('/profile/employer');
-        }
-    });
 });
