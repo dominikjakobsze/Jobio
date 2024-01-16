@@ -12,7 +12,7 @@ const ImageFields = ({ company_icon }) => {
                 onChange={(e) => {
                     setImage(e.currentTarget.value);
                 }}
-                className="placeholder:text-gray-300 flex-[0_0_75%] text-center text-gray-400 text-sm font-[500] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+                className="placeholder:text-gray-300 flex-[0_0_95%] lg:flex-[0_0_75%] text-center text-gray-400 text-sm font-[500] mx-auto rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             />
             <img
                 src={image}
