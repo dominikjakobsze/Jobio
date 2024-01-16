@@ -5,6 +5,7 @@ use App\Http\Controllers\TfileController;
 use App\Http\Controllers\TofferController;
 use App\Http\Controllers\ToptionController;
 use App\Http\Controllers\TpersonController;
+use App\Http\Controllers\TresumeController;
 use App\Http\Middleware\CheckIfModelExists;
 use App\Http\Middleware\EnsureUserIsEmployer;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
@@ -127,5 +128,8 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 });
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
+    //views&forms
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
+    Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreate']);
+    //endpoints
 });

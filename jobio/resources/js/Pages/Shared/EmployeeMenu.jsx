@@ -29,7 +29,7 @@ const EmployerMenu = () => {
                 />
                 <MenuBlockButton
                     actionTitle={"Kreator CV"}
-                    link={`${localUrl}/`}
+                    link={`${localUrl}/employee/resume-create-edit`}
                     IconComponent={
                         <IoDocumentAttach className="text-gray-700 text-5xl font-[700]" />
                     }
