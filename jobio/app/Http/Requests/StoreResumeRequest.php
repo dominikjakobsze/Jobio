@@ -98,8 +98,8 @@ class StoreResumeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            "filled" => ":attribute jest wymagane f",
-            "present" => ":attribute jest wymagane p",
+            "filled" => ":attribute jest wymagane",
+            "present" => ":attribute jest wymagane",
             "name.regex" => ":attribute może zawierać jedynie litery alfabetu",
             "string" => ":attribute musi być tekstem",
             "array" => "Coś jest nie tak z :attribute",
