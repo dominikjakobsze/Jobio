@@ -73,7 +73,7 @@ class StoreResumeRequest extends FormRequest
 
     public function rules(): array
     {
-        // nullable: The field may be null.
+        // nullable: The field may be null. If it is null, then other validatin rules are skipped
         // filled: The field must not be empty (null, empty string, empty array).
         // present: The field must exist in the input data but can be null or empty.
         // sometimes: The field can be present in the input data, but it doesn't have to be (the field is optional). If the field is present, then the associated validation rules should be applied
