@@ -1,9 +1,9 @@
 import React from "react";
 import CustomTextArea from "./CustomTextArea";
 
-const ExperienceBlock = (propsHolderDefault) => {
+const ExperienceBlock = ({ propsHolderDefault }) => {
     const propsHolder = React.useRef(
-        propsHolderDefault[0] ?? [
+        propsHolderDefault ?? [
             {
                 defaultTextareaValue: "",
                 temporaryTextareaValue: "",
