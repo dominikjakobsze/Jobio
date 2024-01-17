@@ -13,7 +13,9 @@ const CustomTextArea = ({
     useAutosizeTextArea(textareaRef.current, textarea);
 
     React.useEffect(() => {
-        console.log(nameKey);
+        if (typeof setPropsHolder === "function") {
+            setPropsHolder(nameKey, textarea);
+        }
     }, [textarea]);
 
     return (

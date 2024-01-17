@@ -43,7 +43,23 @@ const Main = () => {
                                 {
                                     component: EducationBlock,
                                     props: {
-                                        text: "test55",
+                                        propsHolderDefault: [
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "company",
+                                            },
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "work",
+                                            },
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "respo",
+                                            },
+                                        ],
                                     },
                                 },
                             ];
@@ -67,7 +83,23 @@ const Main = () => {
                                 {
                                     component: ExperienceBlock,
                                     props: {
-                                        text: "test55",
+                                        propsHolderDefault: [
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "company",
+                                            },
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "work",
+                                            },
+                                            {
+                                                defaultTextareaValue: "",
+                                                temporaryTextareaValue: "",
+                                                nameKey: "respo",
+                                            },
+                                        ],
                                     },
                                 },
                             ];

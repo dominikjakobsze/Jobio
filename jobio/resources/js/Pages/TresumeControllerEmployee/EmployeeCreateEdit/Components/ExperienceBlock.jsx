@@ -1,28 +1,40 @@
 import React from "react";
 import CustomTextArea from "./CustomTextArea";
 
-const ExperienceBlock = () => {
-    const propsHolder = React.useRef([
-        {
-            defaultTextareaValue: "1",
-            temporaryTextareaValue: "",
-            nameKey: "company",
-        },
-        {
-            defaultTextareaValue: "2",
-            temporaryTextareaValue: "",
-            nameKey: "work",
-        },
-        {
-            defaultTextareaValue: "3",
-            temporaryTextareaValue: "",
-            nameKey: "respo",
-        },
-    ]);
-    const setPropsHolder = (nameKey) => {};
-    React.useEffect(() => {
-        console.log(propsHolder.current);
-    }, [propsHolder]);
+const ExperienceBlock = (propsHolderDefault) => {
+    const propsHolder = React.useRef(
+        propsHolderDefault[0] ?? [
+            {
+                defaultTextareaValue: "",
+                temporaryTextareaValue: "",
+                nameKey: "company",
+            },
+            {
+                defaultTextareaValue: "",
+                temporaryTextareaValue: "",
+                nameKey: "work",
+            },
+            {
+                defaultTextareaValue: "",
+                temporaryTextareaValue: "",
+                nameKey: "respo",
+            },
+        ],
+    );
+
+    const setPropsHolder = (nameKey, newValue) => {
+        const updatedPropsHolder = propsHolder.current.map((item) => {
+            if (item.nameKey === nameKey) {
+                return {
+                    ...item,
+                    temporaryTextareaValue: newValue,
+                };
+            }
+            return item;
+        });
+        propsHolder.current = updatedPropsHolder;
+    };
+
     return (
         <>
             <p
@@ -40,6 +52,7 @@ const ExperienceBlock = () => {
                         propsHolder?.current?.[0]?.defaultTextareaValue
                     }
                     nameKey={propsHolder?.current?.[0]?.nameKey}
+                    setPropsHolder={setPropsHolder}
                 />
                 <CustomTextArea
                     placeholder={"Okres Pracy"}
@@ -48,6 +61,7 @@ const ExperienceBlock = () => {
                         propsHolder?.current?.[1]?.defaultTextareaValue
                     }
                     nameKey={propsHolder?.current?.[1]?.nameKey}
+                    setPropsHolder={setPropsHolder}
                 />
 
                 <CustomTextArea
@@ -57,6 +71,7 @@ const ExperienceBlock = () => {
                         propsHolder?.current?.[2]?.defaultTextareaValue
                     }
                     nameKey={propsHolder?.current?.[2]?.nameKey}
+                    setPropsHolder={setPropsHolder}
                 />
             </div>
         </>
