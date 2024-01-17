@@ -30,16 +30,19 @@ const EducationBlock = ({
                     placeholder={"Nazwa Szkoły"}
                     className={"text-base text-gray-600 font-[600]"}
                     defaultTextareaValue={firstVal}
+                    name={`educationBlock[${id}][firstVal]`}
                 />
                 <CustomTextArea
                     placeholder={"Okres Nauki"}
                     className={"text-xs text-gray-400 font-[400]"}
                     defaultTextareaValue={secondVal}
+                    name={`educationBlock[${id}][secondVal]`}
                 />
                 <CustomTextArea
                     placeholder={"Dodatkowe Informacje"}
                     className={"text-sm text-gray-500 font-[500]"}
                     defaultTextareaValue={thirdVal}
+                    name={`educationBlock[${id}][thirdVal]`}
                 />
             </div>
         </>

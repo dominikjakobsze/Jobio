@@ -19,6 +19,7 @@ use App\Models\Tperson;
 use App\Models\Treport;
 use App\Models\Tresume;
 use App\Services\ImageGeneratorService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -131,5 +132,8 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     //views&forms
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
     Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreateEdit']);
+    Route::patch('/endpoint/test/12', function (Request $request) {
+        dd($request->all());
+    });
     //endpoints
 });

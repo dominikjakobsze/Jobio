@@ -16,7 +16,7 @@ const TresumeEmployeeCreateEdit = () => {
                 <Spacer type={"extra-small"} />
                 <HomeCrums
                     name={"Panel Pracownika"}
-                    link={localUrl + "/profile/support"}
+                    link={localUrl + "/profile/employee"}
                 />
                 <Spacer type={"extra-large"} />
                 <ShHeader title={"Kreator CV"} />

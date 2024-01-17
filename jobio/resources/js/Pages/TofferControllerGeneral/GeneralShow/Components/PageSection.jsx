@@ -8,7 +8,7 @@ const PageSection = ({ offer }) => {
         JSON.parse(offer?.page_offer)?.page ?? "",
     );
     const [staticMap, setStaticMap] = React.useState(
-        `https://api.jawg.io/static?marker=color:012a4b,size:medium,label:O%7C${offer?.latitude},${offer?.longitude}&zoom=15&center=${offer?.latitude},${offer?.longitude}&size=1920x350&layer=jawg-streets&format=png&access-token=jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh`,
+        `https://api.jawg.io/static?marker=color:012a4b,size:medium,label:O%7C${offer?.latitude},${offer?.longitude}&zoom=15&center=${offer?.latitude},${offer?.longitude}&size=1000x350&layer=jawg-streets&access-token=jJNHET49eekqSetNpABgWWUYxS144E1aJeQe7wJHNSU2HSrZFKUzueYBnCtS93nh`,
     );
     console.log(page.length);
     return (

@@ -110,7 +110,7 @@ class TofferController extends Controller
         $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
         $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
         return Inertia::render('TofferControllerGeneral/GeneralShow/TofferGeneralShow', [
-            'offer' => DatabaseService::firstOrNotFoundWithTryCatch(ModelHelperService::$foundModel->with(["toftops.toption"])),
+            'offer' => DatabaseService::firstOrNotFoundWithTryCatch(Toffer::with(["toftops.toption"])->where('id', '=', ModelHelperService::$foundModel->id)),
             'randomOffers' => $randomOffers
         ]);
     }
@@ -121,7 +121,7 @@ class TofferController extends Controller
         $this->authorize('isUserOwnerOfOffer', ModelHelperService::$foundModel);
         return Inertia::render('TofferControllerEmployer/EmployerAssignFilters/TofferEmployerAssignFilters', [
             "offer" => ModelHelperService::$foundModel,
-            "active_options" => DatabaseService::firstOrNotFoundWithTryCatch(ModelHelperService::$foundModel->with(["toftops.toption"]))?->toftops,
+            "active_options" => DatabaseService::firstOrNotFoundWithTryCatch(Toffer::with(["toftops.toption"])->where('id', '=', ModelHelperService::$foundModel->id))?->toftops,
             "options" => [
                 "Technologia" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "T")),
                 "Narzędzia i Inne" => DatabaseService::getOrNotFoundWithTryCatch(Toption::where('option_type', '=', "D")),

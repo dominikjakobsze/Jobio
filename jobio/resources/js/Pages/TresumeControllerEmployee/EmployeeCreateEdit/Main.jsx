@@ -7,17 +7,33 @@ import ExperienceBlock from "./Components/ExperienceBlock";
 import { v4 as uuidv4 } from "uuid";
 
 const Main = () => {
+    const formRef = React.useRef(null);
     const [education, setEducation] = React.useState([]);
     const [experience, setExperience] = React.useState([]);
     return (
         <>
-            <div className="flex-[0_0_100%] shadow-standard p-5 flex flex-wrap flex-row items-start justify-start content-start self-start rounded-2xl bg-white gap-1">
-                <CustomTextArea placeholder={"Imię i Nazwisko"} />
+            <form
+                ref={formRef}
+                method="post"
+                encType="multipart/form-data"
+                action="/endpoint/test/12"
+                className="flex-[0_0_100%] shadow-standard p-5 flex flex-wrap flex-row items-start justify-start content-start self-start rounded-2xl bg-white gap-1"
+            >
+                <input
+                    className="hidden"
+                    type="text"
+                    name="_method"
+                    value="PATCH"
+                    readOnly={true}
+                />
+                <CustomTextArea name={"name"} placeholder={"Imię i Nazwisko"} />
                 <CustomTextArea
+                    name={"address"}
                     placeholder={"Dane Adresowe"}
                     className={"text-sm text-gray-400 font-[400]"}
                 />
                 <CustomTextArea
+                    name={"contact"}
                     placeholder={"Dane Kontaktowe"}
                     className={"text-sm text-gray-400 font-[400]"}
                 />
@@ -25,15 +41,11 @@ const Main = () => {
                     Podsumowanie
                 </h2>
                 <CustomTextArea
+                    name={"summary"}
                     placeholder={"Podsumowanie"}
                     className={"text-sm text-gray-600 font-[600]"}
                 />
-                <h2
-                    onClick={() => {
-                        console.log(education);
-                    }}
-                    className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all"
-                >
+                <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
                     Edukacja
                 </h2>
                 {education?.map((item, index) => {
@@ -69,21 +81,53 @@ const Main = () => {
                 <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
                     Doświadczenie
                 </h2>
+                {experience?.map((item, index) => {
+                    if (item?.componentName === "ExperienceBlock") {
+                        return (
+                            <ExperienceBlock
+                                key={item?.props?.id}
+                                setExperience={setExperience}
+                                {...item?.props}
+                            />
+                        );
+                    }
+                })}
                 <IoIosAddCircle
                     onClick={() => {
-                        console.log("experience");
+                        setExperience((prev) => {
+                            return [
+                                ...prev,
+                                {
+                                    componentName: "ExperienceBlock",
+                                    props: {
+                                        id: uuidv4(),
+                                        firstVal: "",
+                                        secondVal: "",
+                                        thirdVal: "",
+                                    },
+                                },
+                            ];
+                        });
                     }}
                     className="text-sky-400 text-4xl hover:brightness-110 cursor-pointer mx-auto"
                 />
-
-                <div className="flex-[0_0_100%]"></div>
+                <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
+                    Umiejętności
+                </h2>
+                <CustomTextArea
+                    name={"skills"}
+                    placeholder={"Opisz swoje umiejętności"}
+                    className={"text-sm text-gray-600 font-[600]"}
+                />
                 <SendFormButton
-                    mxAuto={"mx-auto"}
+                    mxAuto={"mx-auto mt-10"}
                     handleSendForm={async () => {
-                        console.log("SendFormButton");
+                        formRef.current.submit();
+                        // const formData = new FormData(formRef.current);
+                        // console.log(...formData);
                     }}
                 />
-            </div>
+            </form>
         </>
     );
 };

@@ -1,77 +1,48 @@
 import React from "react";
 import CustomTextArea from "./CustomTextArea";
+import { FaDeleteLeft } from "react-icons/fa6";
 
-const ExperienceBlock = ({ propsHolderDefault }) => {
-    const propsHolder = React.useRef(
-        propsHolderDefault ?? [
-            {
-                defaultTextareaValue: "",
-                temporaryTextareaValue: "",
-                nameKey: "company",
-            },
-            {
-                defaultTextareaValue: "",
-                temporaryTextareaValue: "",
-                nameKey: "work",
-            },
-            {
-                defaultTextareaValue: "",
-                temporaryTextareaValue: "",
-                nameKey: "respo",
-            },
-        ],
-    );
-
-    const setPropsHolder = (nameKey, newValue) => {
-        const updatedPropsHolder = propsHolder.current.map((item) => {
-            if (item.nameKey === nameKey) {
-                return {
-                    ...item,
-                    temporaryTextareaValue: newValue,
-                };
-            }
-            return item;
-        });
-        propsHolder.current = updatedPropsHolder;
-    };
-
+const ExperienceBlock = ({
+    firstVal,
+    secondVal,
+    thirdVal,
+    id,
+    setExperience,
+}) => {
     return (
         <>
-            <p
-                onClick={() => {
-                    console.log(propsHolder);
-                }}
-            >
-                test
-            </p>
-            <div className="bg-orange-500 flex-[0_0_100%] flex flex-row flex-wrap items-start content-start self-start justify-start">
+            <div className="flex-[0_0_100%] flex flex-row flex-wrap items-start content-start self-start justify-start">
+                <div className="flex-[0_0_100%] flex flex-row flex-wrap items-start self-start justify-end content-start my-2">
+                    <FaDeleteLeft
+                        onClick={() => {
+                            setExperience((prev) => {
+                                return prev?.filter((item) => {
+                                    if (item?.props?.id !== id) {
+                                        return item;
+                                    }
+                                });
+                            });
+                        }}
+                        className="text-red-400 text-3xl font-[700] hover:brightness-110 cursor-pointer"
+                    />
+                </div>
                 <CustomTextArea
                     placeholder={"Nazwa Firmy"}
                     className={"text-base text-gray-600 font-[600]"}
-                    defaultTextareaValue={
-                        propsHolder?.current?.[0]?.defaultTextareaValue
-                    }
-                    nameKey={propsHolder?.current?.[0]?.nameKey}
-                    setPropsHolder={setPropsHolder}
+                    defaultTextareaValue={firstVal}
+                    name={`experienceBlock[${id}][firstVal]`}
                 />
                 <CustomTextArea
                     placeholder={"Okres Pracy"}
                     className={"text-xs text-gray-400 font-[400]"}
-                    defaultTextareaValue={
-                        propsHolder?.current?.[1]?.defaultTextareaValue
-                    }
-                    nameKey={propsHolder?.current?.[1]?.nameKey}
-                    setPropsHolder={setPropsHolder}
+                    defaultTextareaValue={secondVal}
+                    name={`experienceBlock[${id}][secondVal]`}
                 />
-
                 <CustomTextArea
                     placeholder={"Obowiązki"}
                     className={"text-sm text-gray-500 font-[500]"}
-                    defaultTextareaValue={
-                        propsHolder?.current?.[2]?.defaultTextareaValue
-                    }
-                    nameKey={propsHolder?.current?.[2]?.nameKey}
-                    setPropsHolder={setPropsHolder}
+                    defaultTextareaValue={thirdVal}
+                    name={`experienceBlock[${id}][thirdVal]`}
                 />
             </div>
         </>

@@ -10,6 +10,7 @@ import axios from "axios";
 import ErrorContainer from "../../Shared/ErrorContainer";
 
 const Main = ({ offer, options, active_options }) => {
+    console.log(active_options);
     const [errors, setErrors] = React.useState([]);
     const formRef = React.useRef(null);
     const handleSendForm = async () => {
