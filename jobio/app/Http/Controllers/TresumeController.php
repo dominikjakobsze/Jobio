@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTresumeRequest;
 use App\Http\Requests\UpdateTresumeRequest;
 use App\Models\Tresume;
+use Inertia\Inertia;
 
 class TresumeController extends Controller
 {
-    public function employeeCreate()
+    public function employeeCreateEdit()
     {
-        dd("test");
+        return Inertia::render('TresumeControllerEmployee/EmployeeCreateEdit/TresumeEmployeeCreateEdit', []);
     }
 }

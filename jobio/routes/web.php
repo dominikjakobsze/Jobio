@@ -130,6 +130,6 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
     //views&forms
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
-    Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreate']);
+    Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreateEdit']);
     //endpoints
 });

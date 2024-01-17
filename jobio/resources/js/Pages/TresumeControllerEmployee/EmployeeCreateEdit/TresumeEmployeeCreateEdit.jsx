@@ -2,8 +2,12 @@ import HomeCrums from "../../Shared/HomeCrums";
 import MenuContainerLayout from "../../Shared/MenuContainerLayout";
 import MenuHeader from "../../Shared/MenuHeader";
 import Spacer from "../../Shared/Spacer";
+import { URL as localUrl } from "../../../app";
+import ShHeader from "../../Shared/ShHeader";
+import ShSubHeader from "../../Shared/ShSubHeader";
+import Main from "./Main";
 
-const TresumeEmployeeCreate = () => {
+const TresumeEmployeeCreateEdit = () => {
     return (
         <>
             <MenuContainerLayout>
@@ -11,19 +15,19 @@ const TresumeEmployeeCreate = () => {
                 <MenuHeader />
                 <Spacer type={"extra-small"} />
                 <HomeCrums
-                    name={"Panel Wsparcia"}
+                    name={"Panel Pracownika"}
                     link={localUrl + "/profile/support"}
                 />
                 <Spacer type={"extra-large"} />
-                <ShHeader title={"Zarządzanie Opcjami Filtrowania"} />
+                <ShHeader title={"Kreator CV"} />
                 <Spacer type={"small"} />
-                <ShSubHeader>Umożliwia definiowanie nowych filtrów</ShSubHeader>
+                <ShSubHeader>Stwórz lub edytuj swoje CV</ShSubHeader>
                 <Spacer type={"extra-large"} />
-                <Main options={options} />
+                <Main />
                 <Spacer type={"extra-large"} />
             </MenuContainerLayout>
         </>
     );
 };
 
-export default TresumeEmployeeCreate;
+export default TresumeEmployeeCreateEdit;
