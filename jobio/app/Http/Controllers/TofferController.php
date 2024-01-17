@@ -107,7 +107,7 @@ class TofferController extends Controller
     }
     public function generalShow()
     {
-        $randomOffers = Toffer::where('id', '!=', ModelHelperService::$foundModel->id)->get();
+        $randomOffers = DatabaseService::getOrNotFoundWithTryCatch(Toffer::where('id', '!=', ModelHelperService::$foundModel->id));
         $randomOffers = $randomOffers?->count() >= 3 ?  $randomOffers?->random(3) : [];
         return Inertia::render('TofferControllerGeneral/GeneralShow/TofferGeneralShow', [
             'offer' => DatabaseService::firstOrNotFoundWithTryCatch(Toffer::with(["toftops.toption"])->where('id', '=', ModelHelperService::$foundModel->id)),

@@ -15,14 +15,16 @@ const RandomOffersSection = ({ randomOffers }) => {
                 return (
                     <div
                         key={item?.id}
-                        className="f fr fw ss js items-stretch cs p-5 flex-[0_0_100%] shadow-md gap-5 cup hover:brightness-125"
-                        onClick={() => window.open(URL + `/offer/${item?.id}`)}
+                        className="f fr fw ss justify-center lg:justify-start items-stretch cs p-5 flex-[0_0_100%] shadow-md gap-5 cup hover:brightness-125"
+                        onClick={() =>
+                            window.open(URL + `/general/offer/${item?.id}`)
+                        }
                     >
                         <img
                             src={item?.company_icon}
                             className="flex-[0_0_100px] h-[100px] rounded-2xl ss"
                         />
-                        <div className="flex-[1_0_0] p-1 sc f fr fw js is cs">
+                        <div className="flex-[0_0_100%] lg:flex-[1_0_0] p-1 sc f fr fw js is cs">
                             <h2 className="flex-[0_0_100%] text-base text-gray-700 font-[600]">
                                 {item?.title}
                             </h2>
