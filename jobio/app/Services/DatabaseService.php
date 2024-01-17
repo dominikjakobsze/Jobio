@@ -60,6 +60,18 @@ class DatabaseService
             return abort(500, 'Problem z wyciągnięciem rekordu');
         }
     }
+    public static function firstOrNullWithTryCatch(Builder $builder)
+    {
+        try {
+            $model = $builder->first();
+            if ($model === null) {
+                return null;
+            }
+            return $model;
+        } catch (Exception $exception) {
+            return abort(500, 'Problem z wyciągnięciem rekordu');
+        }
+    }
     public static function getOrNotFoundWithTryCatch(Builder $builder)
     {
         try {
