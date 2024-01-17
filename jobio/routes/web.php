@@ -132,8 +132,6 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     //views&forms
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
     Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreateEdit']);
-    Route::patch('/endpoint/test/12', function (Request $request) {
-        dd($request->all());
-    });
     //endpoints
+    Route::patch('/endpoint/employee/resume-create-edit', [TresumeController::class, 'endpointEmployeeCreateEdit']);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreResumeRequest;
 use App\Http\Requests\StoreTresumeRequest;
 use App\Http\Requests\UpdateTresumeRequest;
 use App\Models\Tresume;
@@ -12,5 +13,10 @@ class TresumeController extends Controller
     public function employeeCreateEdit()
     {
         return Inertia::render('TresumeControllerEmployee/EmployeeCreateEdit/TresumeEmployeeCreateEdit', []);
+    }
+
+    public function endpointEmployeeCreateEdit(StoreResumeRequest $storeResumeRequest)
+    {
+        dd($storeResumeRequest->all(), $storeResumeRequest->validated());
     }
 }
