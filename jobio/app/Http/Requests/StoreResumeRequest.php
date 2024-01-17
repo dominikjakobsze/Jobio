@@ -20,7 +20,6 @@ class StoreResumeRequest extends FormRequest
             //let's say, if you add in rules() "test" and then you will try to set "test" and "test2" here
             //you will only see "test" key => value when you call ->validated(), "test2" will not be present
             //because it didn't get defined in rules()
-            dd($validatedData);
             $validatedDataCollection = collect($validatedData);
             $sanitizeTemplate = [
                 "name" => null,
@@ -35,15 +34,26 @@ class StoreResumeRequest extends FormRequest
             foreach ($sanitizeTemplate as $key => $value) {
                 if ($validatedDataCollection->has($key) === true) {
                     if ((bool)is_array($validatedDataCollection->get($key)) === true) {
-                        foreach ($validatedDataCollection->get($key) as $key => $value) {
-                            dd($key, $value);
+                        foreach ($validatedDataCollection->get($key) as $inKey => $inValue) {
+                            if ((bool)is_array($inValue) === true) {
+                                $inValue = collect($inValue);
+                                if ((bool)$inValue->has("firstVal") === true) {
+                                    $finalArray[$key][$inKey]["firstVal"] = $inValue->get("firstVal");
+                                }
+                                if ((bool)$inValue->has("secondVal") === true) {
+                                    $finalArray[$key][$inKey]["secondVal"] = $inValue->get("secondVal");
+                                }
+                                if ((bool)$inValue->has("thirdVal") === true) {
+                                    $finalArray[$key][$inKey]["thirdVal"] = $inValue->get("thirdVal");
+                                }
+                            }
                         }
                     } else {
                         $finalArray[$key] = $validatedDataCollection->get($key);
                     }
                 }
             }
-            dd($validatedDataCollection, $finalArray);
+            $setData($finalArray);
         });
     }
 

@@ -46,14 +46,6 @@ const Main = () => {
                     className={"text-sm text-gray-600 font-[600]"}
                 />
                 <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
-                    Umiejętności
-                </h2>
-                <CustomTextArea
-                    name={"skills"}
-                    placeholder={"Opisz swoje umiejętności"}
-                    className={"text-sm text-gray-600 font-[600]"}
-                />
-                <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
                     Edukacja
                 </h2>
                 {education?.map((item, index) => {
@@ -118,6 +110,14 @@ const Main = () => {
                         });
                     }}
                     className="text-sky-400 text-4xl hover:brightness-110 cursor-pointer mx-auto"
+                />
+                <h2 className="resize-none flex-[0_0_100%] p-2 outline-none text-xl text-gray-600 font-[700] border-transparent placeholder:opacity-[0.3] focus:border-transparent focus:bg-gray-100 focus:ring-0 overflow-hidden whitespace-pre-wrap text-clip break-all">
+                    Umiejętności
+                </h2>
+                <CustomTextArea
+                    name={"skills"}
+                    placeholder={"Opisz swoje umiejętności"}
+                    className={"text-sm text-gray-600 font-[600]"}
                 />
                 <SendFormButton
                     mxAuto={"mx-auto mt-10"}
