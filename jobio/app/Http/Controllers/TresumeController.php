@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreResumeRequest;
-use App\Http\Requests\StoreTresumeRequest;
-use App\Http\Requests\UpdateTresumeRequest;
-use App\Models\Tperson;
 use App\Models\Tresume;
 use App\Services\DatabaseService;
-use App\Services\DifferentiationService;
 use App\Services\UpdaterService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -20,7 +16,7 @@ class TresumeController extends Controller
         $templateData = DatabaseService::firstOrNullWithTryCatch(
             Tresume::select(["template_data"])->where("tperson_id", "=", Auth::guard('person')?->user()?->id)
         );
-        $templateData = $templateData !== null ? json_decode($templateData->template_data, true) : null;
+        $templateData = $templateData !== null ? collect(json_decode($templateData->template_data, true)) : null;
 
         if ($templateData !== null) {
             $blockNames = collect($templateData)
@@ -45,8 +41,6 @@ class TresumeController extends Controller
                 })
                 ->values();
 
-            $templateData = collect($templateData);
-
             $blockNames->pluck('componentName')->each(function ($key) use ($templateData) {
                 $templateData->forget($key);
             });
@@ -55,8 +49,6 @@ class TresumeController extends Controller
                 $props = $group->pluck('props')->toArray();
                 $templateData->put($componentName, $props);
             });
-
-            dd($templateData, $blockNames);
         }
 
         return Inertia::render('TresumeControllerEmployee/EmployeeCreateEdit/TresumeEmployeeCreateEdit', [
