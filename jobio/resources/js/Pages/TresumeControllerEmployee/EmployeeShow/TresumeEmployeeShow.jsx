@@ -1,3 +1,9 @@
+import HomeCrums from "../../Shared/HomeCrums";
+import MenuHeader from "../../Shared/MenuHeader";
+import Spacer from "../../Shared/Spacer";
+import { URL as localUrl } from "../../../app";
+import MenuContainerLayout from "../../Shared/MenuContainerLayout";
+
 const TresumeEmployeeShow = ({ resume }) => {
     const renderBlocks = () => {
         if (!resume?.blocks) {
@@ -45,25 +51,34 @@ const TresumeEmployeeShow = ({ resume }) => {
 
     return (
         <>
-            <div className="mx-auto w-full max-w-[1440px] p-3 lg:p-10 flex flex-row flex-wrap items-start justify-start content-start self-start">
-                <div className="min-h-[100dvh] shadow-standard p-3 lg:p-10 rounded-2xl flex flex-row flex-wrap items-start justify-start content-start self-start flex-[0_0_100%] bg-gray-100">
+            <MenuContainerLayout>
+                <Spacer type={"large"} />
+                <Spacer type={"small"} />
+                <MenuHeader />
+                <Spacer type={"extra-small"} />
+                <HomeCrums
+                    link={`${localUrl}/profile/employee`}
+                    name={"Panel Pracownika"}
+                />
+                <Spacer type={"large"} />
+                <div className="min-h-[100dvh] shadow-standard p-3 lg:p-10 rounded-2xl flex flex-row flex-wrap items-start justify-start content-start self-start flex-[0_0_100%] bg-gray-50">
                     {resume?.name ? (
                         <>
-                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-4xl font-[700] text-gray-700">
+                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-2xl lg:text-4xl font-[700] text-gray-700 text-center lg:text-left">
                                 {resume?.name}
                             </h1>
                         </>
                     ) : null}
                     {resume?.address ? (
                         <>
-                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-sm font-[400] text-gray-400">
+                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-sm font-[400] text-gray-400 text-center lg:text-left mt-3 lg:mt-0">
                                 {resume?.address}
                             </h1>
                         </>
                     ) : null}
                     {resume?.contact ? (
                         <>
-                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-sm font-[400] text-gray-400">
+                            <h1 className="flex-[0_0_100%] text-clip whitespace-pre-wrap overflow-visible break-words text-sm font-[400] text-gray-400 text-center lg:text-left mt-3 lg:mt-0">
                                 {resume?.contact}
                             </h1>
                         </>
@@ -90,7 +105,9 @@ const TresumeEmployeeShow = ({ resume }) => {
                         </>
                     ) : null}
                 </div>
-            </div>
+                <Spacer type={"extra-large"} />
+                <Spacer type={"extra-large"} />
+            </MenuContainerLayout>
         </>
     );
 };
