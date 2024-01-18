@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreResumeRequest;
 use App\Models\Tresume;
+use App\Models\Tretof;
 use App\Services\DatabaseService;
+use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -43,6 +45,36 @@ class TresumeController extends Controller
                 "template_data" => $validatedData->toJson(),
             ],
             model: $tresume ?? new Tresume()
+        );
+        $result = DatabaseService::saveWithTryCatch(
+            model: $returnedModel
+        );
+        return response()->json(
+            data: $result,
+            status: 200,
+            headers: []
+        );
+    }
+
+    public function endpointEmployeeResumeApplyOffer()
+    {
+        $resume = DatabaseService::firstOrNullWithTryCatch(Tresume::where("tperson_id", "=", Auth::guard('person')->user()->id));
+        if ($resume === null) {
+            return abort(404, "Nie możesz zaaplikować na ofertę ponieważ nie posiadasz CV!");
+        }
+        $alreadyApplied = DatabaseService::firstOrNullWithTryCatch(
+            Tretof::where("toffer_id", "=", ModelHelperService::$foundModel->id)
+                ->where("tresume_id", "=", $resume->id)
+        );
+        if ($alreadyApplied !== null) {
+            return abort(404, "Już zaaplikowałeś na tę ofertę!");
+        }
+        $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
+            toAssignArray: [
+                "toffer_id" => ModelHelperService::$foundModel->id,
+                "tresume_id" => $resume->id,
+            ],
+            model: new Tretof()
         );
         $result = DatabaseService::saveWithTryCatch(
             model: $returnedModel

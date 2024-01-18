@@ -29,7 +29,7 @@ const Main = ({ offer, randomOffers }) => {
                 ) : null;
             }, [])}
             {React.useMemo(() => {
-                return <ApplySection />;
+                return <ApplySection offer={offer} />;
             }, [])}
         </>
     );

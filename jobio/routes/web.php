@@ -124,6 +124,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Toffer'])->group(function () {
         //views&forms
         //endpoints
+        Route::get('/endpoint/employee/resume/apply/offer/{id}', [TresumeController::class, 'endpointEmployeeResumeApplyOffer']);
     });
 });
 
