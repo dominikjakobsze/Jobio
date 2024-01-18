@@ -7,10 +7,14 @@ import ExperienceBlock from "./Components/ExperienceBlock";
 import { v4 as uuidv4 } from "uuid";
 
 const Main = ({ resume }) => {
-    console.log(resume?.educationBlock);
+    console.log(resume?.blocks?.educationBlock);
     const formRef = React.useRef(null);
-    const [education, setEducation] = React.useState([]);
-    const [experience, setExperience] = React.useState([]);
+    const [education, setEducation] = React.useState(
+        resume?.blocks?.educationBlock ?? [],
+    );
+    const [experience, setExperience] = React.useState(
+        resume?.blocks?.experienceBlock ?? [],
+    );
     return (
         <>
             <form

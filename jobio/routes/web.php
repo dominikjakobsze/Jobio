@@ -18,6 +18,7 @@ use App\Models\Toption;
 use App\Models\Tperson;
 use App\Models\Treport;
 use App\Models\Tresume;
+use App\Rules\ForbiddenIfFieldPresent;
 use App\Services\ImageGeneratorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 /*
@@ -134,4 +136,49 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreateEdit']);
     //endpoints
     Route::patch('/endpoint/employee/resume-create-edit', [TresumeController::class, 'endpointEmployeeCreateEdit']);
+});
+
+Route::get('/test/test', function () {
+    $validator = Validator::make(
+        [
+            "for_rent" => true,
+            "for_sale" => true,
+            "sale_price" => 1000,
+            "rent_price" => 2000,
+        ],
+        [
+            "for_rent" => [
+                new ForbiddenIfFieldPresent(
+                    ["for_sale", "sale_price"]
+                ),
+                "sometimes",
+                "filled"
+            ],
+            "for_sale" => [
+                new ForbiddenIfFieldPresent(
+                    ["for_rent", "rent_price"]
+                ),
+                "sometimes",
+                "filled"
+            ],
+            "sale_price" => [
+                new ForbiddenIfFieldPresent(
+                    ["for_rent", "rent_price"]
+                ),
+                "sometimes",
+                "nullable"
+            ],
+            "rent_price" => [
+                new ForbiddenIfFieldPresent(
+                    ["for_sale", "sale_price"]
+                ),
+                "sometimes",
+                "nullable"
+            ],
+        ]
+    );
+    if ($validator->fails()) {
+        dd($validator->errors()->getMessages());
+    }
+    dd($validator->validated());
 });
