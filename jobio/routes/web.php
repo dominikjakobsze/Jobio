@@ -6,28 +6,11 @@ use App\Http\Controllers\TofferController;
 use App\Http\Controllers\ToptionController;
 use App\Http\Controllers\TpersonController;
 use App\Http\Controllers\TresumeController;
-use App\Http\Middleware\CheckIfModelExists;
-use App\Http\Middleware\EnsureUserIsEmployer;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
-use App\Http\Requests\StorePostRequest;
-use App\Models\Tfile;
-use App\Models\Tlog;
-use App\Models\Toffer;
-use App\Models\Toftop;
-use App\Models\Toption;
-use App\Models\Tperson;
-use App\Models\Treport;
-use App\Models\Tresume;
-use App\Rules\ForbiddenIfFieldPresent;
-use App\Services\ImageGeneratorService;
-use Illuminate\Http\Request;
+use App\Rules\OneOfFieldsMustBePresentButNotBoth;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,39 +125,40 @@ Route::get('/test/test', function () {
     $validator = Validator::make(
         [
             "for_rent" => true,
-            "for_sale" => true,
-            "sale_price" => 1000,
-            "rent_price" => 2000,
+            //"for_sale" => true,
+            "sale_price" => null,
+            "rent_price" => null,
         ],
         [
             "for_rent" => [
-                new ForbiddenIfFieldPresent(
-                    ["for_sale", "sale_price"]
+                new OneOfFieldsMustBePresentButNotBoth(
+                    conflictFieldName: "for_sale"
                 ),
-                "sometimes",
                 "filled"
             ],
             "for_sale" => [
-                new ForbiddenIfFieldPresent(
-                    ["for_rent", "rent_price"]
+                new OneOfFieldsMustBePresentButNotBoth(
+                    conflictFieldName: "for_rent"
                 ),
-                "sometimes",
                 "filled"
             ],
             "sale_price" => [
-                new ForbiddenIfFieldPresent(
-                    ["for_rent", "rent_price"]
-                ),
-                "sometimes",
+                "present_with:for_sale",
+                "exclude_without:for_sale",
                 "nullable"
             ],
             "rent_price" => [
-                new ForbiddenIfFieldPresent(
-                    ["for_sale", "sale_price"]
-                ),
-                "sometimes",
+                "present_with:for_rent",
+                "exclude_without:for_rent",
                 "nullable"
             ],
+        ],
+        [],
+        [
+            "rent_price" => "cena najmu",
+            "sale_price" => "cena sprzedazy",
+            "for_sale" => "na sprzedaz",
+            "for_rent" => "do wynajecia",
         ]
     );
     if ($validator->fails()) {

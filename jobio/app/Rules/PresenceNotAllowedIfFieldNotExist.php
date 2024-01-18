@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Support\Arr;
 
-class MustBePresentIfFieldExistsOtherwisePresenceNotAllowed implements ValidationRule, DataAwareRule
+class PresenceNotAllowedIfFieldNotExist implements ValidationRule, DataAwareRule
 {
     public function __construct(public array $mustExistFields)
     {
@@ -24,6 +24,10 @@ class MustBePresentIfFieldExistsOtherwisePresenceNotAllowed implements Validatio
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        dd($value, $attribute, $this->data, $this->mustExistFields);
+        collect($this->mustExistFields)->each(function ($value, $key) use (&$fail, &$attribute) {
+            if ((bool)Arr::has($this->data, $value) === false) {
+                $fail("Pole: " . $value . " nie istnieje, więc przełanie pola: " . $attribute . " jest niedozwolone");
+            }
+        });
     }
 }
