@@ -14,29 +14,29 @@ const Main = ({ resumes }) => {
                     return (
                         <ResourceListItem
                             key={resume?.id}
-                            right={resume?.toffer_id}
+                            right={resume?.created_at}
                             rightClasses={"text-gray-500"}
-                            rightText={"Zaaplikowano na: "}
+                            rightText={"Zaaplikowano o: "}
                             breakLayout={
                                 "flex-[0_0_100%] lg:flex-[0_0_45%] xl:flex-[0_0_30%]"
                             }
                             ActionButtons={[
                                 <ActionButton
-                                    key={resume?.id + "d"}
+                                    key={resume?.id + "u"}
                                     text={"Odrzuć"}
                                     typeClasses={
                                         "bg-red-300/50 border border-solid border-red-500/50 text-red-400"
                                     }
                                 />,
                                 <ActionButton
-                                    key={resume?.id + "d"}
+                                    key={resume?.id + "o"}
                                     text={"Oferta"}
                                     typeClasses={
                                         "bg-purple-300/50 border border-solid border-purple-500/50 text-purple-400"
                                     }
                                 />,
                                 <ActionButton
-                                    key={resume?.id + "d"}
+                                    key={resume?.id + "cv"}
                                     text={"CV"}
                                     typeClasses={
                                         "bg-lime-300/50 border border-solid border-lime-500/50 text-lime-400"
