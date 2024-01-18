@@ -9,6 +9,7 @@ use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Validator;
 
+//it works just like "present", but this "present" is aware of other fields and has logic implied
 class OneOfFieldsMustBePresentButNotBoth implements ValidationRule, DataAwareRule, ValidatorAwareRule
 {
     public $implicit = true; //makes it run even if field is not present in input data, when false it only runs when field is present in input data
