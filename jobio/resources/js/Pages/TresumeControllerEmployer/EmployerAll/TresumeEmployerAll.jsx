@@ -5,8 +5,9 @@ import ShHeader from "../../Shared/ShHeader";
 import ShSubHeader from "../../Shared/ShSubHeader";
 import Spacer from "../../Shared/Spacer";
 import { URL as localUrl } from "../../../app";
+import Main from "./Main";
 
-const TresumeEmployerAll = () => {
+const TresumeEmployerAll = ({ resumes }) => {
     return (
         <>
             <MenuContainerLayout>
@@ -22,6 +23,7 @@ const TresumeEmployerAll = () => {
                 <Spacer type={"small"} />
                 <ShSubHeader>Przejrzyj złożone CV!</ShSubHeader>
                 <Spacer type={"extra-large"} />
+                <Main resumes={resumes} />
                 <Spacer type={"extra-large"} />
             </MenuContainerLayout>
         </>

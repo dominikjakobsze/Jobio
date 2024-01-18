@@ -9,6 +9,7 @@ use App\Models\Tretof;
 use App\Services\DatabaseService;
 use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Js;
@@ -24,10 +25,11 @@ class TresumeController extends Controller
         if ($returned->pluck("id")->count() != 0) {
             $offerIds = $returned->pluck("id")->toArray();
             $resumes = DatabaseService::getOrNotFoundWithTryCatch(
-                DB::whereIn("toffer_id", $offerIds)
+                Tretof::whereIn("toffer_id", $offerIds)
             );
-            // dd($resumes->)
         }
+        $resumes = $resumes ?? [];
+        $resumes = empty($resumes) ? null : $resumes;
         return Inertia::render('TresumeControllerEmployer/EmployerAll/TresumeEmployerAll', [
             "resumes" => $resumes,
         ]);
