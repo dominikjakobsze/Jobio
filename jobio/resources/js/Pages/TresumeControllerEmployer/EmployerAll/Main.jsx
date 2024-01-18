@@ -3,6 +3,7 @@ import Spacer from "../../Shared/Spacer";
 import ResourceListItem from "../../Shared/ResourceListItem";
 import ActionButton from "../../Shared/ActionButton";
 import DisplayDate from "../../Shared/DisplayDate";
+import { URL as localUrl, exceptionBlock } from "../../../app";
 
 const Main = ({ resumes }) => {
     console.log(resumes);
