@@ -28,6 +28,7 @@ class TresumeController extends Controller
                 Tretof::whereIn("toffer_id", $offerIds)
             );
         }
+        $resumes = $resumes->toArray();
         $resumes = $resumes ?? [];
         $resumes = empty($resumes) ? null : $resumes;
         return Inertia::render('TresumeControllerEmployer/EmployerAll/TresumeEmployerAll', [

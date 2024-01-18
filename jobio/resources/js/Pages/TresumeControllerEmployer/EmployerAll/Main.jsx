@@ -2,6 +2,7 @@ import React from "react";
 import Spacer from "../../Shared/Spacer";
 import ResourceListItem from "../../Shared/ResourceListItem";
 import ActionButton from "../../Shared/ActionButton";
+import DisplayDate from "../../Shared/DisplayDate";
 
 const Main = ({ resumes }) => {
     console.log(resumes);
@@ -14,7 +15,9 @@ const Main = ({ resumes }) => {
                     return (
                         <ResourceListItem
                             key={resume?.id}
-                            right={resume?.created_at}
+                            right={
+                                <DisplayDate _timestamp={resume?.created_at} />
+                            }
                             rightClasses={"text-gray-500"}
                             rightText={"Zaaplikowano o: "}
                             breakLayout={
