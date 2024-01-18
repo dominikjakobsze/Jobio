@@ -113,12 +113,14 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     });
 });
 
-Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee'])->group(function () {
+Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employee,rer'])->group(function () {
     //views&forms
     Route::get('/profile/employee', [TpersonController::class, 'profileEmployee']);
     Route::get('/employee/resume-create-edit', [TresumeController::class, 'employeeCreateEdit']);
+    Route::get('/employee/resume', [TresumeController::class, 'employeeShow']);
     //endpoints
     Route::patch('/endpoint/employee/resume-create-edit', [TresumeController::class, 'endpointEmployeeCreateEdit']);
+    //Additional Middlewares
 });
 
 Route::get('/test/test', function () {

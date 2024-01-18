@@ -7,6 +7,7 @@ import ShSubHeader from "./ShSubHeader";
 import Spacer from "./Spacer";
 import MenuBlockButtonsContainer from "./MenuBlockButtonsContainer";
 import MenuBlockButton from "./MenuBlockButton";
+import { IoDocumentText } from "react-icons/io5";
 
 const EmployerMenu = () => {
     return (
@@ -21,10 +22,10 @@ const EmployerMenu = () => {
             <Spacer type={"medium"} />
             <MenuBlockButtonsContainer>
                 <MenuBlockButton
-                    actionTitle={"Lista Aplikacji"}
-                    link={`${localUrl}/`}
+                    actionTitle={"Podgląd CV"}
+                    link={`${localUrl}/employee/resume`}
                     IconComponent={
-                        <MdLocalOffer className="text-gray-700 text-5xl font-[700]" />
+                        <IoDocumentText className="text-gray-700 text-5xl font-[700]" />
                     }
                 />
                 <MenuBlockButton

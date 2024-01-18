@@ -132,6 +132,7 @@ const Main = ({ resume }) => {
                     Umiejętności
                 </h2>
                 <CustomTextArea
+                    defaultTextareaValue={resume?.skills ?? ""}
                     name={"skills"}
                     placeholder={"Opisz swoje umiejętności"}
                     className={"text-sm text-gray-600 font-[600]"}

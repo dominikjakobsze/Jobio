@@ -22,6 +22,17 @@ class TresumeController extends Controller
         ]);
     }
 
+    public function employeeShow()
+    {
+        $templateData = DatabaseService::firstOrNotFoundWithTryCatch(
+            Tresume::select(["template_data"])->where("tperson_id", "=", Auth::guard('person')?->user()?->id)
+        );
+
+        return Inertia::render('TresumeControllerEmployee/EmployeeShow/TresumeEmployeeShow', [
+            "resume" => $templateData !== null ? json_decode($templateData->template_data, true) : null,
+        ]);
+    }
+
     public function endpointEmployeeCreateEdit(StoreResumeRequest $storeResumeRequest)
     {
         $tresume = DatabaseService::firstOrNullWithTryCatch(Tresume::where("tperson_id", "=", Auth::guard('person')?->user()?->id));

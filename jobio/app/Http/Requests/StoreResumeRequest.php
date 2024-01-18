@@ -21,7 +21,6 @@ class StoreResumeRequest extends FormRequest
             //let's say, if you add in rules() "test" and then you will try to set "test" and "test2" here
             //you will only see "test" key => value when you call ->validated(), "test2" will not be present
             //because it didn't get defined in rules()
-
             if (Arr::has($validatedData, "blocks") === true) {
                 collect(Arr::get($validatedData, "blocks"))
                     ->keys()
