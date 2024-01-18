@@ -7,7 +7,7 @@ import ShHeader from "../../Shared/ShHeader";
 import ShSubHeader from "../../Shared/ShSubHeader";
 import Main from "./Main";
 
-const TresumeEmployeeCreateEdit = () => {
+const TresumeEmployeeCreateEdit = ({ resume }) => {
     return (
         <>
             <MenuContainerLayout>
@@ -23,7 +23,7 @@ const TresumeEmployeeCreateEdit = () => {
                 <Spacer type={"small"} />
                 <ShSubHeader>Stwórz lub edytuj swoje CV</ShSubHeader>
                 <Spacer type={"extra-large"} />
-                <Main />
+                <Main resume={resume} />
                 <Spacer type={"extra-large"} />
             </MenuContainerLayout>
         </>

@@ -6,7 +6,8 @@ import EducationBlock from "./Components/EducationBlock";
 import ExperienceBlock from "./Components/ExperienceBlock";
 import { v4 as uuidv4 } from "uuid";
 
-const Main = () => {
+const Main = ({ resume }) => {
+    console.log(resume?.educationBlock);
     const formRef = React.useRef(null);
     const [education, setEducation] = React.useState([]);
     const [experience, setExperience] = React.useState([]);
@@ -26,13 +27,19 @@ const Main = () => {
                     value="PATCH"
                     readOnly={true}
                 />
-                <CustomTextArea name={"name"} placeholder={"Imię i Nazwisko"} />
                 <CustomTextArea
+                    defaultTextareaValue={resume?.name ?? ""}
+                    name={"name"}
+                    placeholder={"Imię i Nazwisko"}
+                />
+                <CustomTextArea
+                    defaultTextareaValue={resume?.address ?? ""}
                     name={"address"}
                     placeholder={"Dane Adresowe"}
                     className={"text-sm text-gray-400 font-[400]"}
                 />
                 <CustomTextArea
+                    defaultTextareaValue={resume?.contact ?? ""}
                     name={"contact"}
                     placeholder={"Dane Kontaktowe"}
                     className={"text-sm text-gray-400 font-[400]"}
@@ -41,6 +48,7 @@ const Main = () => {
                     Podsumowanie
                 </h2>
                 <CustomTextArea
+                    defaultTextareaValue={resume?.summary ?? ""}
                     name={"summary"}
                     placeholder={"Podsumowanie"}
                     className={"text-sm text-gray-600 font-[600]"}
@@ -75,6 +83,7 @@ const Main = () => {
                                 },
                             ];
                         });
+                        console.log(education);
                     }}
                     className="text-sky-400 text-4xl hover:brightness-110 cursor-pointer mx-auto"
                 />

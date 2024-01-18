@@ -17,7 +17,51 @@ class TresumeController extends Controller
 {
     public function employeeCreateEdit()
     {
-        return Inertia::render('TresumeControllerEmployee/EmployeeCreateEdit/TresumeEmployeeCreateEdit', []);
+        $templateData = DatabaseService::firstOrNullWithTryCatch(
+            Tresume::select(["template_data"])->where("tperson_id", "=", Auth::guard('person')?->user()?->id)
+        );
+        $templateData = $templateData !== null ? json_decode($templateData->template_data, true) : null;
+
+        if ($templateData !== null) {
+            $blockNames = collect($templateData)
+                ->filter(function ($value) {
+                    return is_array($value);
+                })
+                ->flatMap(function ($value, $key) {
+                    if (!is_string($key) || empty($value)) {
+                        return [];
+                    }
+
+                    $blockName = ["componentName" => $key, "props" => []];
+
+                    return collect($value)->map(function ($inValue, $inKey) use ($blockName) {
+                        if (!is_string($inKey) || !is_array($inValue)) {
+                            return null;
+                        }
+                        $blockName["props"]["id"] = $inKey;
+                        $blockName["props"] = array_merge($blockName["props"], $inValue);
+                        return $blockName;
+                    });
+                })
+                ->values();
+
+            $templateData = collect($templateData);
+
+            $blockNames->pluck('componentName')->each(function ($key) use ($templateData) {
+                $templateData->forget($key);
+            });
+
+            $blockNames->groupBy('componentName')->each(function ($group, $componentName) use ($templateData) {
+                $props = $group->pluck('props')->toArray();
+                $templateData->put($componentName, $props);
+            });
+
+            dd($templateData, $blockNames);
+        }
+
+        return Inertia::render('TresumeControllerEmployee/EmployeeCreateEdit/TresumeEmployeeCreateEdit', [
+            "resume" => $templateData,
+        ]);
     }
 
     public function endpointEmployeeCreateEdit(StoreResumeRequest $storeResumeRequest)
