@@ -6,6 +6,7 @@ use App\Rules\OptionAlreadyDefined;
 use App\Traits\CustomFailedValidationTrait;
 use App\Traits\TransformValidatedTrait;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class StoreResumeRequest extends FormRequest
 {
@@ -20,40 +21,21 @@ class StoreResumeRequest extends FormRequest
             //let's say, if you add in rules() "test" and then you will try to set "test" and "test2" here
             //you will only see "test" key => value when you call ->validated(), "test2" will not be present
             //because it didn't get defined in rules()
-            $validatedDataCollection = collect($validatedData);
-            $sanitizeTemplate = [
-                "name" => null,
-                "address" => null,
-                "contact" => null,
-                "summary" => null,
-                "skills" => null,
-                "educationBlock" => null,
-                "experienceBlock" => null,
-            ];
-            $finalArray = [];
-            foreach ($sanitizeTemplate as $key => $value) {
-                if ($validatedDataCollection->has($key) === true) {
-                    if ((bool)is_array($validatedDataCollection->get($key)) === true) {
-                        foreach ($validatedDataCollection->get($key) as $inKey => $inValue) {
-                            if ((bool)is_array($inValue) === true) {
-                                $inValue = collect($inValue);
-                                if ((bool)$inValue->has("firstVal") === true) {
-                                    $finalArray[$key][$inKey]["firstVal"] = $inValue->get("firstVal");
-                                }
-                                if ((bool)$inValue->has("secondVal") === true) {
-                                    $finalArray[$key][$inKey]["secondVal"] = $inValue->get("secondVal");
-                                }
-                                if ((bool)$inValue->has("thirdVal") === true) {
-                                    $finalArray[$key][$inKey]["thirdVal"] = $inValue->get("thirdVal");
-                                }
-                            }
+
+            if (Arr::has($validatedData, "blocks") === true) {
+                collect(Arr::get($validatedData, "blocks"))
+                    ->keys()
+                    ->each(function ($item, $key) use (&$validatedData) {
+                        if (Arr::has($validatedData, "blocks." . $item) === true) {
+                            Arr::set(
+                                $validatedData,
+                                "blocks." . $item,
+                                collect(Arr::get($validatedData, "blocks." . $item))->values()->toArray()
+                            );
                         }
-                    } else {
-                        $finalArray[$key] = $validatedDataCollection->get($key);
-                    }
-                }
+                    });
+                $setData($validatedData);
             }
-            $setData($finalArray);
         });
     }
 
@@ -70,14 +52,6 @@ class StoreResumeRequest extends FormRequest
             "contact" => "Pole Kontakt",
             "summary" => "Pole Podsumowanie",
             "skills" => "Pole Umiejętności",
-            "educationBlock" => "Sekcja Edukacja",
-            "educationBlock.*.firstVal" => "Pole Nazwa Szkoły",
-            "educationBlock.*.secondVal" => "Pole Okres Nauki",
-            "educationBlock.*.thirdVal" => "Pole Dodatkowe Informacje",
-            "experienceBlock" => "Sekcja Doświadczenie",
-            "experienceBlock.*.firstVal" => "Pole Nazwa Firmy",
-            "experienceBlock.*.secondVal" => "Pole Okres Pracy",
-            "experienceBlock.*.thirdVal" => "Pole Obowiązki",
         ];
     }
 
@@ -95,14 +69,7 @@ class StoreResumeRequest extends FormRequest
             "contact" => ["present", "filled", "string"],
             "summary" => ["sometimes", "nullable", "string"],
             "skills" => ["sometimes", "nullable", "string"],
-            "educationBlock" => ["sometimes", "filled", "array"],
-            "experienceBlock" => ["sometimes", "filled", "array"],
-            "educationBlock.*.firstVal" => ["present_with:educationBlock", "filled", "string"],
-            "educationBlock.*.secondVal" => ["present_with:educationBlock", "filled", "string"],
-            "educationBlock.*.thirdVal" => ["present_with:educationBlock", "nullable", "string"],
-            "experienceBlock.*.firstVal" => ["present_with:experienceBlock", "filled", "string"],
-            "experienceBlock.*.secondVal" => ["present_with:experienceBlock", "filled", "string"],
-            "experienceBlock.*.thirdVal" => ["present_with:experienceBlock", "filled", "string"],
+            "blocks" => ["sometimes", "filled", "array"],
         ];
     }
     public function messages(): array
@@ -113,7 +80,6 @@ class StoreResumeRequest extends FormRequest
             "name.regex" => ":attribute może zawierać jedynie litery alfabetu",
             "string" => ":attribute musi być tekstem",
             "array" => "Coś jest nie tak z :attribute",
-            "present_with" => "Brakuje :attribute",
         ];
     }
 }

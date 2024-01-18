@@ -26,23 +26,37 @@ const ExperienceBlock = ({
                         className="text-red-400 text-3xl font-[700] hover:brightness-110 cursor-pointer"
                     />
                 </div>
+                <input
+                    readOnly={true}
+                    type="text"
+                    className="hidden"
+                    name={`blocks[experienceBlock][${id}][componentName]`}
+                    value={"ExperienceBlock"}
+                />
+                <input
+                    readOnly={true}
+                    type="text"
+                    className="hidden"
+                    name={`blocks[experienceBlock][${id}][props][id]`}
+                    value={`${id}`}
+                />
                 <CustomTextArea
                     placeholder={"Nazwa Firmy"}
                     className={"text-base text-gray-600 font-[600]"}
                     defaultTextareaValue={firstVal}
-                    name={`experienceBlock[${id}][firstVal]`}
+                    name={`blocks[experienceBlock][${id}][props][firstVal]`}
                 />
                 <CustomTextArea
                     placeholder={"Okres Pracy"}
                     className={"text-xs text-gray-400 font-[400]"}
                     defaultTextareaValue={secondVal}
-                    name={`experienceBlock[${id}][secondVal]`}
+                    name={`blocks[experienceBlock][${id}][props][secondVal]`}
                 />
                 <CustomTextArea
                     placeholder={"Obowiązki"}
                     className={"text-sm text-gray-500 font-[500]"}
                     defaultTextareaValue={thirdVal}
-                    name={`experienceBlock[${id}][thirdVal]`}
+                    name={`blocks[experienceBlock][${id}][props][thirdVal]`}
                 />
             </div>
         </>
