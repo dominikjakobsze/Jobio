@@ -31,6 +31,7 @@ const Main = ({ offer, randomOffers }) => {
             {React.useMemo(() => {
                 return <ApplySection offer={offer} />;
             }, [])}
+            <Spacer type={"medium"} />
         </>
     );
 };

@@ -9,6 +9,7 @@ use App\Services\DatabaseService;
 use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Js;
 use Inertia\Inertia;
 
 class TresumeController extends Controller
@@ -60,14 +61,26 @@ class TresumeController extends Controller
     {
         $resume = DatabaseService::firstOrNullWithTryCatch(Tresume::where("tperson_id", "=", Auth::guard('person')->user()->id));
         if ($resume === null) {
-            return abort(404, "Nie możesz zaaplikować na ofertę ponieważ nie posiadasz CV!");
+            return abort(409, json_encode(
+                [
+                    [
+                        "error" => "Nie możesz zaaplikować na ofertę ponieważ nie posiadasz CV!"
+                    ]
+                ]
+            ));
         }
         $alreadyApplied = DatabaseService::firstOrNullWithTryCatch(
             Tretof::where("toffer_id", "=", ModelHelperService::$foundModel->id)
                 ->where("tresume_id", "=", $resume->id)
         );
         if ($alreadyApplied !== null) {
-            return abort(404, "Już zaaplikowałeś na tę ofertę!");
+            return abort(409, json_encode(
+                [
+                    [
+                        "error" => "Już zaaplikowałeś na tę ofertę!"
+                    ]
+                ]
+            ));
         }
         $returnedModel = UpdaterService::assignValuesToModelWithTryCatch(
             toAssignArray: [

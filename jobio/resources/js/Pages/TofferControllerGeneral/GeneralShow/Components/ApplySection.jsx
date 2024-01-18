@@ -8,7 +8,6 @@ const ApplySection = ({ offer }) => {
     const [errors, setErrors] = React.useState([]);
     return (
         <>
-            <ErrorContainer errors={errors} />
             <div className="bg-transparent p-5 w-full mx-auto f fr fw ss jc is cs mt-10">
                 <div
                     onClick={async () => {
@@ -28,6 +27,7 @@ const ApplySection = ({ offer }) => {
                     Zaaplikuj
                 </div>
             </div>
+            <ErrorContainer errors={errors} />
         </>
     );
 };
