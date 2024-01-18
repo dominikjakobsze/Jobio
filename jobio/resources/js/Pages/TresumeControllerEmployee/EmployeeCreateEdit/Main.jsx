@@ -5,9 +5,13 @@ import { IoIosAddCircle } from "react-icons/io";
 import EducationBlock from "./Components/EducationBlock";
 import ExperienceBlock from "./Components/ExperienceBlock";
 import { v4 as uuidv4 } from "uuid";
+import { URL as localUrl, exceptionBlock } from "../../../app";
+import axios from "axios";
+import ErrorContainer from "../../Shared/ErrorContainer";
 
 const Main = ({ resume }) => {
     console.log(resume?.blocks?.educationBlock);
+    const [errors, setErrors] = React.useState([]);
     const formRef = React.useRef(null);
     const [education, setEducation] = React.useState(
         resume?.blocks?.educationBlock ?? [],
@@ -132,12 +136,30 @@ const Main = ({ resume }) => {
                     placeholder={"Opisz swoje umiejętności"}
                     className={"text-sm text-gray-600 font-[600]"}
                 />
+                <div className="flex-[0_0_100%] mt-10"></div>
+                <ErrorContainer errors={errors} />
                 <SendFormButton
                     mxAuto={"mx-auto mt-10"}
                     handleSendForm={async () => {
-                        formRef.current.submit();
-                        // const formData = new FormData(formRef.current);
-                        // console.log(...formData);
+                        // formRef.current.submit();
+                        const result = await exceptionBlock(async () => {
+                            const formData = new FormData(formRef.current);
+                            const response = await axios.post(
+                                `${localUrl}/endpoint/employee/resume-create-edit`,
+                                formData,
+                                {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data",
+                                    },
+                                },
+                            );
+                            return null;
+                        });
+                        if (result !== null) {
+                            setErrors(result);
+                            return;
+                        }
+                        window.location.href = `${localUrl}/employee/resume-create-edit`;
                     }}
                 />
             </form>

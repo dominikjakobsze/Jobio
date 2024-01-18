@@ -15,9 +15,9 @@ export const exceptionBlock = async (functionToCheck) => {
                 JSON?.parse(exception?.response?.data?.message)[0],
             );
         }
-        // window.location.href =
-        //     URL +
-        //     `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
+        window.location.href =
+            URL +
+            `/general/error/${exception?.response?.status}/${exception?.response?.data?.message}`;
     }
 };
 
