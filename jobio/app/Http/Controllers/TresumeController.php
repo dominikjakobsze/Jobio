@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreResumeRequest;
+use App\Models\Toffer;
 use App\Models\Tresume;
 use App\Models\Tretof;
 use App\Services\DatabaseService;
 use App\Services\ModelHelperService;
 use App\Services\UpdaterService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Js;
 use Inertia\Inertia;
 
@@ -16,7 +18,19 @@ class TresumeController extends Controller
 {
     public function employerAll()
     {
-        return Inertia::render('TresumeControllerEmployer/EmployerAll/TresumeEmployerAll', []);
+        $returned = DatabaseService::getOrNotFoundWithTryCatch(
+            Toffer::where("temployer_id", "=", Auth::guard('person')->user()->id)
+        );
+        if ($returned->pluck("id")->count() != 0) {
+            $offerIds = $returned->pluck("id")->toArray();
+            $resumes = DatabaseService::getOrNotFoundWithTryCatch(
+                DB::whereIn("toffer_id", $offerIds)
+            );
+            // dd($resumes->)
+        }
+        return Inertia::render('TresumeControllerEmployer/EmployerAll/TresumeEmployerAll', [
+            "resumes" => $resumes,
+        ]);
     }
 
     public function employeeCreateEdit()

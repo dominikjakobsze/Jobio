@@ -18,5 +18,6 @@ trait TransformValidatedTrait
 // $this->transformValidated(function ($validatedData, $setData) use ($test) {
 //     dd($validatedData, $setData, $test);
 // });
+//
 // /** @disregard - Ignores intelephense errors only in next line! */
 // dd($this->validator->getData());
