@@ -122,10 +122,11 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 });
 
 Route::get('/test/test', function () {
+    //if you forget how it works, just play with it by commenting out some fields of data array
     $validator = Validator::make(
         [
             "for_rent" => true,
-            //"for_sale" => true,
+            "for_sale" => true,
             "sale_price" => null,
             "rent_price" => null,
         ],
