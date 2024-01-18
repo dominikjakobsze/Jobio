@@ -14,6 +14,11 @@ use Inertia\Inertia;
 
 class TresumeController extends Controller
 {
+    public function employerAll()
+    {
+        return Inertia::render('TresumeControllerEmployer/EmployerAll/TresumeEmployerAll', []);
+    }
+
     public function employeeCreateEdit()
     {
         $templateData = DatabaseService::firstOrNullWithTryCatch(

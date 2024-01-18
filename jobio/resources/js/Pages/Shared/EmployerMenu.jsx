@@ -41,7 +41,7 @@ const EmployerMenu = () => {
                 />
                 <MenuBlockButton
                     actionTitle={"Aplikacje"}
-                    link={`${localUrl}/support/options`}
+                    link={`${localUrl}/employer/resumes`}
                     IconComponent={
                         <IoDocumentAttach className="text-gray-700 text-5xl font-[700]" />
                     }

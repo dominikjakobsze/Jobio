@@ -7,6 +7,7 @@ use App\Http\Controllers\ToptionController;
 use App\Http\Controllers\TpersonController;
 use App\Http\Controllers\TresumeController;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
+use App\Models\Tresume;
 use App\Rules\OneOfFieldsMustBePresentButNotBoth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ Route::middleware([EnsureUserIsLoggedIn::class])->group(function () {
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:employer'])->group(function () {
     //views&forms
     Route::get('/profile/employer', [TpersonController::class, 'profileEmployer']);
+    Route::get('/employer/resumes', [TresumeController::class, 'employerAll']);
     Route::get('/employer/files', [TfileController::class, 'employerAll']);
     Route::get('/employer/offer-create', [TofferController::class, 'employerCreate']);
     Route::get('/employer/offers', [TofferController::class, 'employerAll']);
