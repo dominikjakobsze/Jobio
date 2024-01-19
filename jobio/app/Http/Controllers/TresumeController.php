@@ -17,6 +17,11 @@ use Inertia\Inertia;
 
 class TresumeController extends Controller
 {
+    public function employerResumeOffer($appliedId)
+    {
+        dd($appliedId);
+    }
+
     public function employerAll()
     {
         $returned = DatabaseService::getOrNotFoundWithTryCatch(
@@ -92,7 +97,7 @@ class TresumeController extends Controller
             ));
         }
         $alreadyApplied = DatabaseService::firstOrNullWithTryCatch(
-            Tretof::where("toffer_id", "=", ModelHelperService::$foundModel->id)
+            Tretof::withTrashed()->where("toffer_id", "=", ModelHelperService::$foundModel->id)
                 ->where("tresume_id", "=", $resume->id)
         );
         if ($alreadyApplied !== null) {

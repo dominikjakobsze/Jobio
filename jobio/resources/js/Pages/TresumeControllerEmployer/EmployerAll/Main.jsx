@@ -38,6 +38,14 @@ const Main = ({ resumes }) => {
                                     typeClasses={
                                         "bg-purple-300/50 border border-solid border-purple-500/50 text-purple-400"
                                     }
+                                    handleClick={async () => {
+                                        await exceptionBlock(async () => {
+                                            window.open(
+                                                `${localUrl}/general/offer/${resume?.toffer_id}`,
+                                                "_blank",
+                                            );
+                                        });
+                                    }}
                                 />,
                                 <ActionButton
                                     key={resume?.id + "cv"}
@@ -45,6 +53,14 @@ const Main = ({ resumes }) => {
                                     typeClasses={
                                         "bg-lime-300/50 border border-solid border-lime-500/50 text-lime-400"
                                     }
+                                    handleClick={async () => {
+                                        await exceptionBlock(async () => {
+                                            window.open(
+                                                `${localUrl}/employee/applied/${resume?.id}`,
+                                                "_blank",
+                                            );
+                                        });
+                                    }}
                                 />,
                             ]}
                         />

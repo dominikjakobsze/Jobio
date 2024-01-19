@@ -81,6 +81,11 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
         Route::put('/endpoint/employer/offer/{id}', [TofferController::class, 'endpointEmployerEdit']);
         Route::put('/endpoint/employer/offer-filters/{id}', [TofferController::class, 'endpointEmployerAssignFilters']);
     });
+    Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Tretof'])->group(function () {
+        //views&forms
+        Route::get('/employee/applied/{id}', [TresumeController::class, 'employerResumeOffer']);
+        //endpoints
+    });
 });
 
 Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserHasRole:support'])->group(function () {
