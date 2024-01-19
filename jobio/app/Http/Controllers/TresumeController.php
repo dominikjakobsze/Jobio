@@ -17,9 +17,18 @@ use Inertia\Inertia;
 
 class TresumeController extends Controller
 {
-    public function employerResumeOffer($appliedId)
+    public function employerResumeOffer()
     {
-        dd($appliedId);
+        DatabaseService::firstOrNotFoundWithTryCatch(
+            Toffer::where("id", "=", ModelHelperService::$foundModel->toffer_id)
+                ->where("temployer_id", "=", Auth::guard('person')->user()->id)
+        );
+        $templateData = DatabaseService::firstOrNotFoundWithTryCatch(
+            Tresume::where("id", "=", ModelHelperService::$foundModel->tresume_id)
+        );
+        return Inertia::render('TresumeControllerEmployer/EmployerResumeOffer/TresumeEmployerResumeOffer', [
+            "resume" => json_decode($templateData->template_data, true),
+        ]);
     }
 
     public function employerAll()
