@@ -83,8 +83,9 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     });
     Route::middleware(['App\Http\Middleware\CheckIfModelExists:App\Models\Tretof'])->group(function () {
         //views&forms
-        Route::get('/employee/applied/{id}', [TresumeController::class, 'employerResumeOffer']);
+        Route::get('/employer/applied/{id}', [TresumeController::class, 'employerResumeOffer']);
         //endpoints
+        Route::get('/endpoint/employer/deny/{id}', [TresumeController::class, 'endpointEmployerDeny']);
     });
 });
 

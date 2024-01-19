@@ -72,6 +72,25 @@ class TresumeController extends Controller
         ]);
     }
 
+    public function endpointEmployerDeny()
+    {
+        DatabaseService::firstOrNotFoundWithTryCatch(
+            Toffer::where("id", "=", ModelHelperService::$foundModel->toffer_id)
+                ->where("temployer_id", "=", Auth::guard('person')->user()->id)
+        );
+        DatabaseService::firstOrNotFoundWithTryCatch(
+            Tresume::where("id", "=", ModelHelperService::$foundModel->tresume_id)
+        );
+        DatabaseService::deleteWithTryCatch(
+            ModelHelperService::$foundModel
+        );
+        return response()->json(
+            data: true,
+            status: 200,
+            headers: []
+        );
+    }
+
     public function endpointEmployeeCreateEdit(StoreResumeRequest $storeResumeRequest)
     {
         $tresume = DatabaseService::firstOrNullWithTryCatch(Tresume::where("tperson_id", "=", Auth::guard('person')?->user()?->id));

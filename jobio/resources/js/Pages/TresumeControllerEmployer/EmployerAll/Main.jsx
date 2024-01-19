@@ -31,6 +31,14 @@ const Main = ({ resumes }) => {
                                     typeClasses={
                                         "bg-red-300/50 border border-solid border-red-500/50 text-red-400"
                                     }
+                                    handleClick={async () => {
+                                        await exceptionBlock(async () => {
+                                            window.open(
+                                                `${localUrl}/endpoint/employer/deny/${resume?.id}`,
+                                                "_blank",
+                                            );
+                                        });
+                                    }}
                                 />,
                                 <ActionButton
                                     key={resume?.id + "o"}
@@ -56,7 +64,7 @@ const Main = ({ resumes }) => {
                                     handleClick={async () => {
                                         await exceptionBlock(async () => {
                                             window.open(
-                                                `${localUrl}/employee/applied/${resume?.id}`,
+                                                `${localUrl}/employer/applied/${resume?.id}`,
                                                 "_blank",
                                             );
                                         });
