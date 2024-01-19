@@ -4,6 +4,7 @@ import ResourceListItem from "../../Shared/ResourceListItem";
 import ActionButton from "../../Shared/ActionButton";
 import DisplayDate from "../../Shared/DisplayDate";
 import { URL as localUrl, exceptionBlock } from "../../../app";
+import axios from "axios";
 
 const Main = ({ resumes }) => {
     console.log(resumes);
@@ -32,12 +33,23 @@ const Main = ({ resumes }) => {
                                         "bg-red-300/50 border border-solid border-red-500/50 text-red-400"
                                     }
                                     handleClick={async () => {
-                                        await exceptionBlock(async () => {
-                                            window.open(
-                                                `${localUrl}/endpoint/employer/deny/${resume?.id}`,
-                                                "_blank",
-                                            );
-                                        });
+                                        const result = await exceptionBlock(
+                                            async () => {
+                                                const response =
+                                                    await axios.get(
+                                                        `${localUrl}/endpoint/employer/deny/${resume?.id}`,
+                                                    );
+                                                const refreshResponse =
+                                                    await axios.get(
+                                                        `${localUrl}/endpoint/employer/resumes`,
+                                                    );
+                                                const refreshResult =
+                                                    refreshResponse.data;
+                                                console.log(refreshResult);
+                                                setInnerResumes(refreshResult);
+                                                return null;
+                                            },
+                                        );
                                     }}
                                 />,
                                 <ActionButton

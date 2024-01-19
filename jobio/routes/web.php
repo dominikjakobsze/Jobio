@@ -60,6 +60,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
     Route::get('/employer/offer-create', [TofferController::class, 'employerCreate']);
     Route::get('/employer/offers', [TofferController::class, 'employerAll']);
     //endpoints
+    Route::get('/endpoint/employer/resumes', [TresumeController::class, 'endpointEmployerAll']);
     Route::post('/endpoint/employer/file', [TfileController::class, 'endpointEmployerUpload']);
     Route::get('/endpoint/employer/files', [TfileController::class, 'endpointEmployerAll']);
     Route::post('/endpoint/employer/offer', [TofferController::class, 'endpointEmployerCreate']);

@@ -91,6 +91,30 @@ class TresumeController extends Controller
         );
     }
 
+    public function endpointEmployerAll()
+    {
+        $returned = DatabaseService::getOrNotFoundWithTryCatch(
+            Toffer::where("temployer_id", "=", Auth::guard('person')->user()->id)
+        );
+        if ($returned->pluck("id")->count() != 0) {
+            $offerIds = $returned->pluck("id")->toArray();
+            $resumes = DatabaseService::getOrNotFoundWithTryCatch(
+                Tretof::whereIn("toffer_id", $offerIds)
+            );
+        }
+        $resumes = $resumes->toArray();
+        $resumes = $resumes ?? [];
+        $resumes = empty($resumes) ? null : $resumes;
+        return response()->json(
+            data: [
+                "resumes" => $resumes,
+            ],
+            status: 200,
+            headers: []
+        );
+    }
+
+
     public function endpointEmployeeCreateEdit(StoreResumeRequest $storeResumeRequest)
     {
         $tresume = DatabaseService::firstOrNullWithTryCatch(Tresume::where("tperson_id", "=", Auth::guard('person')?->user()?->id));
