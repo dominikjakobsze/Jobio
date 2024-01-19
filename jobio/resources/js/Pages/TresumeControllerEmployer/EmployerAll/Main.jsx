@@ -7,7 +7,6 @@ import { URL as localUrl, exceptionBlock } from "../../../app";
 import axios from "axios";
 
 const Main = ({ resumes }) => {
-    console.log(resumes);
     const [innerResumes, setInnerResumes] = React.useState(resumes ?? null);
     return (
         <>
@@ -46,7 +45,9 @@ const Main = ({ resumes }) => {
                                                 const refreshResult =
                                                     refreshResponse.data;
                                                 console.log(refreshResult);
-                                                setInnerResumes(refreshResult);
+                                                setInnerResumes(
+                                                    refreshResult?.resumes,
+                                                );
                                                 return null;
                                             },
                                         );
