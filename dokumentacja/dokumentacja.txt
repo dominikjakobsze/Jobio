@@ -1,0 +1,46 @@
+Bazda danych posiada hasło! => wsb_k60_p4
+
+należy dostosować poniższą konfigurację w pliku .env do używanej bazy danych
+(poniższa konfiguracja będzie działała jedynie przy użyciu dockera i zbudowaniu kontenerów z pliku
+docker-compose-dev.yaml)
+
+DB_CONNECTION=mysql
+DB_HOST=db_dev
+DB_PORT=3306
+DB_DATABASE=wsb_k60_p4
+DB_USERNAME=wsb_k60_p4
+DB_PASSWORD=wsb_k60_p4
+
+Należy zainstalować zależności => w folderze jobio => tam gdzie projekt, wykonać npm install i composer install
+
+Ponieważ projekt jest lokalny, dostosowaliśmy logowanie, które zostało zmodyfikowane tj. W pełni działa, ale link do
+zalogowania (OTP)
+jest wyświetlany za pomocą console.log na stronie logowania (w konsoli). Gdyby projekt był na hostingu, byłby wysyłany
+na adres email poczty!
+
+Nie istnieje potrzeba rejestracji, wystarczy podać adres email w polu logowania, jeśli konto istnieje to zostanie
+wygenerowany OTP i wysłany na email
+Jeśli konto nie istnieje, to zostanie automatycznie założone i reszta tak jak linijka wyżej.
+
+Należy ręcznie w bazie danych zmienić rolę użytkownika na support => tabela tpeople, kolumna role
+Dzięki temu, można już w pełni zarządzać systemem, w tym rolami innych użytkowników. Było to rozwiązane konieczne!
+
+Każdy nowy użytkownik domyślnie posiada rolę employee, w panelu wsparcia (użytkownika z rolą support), można zmienić
+rolę takiego użytkownika na employee lub employer
+Role wpływają na funkcjonalność!:
+
+(Dostęp do profilu użytkownika (tam są funkcjonalności) jest dostępny w następujący sposób: pod adresem "/" wybrać ikonę
+użytkownika (nie ma znaczenia rola użytkownika, każdy zobaczy inny panel zależny od użytkownika))
+
+employee:
+    Podgląd CV
+    Kreator CV
+    Zaaplikowanie na ofertę pracy (na stronie danej oferty pracy)
+support:
+    Użytkownicy: sortowanie, zmiana roli itd...
+    Oferty: sortowanie, podgląd itd...
+    Filtrowanie: sortowanie, dodawanie, usuwanie itd...
+employer:
+    Oferty: sortowanie, podgląd, usuwanie, dodawanie, edytowanie, przypisywanie filtrów itd...
+    Pliki: generowanie linku, przesyłanie plików, usuwanie plików itd...
+    Aplikacje: lista złożonych CV, podgląd oferty i CV, odrzucenie aplikacji itd...

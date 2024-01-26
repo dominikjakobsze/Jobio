@@ -4,21 +4,25 @@ namespace App\Policies;
 
 use App\Models\Toffer;
 use App\Models\Tperson;
+use Auth;
 use Illuminate\Auth\Access\Response;
 
 class TofferPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(?Tperson $tperson): Response
+
+    public function isUserOwnerOfOffer(Tperson $tperson, Toffer $toffer)
     {
-        return $tperson?->role === 'support' || $tperson?->role === 'employer' ? Response::allow() : Response::deny('nah');
+        if ($tperson?->id !== $toffer?->temployer_id) {
+            return Response::deny(message: 'Nie możesz wykonywać akcji na czyjejś ofercie!', code: 403);
+        }
+        return Response::allow();
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
+    public function viewAny(?Tperson $tperson): Response
+    {
+        return Response::allow();
+    }
+
     public function view(?Tperson $tperson, Toffer $toffer): Response
     {
         return Response::allow();

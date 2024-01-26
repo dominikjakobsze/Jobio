@@ -5,32 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Models\Toftop
- *
- * @property string $id
- * @property string $toption_id
- * @property string $toffer_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Toffer $toffer
- * @property-read \App\Models\Toption $toption
- * @method static \Database\Factories\ToftopFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop query()
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop whereTofferId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop whereToptionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toftop whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property string id uuid PK AutoSet
+ * @property string toption_id uuid FK SetViaRelationship
+ * @property string toffer_id uuid FK SetViaRelationship
  */
 class Toftop extends Model
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
 
     protected $table = 'toftops';
     protected $primaryKey = 'id';

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->nullable(false);
             $table->uuid('toption_id')->nullable(false);
             $table->uuid('toffer_id')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

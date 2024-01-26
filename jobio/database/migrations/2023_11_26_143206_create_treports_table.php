@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('resource_id')->nullable(false);
             $table->text('resource_model')->nullable(false);
             $table->text('link_source')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

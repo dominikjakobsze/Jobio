@@ -29,10 +29,10 @@ services:
     container_name: db_dev
     hostname: db_dev
     environment:
-      MYSQL_ROOT_PASSWORD: laravel_dev
-      MYSQL_DATABASE: laravel_dev
-      MYSQL_USER: laravel_dev
-      MYSQL_PASSWORD: laravel_dev
+      MYSQL_ROOT_PASSWORD: wsb_k60_p4
+      MYSQL_DATABASE: wsb_k60_p4
+      MYSQL_USER: wsb_k60_p4
+      MYSQL_PASSWORD: wsb_k60_p4
     networks:
       app_network:
         aliases:

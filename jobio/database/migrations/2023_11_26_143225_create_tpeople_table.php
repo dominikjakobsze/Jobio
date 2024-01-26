@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('tpeople', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->nullable(false);
             $table->string('email',255)->nullable(false)->unique('tpeople_email_unique');
-            $table->string('otp',255)->nullable(false)->unique('tpeople_otp_unique');
+            $table->string('otp',255)->nullable(true)->unique('tpeople_otp_unique');
             $table->string('folder',255)->nullable(false)->unique('tpeople_folder_unique');
             $table->text('role')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

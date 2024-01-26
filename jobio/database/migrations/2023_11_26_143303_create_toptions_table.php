@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->nullable(false);
             $table->text('option_type')->nullable(false);
             $table->string('option_value',255)->nullable(false)->unique('toptions_option-value_unique');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

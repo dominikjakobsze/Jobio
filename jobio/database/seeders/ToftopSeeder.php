@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Toftop;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ToftopSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Toftop::factory(500)->create();
     }
 }

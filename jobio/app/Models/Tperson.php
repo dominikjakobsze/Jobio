@@ -8,36 +8,21 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable as AuthorizableTrait;
+
 /**
- * App\Models\Tperson
- *
- * @property string $id
- * @property string $email
- * @property string $otp
- * @property string $folder
- * @property string $role
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Toffer> $toffers
- * @property-read int|null $toffers_count
- * @method static \Database\Factories\TpersonFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson query()
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereFolder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereOtp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tperson whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property string id uuid PK AutoSet
+ * @property string email Unique
+ * @property string otp Unique Nullable [made with Hash::make()]
+ * @property string folder Unique
+ * @property string role [support,employer,employee]
  */
 class Tperson extends Model implements Authenticatable, Authorizable
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
     use AuthenticatableTrait {
         getAuthPassword as getAuthPasswordTrait;
     }
@@ -50,14 +35,19 @@ class Tperson extends Model implements Authenticatable, Authorizable
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function toffers()
     {
         return $this->hasMany(Toffer::class, 'temployer_id', 'id');
     }
-    public function tlogs()
+    public function tresume()
     {
-        return $this->hasMany(Tlog::class, 'tperson_id', 'id');
+        return $this->hasOne(Tresume::class, 'tperson_id', 'id');
+    }
+    public function tfiles()
+    {
+        return $this->hasMany(Tfile::class, 'tperson_id', 'id');
     }
     public function getAuthPassword()
     {

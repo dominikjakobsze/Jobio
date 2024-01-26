@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('min_salary')->nullable(false);
             $table->integer('max_salary')->nullable(false);
             $table->text('title')->nullable(false);
-            $table->text('page_offer')->nullable(false);
+            $table->json('page_offer')->nullable(false);
             $table->double('longitude')->nullable(false);
             $table->double('latitude')->nullable(false);
             $table->text('city')->nullable(false);
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('voivodeship')->nullable(false);
             $table->uuid('temployer_id')->nullable(false);
             $table->text('company_icon')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

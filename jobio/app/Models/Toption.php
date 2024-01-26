@@ -5,32 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Models\Toption
- *
- * @property string $id
- * @property string $option_type
- * @property string $option_value
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Toftop> $toftops
- * @property-read int|null $toftops_count
- * @method static \Database\Factories\ToptionFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Toption newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Toption newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Toption query()
- * @method static \Illuminate\Database\Eloquent\Builder|Toption whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toption whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toption whereOptionType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toption whereOptionValue($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Toption whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property string id uuid PK AutoSet
+ * @property string option_type [T,D,S]
+ * @property string option_value Unique
  */
 class Toption extends Model
 {
     use HasFactory;
     use HasUuids;
+    use SoftDeletes;
 
     protected $table = 'toptions';
     protected $primaryKey = 'id';
@@ -39,8 +25,15 @@ class Toption extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = true;
+    protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function toftops(){
-        return $this->hasMany(Toftop::class,'toption_id','id');
+    public static $template = [
+        "option_type" => null,
+        "option_value" => null
+    ];
+
+    public function toftops()
+    {
+        return $this->hasMany(Toftop::class, 'toption_id', 'id');
     }
 }

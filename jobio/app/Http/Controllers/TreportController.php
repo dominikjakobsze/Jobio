@@ -27,7 +27,7 @@ class TreportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTreportRequest $request)
+    public function store()
     {
         //
     }
@@ -35,7 +35,7 @@ class TreportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Treport $treport)
+    public function show()
     {
         //
     }
@@ -43,7 +43,7 @@ class TreportController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Treport $treport)
+    public function edit()
     {
         //
     }
@@ -51,7 +51,7 @@ class TreportController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTreportRequest $request, Treport $treport)
+    public function update()
     {
         //
     }
@@ -59,7 +59,7 @@ class TreportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Treport $treport)
+    public function destroy()
     {
         //
     }
