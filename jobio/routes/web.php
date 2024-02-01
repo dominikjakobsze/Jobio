@@ -139,6 +139,7 @@ Route::middleware([EnsureUserIsLoggedIn::class, 'App\Http\Middleware\EnsureUserH
 
 Route::get('/test/test', function () {
     //if you forget how it works, just play with it by commenting out some fields of data array and see the results in browser, link "/test/test"
+    // present, filled, sometimes, nullable, exclude
     $validator = Validator::make(
         [
             "for_rent" => true,
